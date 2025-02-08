@@ -7,8 +7,12 @@ module.exports = {
     extend: {
       fontFamily:{
         outfit: ['Outfit-Regular','sans-serif'],
-        "outfit": ['Outfit-Bold','sans-serif'],
-        "outfit": ['Outfit-Medium','sans-serif'],
+        "outfit-bold": ['Outfit-Bold','sans-serif'],
+        "outfit-medium": ['Outfit-Medium','sans-serif'],
+      },
+      colors:{
+        "primary":"#E8B20E",
+        "gray":"#8F8e8d",
       }
     },
   },

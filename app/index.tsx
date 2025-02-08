@@ -1,16 +1,14 @@
-import { Text, View } from "react-native";
+import { Link, router } from "expo-router";
+import { Pressable, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 
 export default function Index() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text className="font-outfit">helo</Text>
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
+    <SafeAreaView className="h-full w-full">
+      <View className="w-full justify-center items-center">
+        <TouchableOpacity onPress={() => router.push('/login')}>
+          <Text className="font-outfit-medium">Go to Login Screen</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
 }

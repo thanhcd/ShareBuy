@@ -18,5 +18,15 @@ export default function RootLayout() {
 
   if (!fontsLoaded) return null;
 
-  return <Stack />;
+  return (
+    <Stack>
+      <Stack.Screen name="index" />
+      <Stack.Screen
+        name="login/index"
+        options={{
+          headerShown: false, // Đảm bảo header sẽ không hiển thị
+        }}
+      />
+    </Stack>
+  )
 }
