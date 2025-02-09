@@ -31,13 +31,12 @@ export default function RootLayout() {
     <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
       <ClerkLoaded>
         <Stack>
-          <Stack.Screen name="index" />
-          <Stack.Screen
+          {/* <Stack.Screen
             name="login/index"
             options={{
               headerShown: false, // Đảm bảo header sẽ không hiển thị
             }}
-          />
+          /> */}
         </Stack>
       </ClerkLoaded>
     </ClerkProvider>
