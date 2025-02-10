@@ -6,13 +6,19 @@ module.exports = {
   theme: {
     extend: {
       fontFamily:{
-        outfit: ['Outfit-Regular','sans-serif'],
-        "outfit-bold": ['Outfit-Bold','sans-serif'],
-        "outfit-medium": ['Outfit-Medium','sans-serif'],
+        poppins: ['Poppins-Regular','sans-serif'],
+        "poppins-bold": ['Poppins-Bold','sans-serif'],
       },
       colors:{
-        "primary":"#E8B20E",
-        "gray":"#8F8e8d",
+        "primary":{
+          100: "#40BFFF",
+          200: "#223263",
+        },
+        "gray":{
+          100: "#EBF0FF",
+          200: "#9098B1",
+        }
+          
       }
     },
   },

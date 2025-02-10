@@ -7,9 +7,8 @@ import { tokenCache } from "@/lib/cache";
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
-    "Outfit-Bold": require("../assets/fonts/Outfit-Bold.ttf"),
-    "Outfit-Medium": require("../assets/fonts/Outfit-Medium.ttf"),
-    "Outfit-Regular": require("../assets/fonts/Outfit-Regular.ttf"),
+    "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
+    "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
   });
 
   useEffect(() => {
