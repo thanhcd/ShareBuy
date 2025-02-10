@@ -16,7 +16,7 @@ const LoginScreen = () => {
                 </View>
                 <View className='py-2'>
                     <Text className='font-poppins-bold text-xl text-center text-primary-200'>Chào mừng đến với ShareBuy</Text>
-                    <Text className='font-poppins-regular text-base text-center text-gray mt-2'>Đăng nhập để tiếp tục</Text>
+                    <Text className='font-poppins-regular text-sm text-center text-gray-200 mt-2'>Đăng nhập để tiếp tục</Text>
                     <View className="w-full min-h-[83vh] flex">
                         <FormFields title="Email"
                             otherStyles="mt-5 border border-gray-100 h-16 justify-center items-center px-4 rounded-lg"
