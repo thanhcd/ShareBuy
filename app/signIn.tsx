@@ -30,18 +30,35 @@ const LoginScreen = () => {
                             placeholder="Mật khẩu"
                             icons={icons.password}
                         />
-                        <CustomButton 
-                        title="Đăng nhập"
-                        handlePress={() => {
+                        <CustomButton
+                            title="Đăng nhập"
+                            handlePress={() => {
 
-                        }}
-                        containerStyles="h-20 bg-primary-100 rounded-lg mt-5"
-                        textStyles="text-white"/>
+                            }}
+                            containerStyles="h-20 bg-primary-100 rounded-lg mt-5"
+                            textStyles="text-white" />
+                        <View className="flex-row items-center justify-center space-x-2 mt-8">
+                            <View className="flex-1 border-t border-gray-100" />
+                            <Text className="text-lg font-poppins-bold text-gray-200">HOẶC</Text>
+                            <View className="flex-1 border-t border-gray-100" />
+                        </View>
+                        <CustomButton title="Đăng nhập với Google"
+                            containerStyles="mt-5 border border-gray-100 h-20 justify-center items-center px-4 rounded-lg"
+                            icons={icons.google}
+                            textStyles={'text-gray-200'}
+                        />
+                        <CustomButton title="Đăng nhập với Facebook"
+                            containerStyles="mt-5 border border-gray-100 h-20 justify-center items-center px-4 rounded-lg"
+                            icons={icons.facebook}
+                            textStyles={'text-gray-200'}
+                        />
+                        <Text className='font-poppins-bold text-sm text-center text-primary-100 mt-2'>Quên mật khẩu</Text>
+                        <Text className='font-poppins-bold text-sm text-center text-gray mt-2'>Không có tài khoản?
+                            <Text className='font-poppins-bold text-sm text-center text-primary-100 mt-2'>Đăng ký</Text></Text>
+
                     </View>
 
-                    <Pressable className="p-5 mt-5 bg-primary rounded-[14px] w-full">
-                        <Text className='font-outfit-medium text-lg text-center'>Get Started</Text>
-                    </Pressable>
+
                 </View>
 
             </View>
