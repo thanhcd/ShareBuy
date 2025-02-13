@@ -19,16 +19,16 @@ export default function RootLayout() {
 
   if (!fontsLoaded) return null;
 
-  const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!
-  console.log("your key",publishableKey)
-  if (!publishableKey) {
-    throw new Error('Add EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in your .env')
-  }
+  // const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!
+  // console.log("your key",publishableKey)
+  // if (!publishableKey) {
+  //   throw new Error('Add EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in your .env')
+  // }
 
   
   return (
-    <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
-      <ClerkLoaded>
+    // <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
+    //   <ClerkLoaded>
         <Stack>
           {/* <Stack.Screen
             name="login/index"
@@ -37,7 +37,7 @@ export default function RootLayout() {
             }}
           /> */}
         </Stack>
-      </ClerkLoaded>
-    </ClerkProvider>
+    //   </ClerkLoaded>
+    // </ClerkProvider>
   )
 }
