@@ -7,6 +7,12 @@ import home from "@/assets/icons/Home.png"
 import cart from '@/assets/icons/Cart.png'
 import offer from '@/assets/icons/Offer.png'
 import search from '@/assets/icons/Search.png'
+import phone from '@/assets/icons/Phone.png'
+import gender from '@/assets/icons/Gender.png'
+import group from '@/assets/icons/Group.png'
+import right from '@/assets/icons/Right.png'
+import date from '@/assets/icons/Date.png'
+import email from '@/assets/icons/email.png'
 
 export default {
     message,
@@ -17,5 +23,11 @@ export default {
     home,
     cart,
     offer,
-    search
+    search,
+    phone,
+    gender,
+    group,
+    right,
+    date,
+    email
 };
