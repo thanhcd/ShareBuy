@@ -1,14 +1,28 @@
-import { View, Text, SafeAreaView, Image, Pressable, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, SafeAreaView, Image, Pressable, ScrollView, TouchableOpacity, Alert } from 'react-native'
 import React, { useState } from 'react'
 import images from '@/constants/images'
 import FormFields from '@/components/FormFields'
 import icons from '@/constants/icons'
 import CustomButton from '@/components/CustomButton'
-import { router } from 'expo-router'
+import { Redirect, router } from 'expo-router'
+import { login } from '@/lib/appwrite'
+import { useGlobalContext } from '@/lib/GlobalProvider'
 
 const SignInScreen = () => {
     const [form, setForm] = useState();
+    const {refetch, loading, isLogged} = useGlobalContext()
 
+    if(!loading && isLogged) return <Redirect href={'/'}/>
+    const handleSignIn = async () => {
+        const result = await login();
+        if (result) {
+            refetch();
+            console.log('login success')
+        }
+        else {
+            Alert.alert('Error', 'failed to login')
+        }
+    }
     const handleSignUp = () => {
         router.push('/signUp')
     }
@@ -37,6 +51,7 @@ const SignInScreen = () => {
                         <CustomButton title={'Đăng nhập'}
                             textStyles={'text-white'}
                             containerStyles={'h-20 bg-primary-100 rounded-lg mt-5'}
+                            
                         />
                         <View className="flex-row items-center justify-center space-x-2 mt-8">
                             <View className="flex-1 border-t border-gray-100" />
@@ -47,6 +62,7 @@ const SignInScreen = () => {
                             containerStyles="mt-5 border border-gray-100 h-20 justify-center items-center px-4 rounded-lg"
                             icons={icons.google}
                             textStyles={'text-gray-200'}
+                            handlePress={handleSignIn}
                         />
                         <CustomButton title="Đăng nhập với Facebook"
                             containerStyles="mt-5 border border-gray-100 h-20 justify-center items-center px-4 rounded-lg"
