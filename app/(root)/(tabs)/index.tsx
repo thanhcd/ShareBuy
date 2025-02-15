@@ -1,17 +1,15 @@
+import SearchBar from "@/components/Search";
+import images from "@/constants/images";
 import { Link, router } from "expo-router";
-import { Pressable, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import { Image, Pressable, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 
 export default function Index() {
   return (
-    <SafeAreaView className="h-full w-full">
-      <View className="w-full justify-center items-center">
-{/*       
-        <Link href={'/signIn'}><Text>sign</Text></Link>
-        <Link href={'/profile'}><Text>profile</Text></Link>
-        <Link href={'/search'}><Text>search</Text></Link>
-        <Link href={'/explore'}><Text>search</Text></Link>
-         */}
+    <SafeAreaView className="bg-white h-full">
+      <View className="px-5 py-5 border-b border-gray-100">
+        <SearchBar />
       </View>
     </SafeAreaView>
+
   );
 }
