@@ -13,6 +13,7 @@ import group from '@/assets/icons/Group.png'
 import right from '@/assets/icons/Right.png'
 import date from '@/assets/icons/Date.png'
 import email from '@/assets/icons/email.png'
+import logout from '@/assets/icons/logout.png'
 
 export default {
     message,
@@ -29,5 +30,6 @@ export default {
     group,
     right,
     date,
-    email
+    email,
+    logout
 };

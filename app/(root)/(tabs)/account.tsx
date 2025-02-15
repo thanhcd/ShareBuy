@@ -1,7 +1,10 @@
-import { View, Text, SafeAreaView, ScrollView, Image, TouchableOpacity, ImageSourcePropType } from 'react-native'
+import { View, Text, SafeAreaView, ScrollView, Image, TouchableOpacity, ImageSourcePropType, Alert } from 'react-native'
 import React from 'react'
 import { useGlobalContext } from '@/lib/GlobalProvider';
 import icons from '@/constants/icons';
+import { router } from 'expo-router';
+import { logout } from '@/lib/appwrite';
+
 
 interface SettingsItemProps {
   icon: ImageSourcePropType;
@@ -9,26 +12,52 @@ interface SettingsItemProps {
   onPress?: () => void;
   textStyle?: string;
   showArrow?: boolean;
+  middleText?: string;
 }
 
-const SettingsItem = ({ icon, title, onPress, textStyle, showArrow = true }: SettingsItemProps) => {
+const SettingsItem = ({
+  icon,
+  title,
+  onPress,
+  textStyle,
+  showArrow = true,
+  middleText // Không có giá trị mặc định
+}: SettingsItemProps) => {
   return (
-    <TouchableOpacity className='flex flex-row items-center justify-between py-5' onPress={onPress}>
+    <TouchableOpacity className='flex flex-row items-center justify-between py-3' onPress={onPress}>
+      {/* Icon + Title */}
       <View className='flex flex-row items-center flex-1 gap-3'>
         <Image source={icon} className='size-7' tintColor={'#40BFFF'} />
         <Text className={`text-base font-poppins-bold text-primary-200 ${textStyle}`}>{title}</Text>
       </View>
-      <Text className='text-gray-200 mr-4'>hello</Text>
+
+      {/* Chỉ hiển thị middleText nếu có truyền vào */}
+      {middleText && <Text className='text-gray-500'>{middleText}</Text>}
+
+      {/* Arrow (nếu có) */}
       {showArrow && <Image source={icons.right} className='size-5' />}
     </TouchableOpacity>
   )
-
 }
+
 const profile = () => {
   const { loading, isLogged, user, refetch } = useGlobalContext();
 
   if (!loading && isLogged) console.log("dang dang nhap")
-
+  const handleLogout = async () => {
+    console.log("Handling logout...");
+    const result = await logout();
+    console.log("Logout result:", result);
+    if (result) {
+      Alert.alert("Logout Success", "U OUTTTTTT");
+      refetch();
+      router.push('/signIn')
+    }
+    else {
+      Alert.alert("Error", "An Error occurred while logging out");
+      // router.push('/signIn')
+    }
+  }
 
   return (
     <SafeAreaView className='h-full bg-white'>
@@ -51,12 +80,21 @@ const profile = () => {
 
         </View>
         <View className='flex flex-col mt-10'>
-          <SettingsItem icon={icons.gender} title='Giới tính' />
-          <SettingsItem icon={icons.date} title='Sinh nhật' />
-          <SettingsItem icon={icons.email} title='Email' />
-          <SettingsItem icon={icons.phone} title='Số điện thoại' />
-          <SettingsItem icon={icons.password} title='Thay đổi mật khẩu' />
+          <SettingsItem icon={icons.gender} title='Giới tính' middleText='Male'/>
+          <SettingsItem icon={icons.date} title='Sinh nhật' middleText='12-12-2000'/>
+          <SettingsItem icon={icons.email} title='Email' middleText={user?.email}/>
+          <SettingsItem icon={icons.phone} title='Số điện thoại' middleText='0976761378'/>
+          <SettingsItem icon={icons.password} title='Thay đổi mật khẩu' middleText='************'/>
 
+        </View>
+        <View className='flex flex-col mt-5 border-t pt-5 border-gray-100'>
+          <SettingsItem
+            icon={icons.logout}
+            title='Logout'
+            textStyle='text-danger'
+            showArrow={false}
+            onPress={handleLogout}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
