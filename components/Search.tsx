@@ -1,4 +1,5 @@
 import icons from '@/constants/icons';
+import { router } from 'expo-router';
 import React from 'react';
 import { View, TextInput, Image, TouchableOpacity } from 'react-native';
 
@@ -19,7 +20,7 @@ const SearchBar = () => {
                     <Image source={icons.love} className="w-1/12 h-1/24 opacity-50" />
                 </TouchableOpacity>
 
-                <TouchableOpacity className="relative">
+                <TouchableOpacity className="relative" onPress={() => router.push("/notificate")}>
                     <Image source={icons.bell} className="w-1/12 h-1/24 opacity-50" />
                 </TouchableOpacity>
             </View>
