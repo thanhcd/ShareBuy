@@ -19,7 +19,7 @@ import bell from '@/assets/icons/Bell.png'
 import list from '@/assets/icons/List.png'
 import mark from '@/assets/icons/Mark.png'
 import transaction from '@/assets/icons/Transaction.png'
-
+import star from '@/assets/icons/star.png'
 
 export default {
     message,
@@ -31,6 +31,7 @@ export default {
     cart,
     offer,
     search,
+    star,
     phone,
     gender,
     right,
