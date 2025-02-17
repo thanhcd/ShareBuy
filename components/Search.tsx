@@ -31,11 +31,11 @@ const SearchBar = () => {
 
             <View className="flex-row items-center gap-3">
                 <TouchableOpacity>
-                    <Image source={icons.love} className="w-1/12 h-1/24 opacity-50 ml-5" />
+                    <Image source={icons.love} className="size-6 opacity-50" />
                 </TouchableOpacity>
 
                 <TouchableOpacity className="relative" onPress={() => router.push("/notificate")}>
-                    <Image source={icons.bell} className="w-1/12 h-1/24 opacity-50" />
+                    <Image source={icons.bell} className="size-5 opacity-50" />
                 </TouchableOpacity>
             </View>
         </View>
