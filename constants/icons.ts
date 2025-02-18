@@ -20,6 +20,11 @@ import list from '@/assets/icons/List.png'
 import mark from '@/assets/icons/Mark.png'
 import transaction from '@/assets/icons/Transaction.png'
 import star from '@/assets/icons/star.png'
+import womanbag from '@/assets/icons/woman bag.png'
+import manbag from '@/assets/icons/man bag.png'
+import shirt from '@/assets/icons/shirt.png'
+import dress from '@/assets/icons/dress.png'
+import manshoe from '@/assets/icons/man shoes.png'
 
 export default {
     message,
@@ -43,5 +48,10 @@ export default {
     list,
     mark,
     transaction,
-    left
+    left,
+    womanbag,
+    manbag,
+    shirt,
+    dress,
+    manshoe
 };
