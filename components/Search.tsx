@@ -30,7 +30,7 @@ const SearchBar = () => {
             </View>
 
             <View className="flex-row items-center gap-3">
-                <TouchableOpacity>
+                <TouchableOpacity className='relative' onPress={() => router.push('/favoriteProduct')}>
                     <Image source={icons.love} className="size-6 opacity-50" />
                 </TouchableOpacity>
 
