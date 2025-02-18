@@ -31,32 +31,32 @@ export const Featuredcards = ({ onPress }: Props) => {
     )
 }
 
-export const Cards = ({ onPress }: Props) => {
+
+export const Card = ({ onPress }: Props) => {
     return (
-        <View className='w-52 h-96 border border-gray-100 flex py-6 items-center overflow-hidden rounded-md'>
-            <TouchableOpacity onPress={onPress} className='flex flex-col items-center w-40 h-44 relative'>
-                <Image source={images.shoe1} className='w-full h-full rounded-md' />
-                <View className='flex flex-col items-start w-full mt-3'>
-                    <View className='flex-col items-start w-full py-2'>
-                        <Text className='text-base font-poppins-bold text-primary-200' numberOfLines={1}>Modern Shoe</Text>
-                        <View className='flex flex-row'>
-                            <Image source={images.stargroup} className='w-5 h-5' />
-                            <Image source={images.stargroup} className='w-5 h-5' />
-                            <Image source={images.stargroup} className='w-5 h-5' />
-                            <Image source={images.stargroup} className='w-5 h-5' />
-                            <Image source={images.stargroup} className='w-5 h-5' />
-                        </View>
-                    </View>
-                    <Text className='text-base font-poppins-bold text-primary-100'>$299.43</Text>
+        <TouchableOpacity onPress={onPress} className='flex-1 w-full mt-4 px-3 py-4 rounded-lg border border-gray-100 relative'>
+            {/* <View className='flex flex-row items-center absolute px-2 top-5 right-5 bg-white/90 p-1 rounded-full z-50'>
+          <Image source={icons.star} className='size-2.5' />
+          <Text className='text-xs font-rubik-bold text-primary-300 ml-1'>4.4</Text>
+        </View> */}
+            <Image source={images.shoe1} className='w-full h-40 rounded-lg' />
+            <View className='flex flex-col mt-2'>
+                <Text className='text-base font-poppins-bold text-primary-200'>Modern Shoe</Text>
+                <View className='flex-row'>
+                    <Image source={icons.star} />
+                    <Image source={icons.star} />
+                    <Image source={icons.star} />
+                    <Image source={icons.star} />
+                    <Image source={icons.star} />
+                </View>
+                <Text className='text-base font-poppins-bold text-primary-100 mt-5'>$299.43</Text>
                     <View className='flex-row gap-3'>
                         <Text className='text-sm font-poppins-bold text-gray-200' style={{ textDecorationLine: 'line-through' }}>
                             $534,33
                         </Text>
                         <Text className='text-sm font-poppins-bold text-red-100'>24% Off</Text>
                     </View>
-                </View>
-            </TouchableOpacity>
-        </View>
-
+            </View>
+        </TouchableOpacity>
     )
 }

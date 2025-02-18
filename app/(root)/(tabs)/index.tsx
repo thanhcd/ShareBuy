@@ -1,4 +1,4 @@
-import { Cards, Featuredcards } from "@/components/Cards";
+import { Card, Featuredcards } from "@/components/Cards";
 import Filter from "@/components/filter";
 import SearchBar from "@/components/Search";
 import images from "@/constants/images";
@@ -19,11 +19,11 @@ export default function Index() {
     <SafeAreaView className="bg-white h-full w-full">
       <FlatList
       data={[1, 2, 3, 4]}
-      renderItem={({ item }) => <Cards />}
+      renderItem={({ item }) => <Card />}
       keyExtractor={(item) => item.toString()}
       numColumns={2}
       contentContainerClassName="pb-32"
-      columnWrapperClassName="flex-1 justify-between px-5 gap-5 py-3"
+      columnWrapperClassName="flex-1 px-5 gap-5 "
       showsVerticalScrollIndicator={false}
         ListHeaderComponent={
           <View className="px-5 mt-5">
