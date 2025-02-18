@@ -29,15 +29,22 @@ export const Featuredcards = ({ onPress }: Props) => {
     )
 }
 
-export const Cards = ({onPress} : Props) => {
+export const Cards = ({ onPress }: Props) => {
     return (
         <View className='w-52 h-80 border border-gray-100 flex py-5 items-center overflow-hidden rounded-md'>
             <TouchableOpacity onPress={onPress} className='flex flex-col items-center w-40 h-40 relative'>
                 <Image source={images.shoe1} className='w-full h-full rounded-md' />
                 <View className='flex flex-col items-start w-full mt-3'>
-                    <View className='flex-col items-start w-full'>
+                    <View className='flex-col items-start w-full py-2'>
                         <Text className='text-base font-poppins-bold text-primary-200' numberOfLines={1}>Modern Shoe</Text>
-                        <Image source={images.stargroup} className='size-5 mb-5'/>
+                        <View className='flex flex-row'>
+                            <Image source={images.stargroup} className='size-5' />
+                            <Image source={images.stargroup} className='size-5' />
+                            <Image source={images.stargroup} className='size-5' />
+                            <Image source={images.stargroup} className='size-5' />
+                            <Image source={images.stargroup} className='size-5' />
+                        </View>
+
                     </View>
                     <Text className='text-base font-poppins-bold text-primary-100'>$299.43</Text>
                     <View className='flex-row gap-3'>
