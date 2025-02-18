@@ -18,15 +18,15 @@ export default function Index() {
   return (
     <SafeAreaView className="bg-white h-full w-full">
       <FlatList
-        data={[1, 2, 3, 4]}
-        renderItem={({ item }) => <Cards />}
-        keyExtractor={(item) => item.toString()}
-        numColumns={2}
-        contentContainerClassName="pb-32"
-        columnWrapperClassName="flex gap-3 px-2 py-1"
-        showsVerticalScrollIndicator={false}
+      data={[1, 2, 3, 4]}
+      renderItem={({ item }) => <Cards />}
+      keyExtractor={(item) => item.toString()}
+      numColumns={2}
+      contentContainerClassName="pb-32"
+      columnWrapperClassName="flex-1 justify-between px-5 gap-5 py-3"
+      showsVerticalScrollIndicator={false}
         ListHeaderComponent={
-          <View className="px-5 py-5">
+          <View className="px-5 mt-5">
             <SearchBar />
             <View className="flex items-center justify-center relative">
               <View className="flex flex-col items-center gap-5 mt-5">
@@ -107,7 +107,7 @@ export default function Index() {
                 contentContainerClassName="flex gap-5 mt-5"
               />
             </View>
-            <View className="items-center justify-center relative">
+            <View className="items-center justify-center relative mb-2">
               <View className="flex flex-col items-center gap-5 mt-5">
                 <Image
                   source={images.shoebanner}
