@@ -25,6 +25,16 @@ import manbag from '@/assets/icons/man bag.png'
 import shirt from '@/assets/icons/shirt.png'
 import dress from '@/assets/icons/dress.png'
 import manshoe from '@/assets/icons/man shoes.png'
+import filter from '@/assets/icons/filter.png'
+import filter1 from '@/assets/icons/Filter (1).png'
+import bikini from '@/assets/icons/bikini.png'
+import manpant from '@/assets/icons/man pants.png'
+import manunderwear from '@/assets/icons/man underwear.png'
+import skirt from '@/assets/icons/skirt.png'
+import tshirt from '@/assets/icons/Tshirt.png'
+import womanpant from '@/assets/icons/woman pants.png'
+import womanshoe from '@/assets/icons/woman shoes.png'
+import womanTshirt from '@/assets/icons/woman tshirt.png'
 
 export default {
     message,
@@ -53,5 +63,15 @@ export default {
     manbag,
     shirt,
     dress,
-    manshoe
+    manshoe,
+    filter,
+    filter1,
+    bikini,
+    manunderwear,
+    skirt,
+    tshirt,
+    womanpant,
+    womanshoe,
+    womanTshirt,
+    manpant
 };

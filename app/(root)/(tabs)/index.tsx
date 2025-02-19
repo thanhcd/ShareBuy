@@ -1,6 +1,7 @@
 import { Card, Featuredcards } from "@/components/Cards";
 import Filter from "@/components/filter";
 import SearchBar from "@/components/Search";
+import icons from "@/constants/icons";
 import images from "@/constants/images";
 import { router } from "expo-router";
 import { useState, useEffect } from "react";
@@ -28,40 +29,11 @@ export default function Index() {
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={
           <View className="px-5 mt-5">
-            <SearchBar />
-            {/* <View className="flex items-center justify-center relative">
-              <View className="flex flex-col items-center gap-5 mt-5">
-                <Image
-                  source={images.durian}
-                  className="h-62"
-                  resizeMode="contain"
-                />
-
-                <Image source={images.slider} />
-              </View>
-
-              <View className="absolute flex flex-col justify-center items-start left-0 px-5 gap-y-5">
-                <Text
-                  className="text-white font-poppins-bold text-2xl text-start max-w-52"
-                  numberOfLines={2}
-                >
-                  Chiến dịch giải cứu sầu riêng
-                </Text>
-                <View className="flex-row gap-2 items-center">
-                  <View className="bg-white px-4 py-2 rounded-md">
-                    <Text className="font-bold text-lg text-black">{currentDateTime.getHours()}</Text>
-                  </View>
-                  <Text className="text-white font-bold text-lg">:</Text>
-                  <View className="bg-white px-4 py-2 rounded-md">
-                    <Text className="font-bold text-lg text-black">{currentDateTime.getMinutes()}</Text>
-                  </View>
-                  <Text className="text-white font-bold text-lg">:</Text>
-                  <View className="bg-white px-4 py-2 rounded-md">
-                    <Text className="font-bold text-lg text-black">{currentDateTime.getSeconds()}</Text>
-                  </View>
-                </View>
-              </View>
-            </View> */}
+            <SearchBar 
+            leftIcon={icons.love} 
+            rightIcon={icons.bell} 
+            onLeftPress={() => router.push('/favoriteProduct')}
+            onRightPress={() => router.push('/notificate')}/>
             <View className="flex relative gap-5 mt-5">
               <View className="relative">
                 <Image source={images.durian} className="w-full rounded-md" />

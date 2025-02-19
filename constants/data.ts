@@ -62,10 +62,23 @@ export const categories = [
   { title: "Túi xách nữ", category: "Condos", icon:icons.womanbag },
   { title: "Túi xách nữ", category: "Condos", icon:icons.womanbag },
   { title: "Túi xách nữ", category: "Condos", icon:icons.womanbag },
-
   { title: "Túi xách nữ", category: "Condos", icon:icons.womanbag },
+];
 
-
+export const classify = [
+  { title: "Áo", icon:icons.shirt},
+  { title: "Đồ lót", icon:icons.bikini },
+  { title: "Váy", icon:icons.dress },
+  { title: "Thời trang công sở", icon:icons.manbag },
+  { title: "Quần nam", icon:icons.manpant },
+  { title: "Giày nam", icon:icons.manshoe },
+  { title: "Đồ lót nam",  icon:icons.manunderwear },
+  { title: "Áo thun nam",  icon:icons.tshirt },
+  { title: "Túi xách nữ",  icon:icons.womanbag },
+  { title: "Quần nữ",  icon:icons.womanpant },
+  { title: "Giày cao gót",  icon:icons.womanshoe },
+  { title: "Áo thun nữ",  icon:icons.womanTshirt },
+  { title: "Váy ngắn",  icon:icons.skirt },
 ];
 
 // export const settings = [

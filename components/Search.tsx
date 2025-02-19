@@ -1,20 +1,46 @@
 import icons from '@/constants/icons';
 import { router, useLocalSearchParams, usePathname } from 'expo-router';
 import React, { useState } from 'react';
-import { View, TextInput, Image, TouchableOpacity } from 'react-native';
-import {useDebouncedCallback} from 'use-debounce';
+import { View, TextInput, Image, TouchableOpacity, ImageSourcePropType } from 'react-native';
+import { useDebouncedCallback } from 'use-debounce';
 
-const SearchBar = () => {
+interface SearchItemProps {
+    icon: ImageSourcePropType;
+    onPress?: () => void;
+}
+
+const FilterItem = ({ icon, onPress }: SearchItemProps) => {
+    return (
+        <TouchableOpacity className="relative" onPress={onPress}>
+            <Image source={icon} className="size-5 opacity-50" />
+        </TouchableOpacity>
+    );
+};
+
+interface SearchBarProps {
+    leftIcon?: ImageSourcePropType;
+    rightIcon?: ImageSourcePropType;
+    onLeftPress?: () => void;
+    onRightPress?: () => void;
+}
+
+const SearchBar = ({
+    leftIcon,
+    rightIcon,
+    onLeftPress,
+    onRightPress
+}: SearchBarProps) => {
     const path = usePathname();
-    const params = useLocalSearchParams<{query?: string}>();
-    const [search, setSearch] = useState(params.query)
-    const debouncedSearch = useDebouncedCallback((text:string) => {
-        router.setParams({query: text}), 500
-    })
-    const handleSearch = (text:string) =>{
+    const params = useLocalSearchParams<{ query?: string }>();
+    const [search, setSearch] = useState(params.query);
+    const debouncedSearch = useDebouncedCallback((text: string) => {
+        router.setParams({ query: text });
+    }, 500);
+
+    const handleSearch = (text: string) => {
         setSearch(text);
-        debouncedSearch(text)
-    }
+        debouncedSearch(text);
+    };
 
     return (
         <View className="flex-row items-center bg-white">
@@ -30,16 +56,10 @@ const SearchBar = () => {
             </View>
 
             <View className="flex-row items-center gap-3">
-                <TouchableOpacity className='relative' onPress={() => router.push('/favoriteProduct')}>
-                    <Image source={icons.love} className="size-6 opacity-50" />
-                </TouchableOpacity>
-
-                <TouchableOpacity className="relative" onPress={() => router.push("/notificate")}>
-                    <Image source={icons.bell} className="size-5 opacity-50" />
-                </TouchableOpacity>
+                <FilterItem icon={leftIcon} onPress={onLeftPress} />
+                <FilterItem icon={rightIcon} onPress={onRightPress} />
             </View>
         </View>
-
     );
 };
 
