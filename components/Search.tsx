@@ -8,31 +8,35 @@ interface SearchItemProps {
     icon: ImageSourcePropType;
     onPress?: () => void;
 }
-
 const FilterItem = ({ icon, onPress }: SearchItemProps) => {
     return (
         <TouchableOpacity className="relative" onPress={onPress}>
-            <Image source={icon} className="size-5 opacity-50" />
+            <Image source={icon} className={icon === icons.mic ? "size-7" : "size-5 opacity-50"} />
         </TouchableOpacity>
     );
 };
 
+
 interface SearchBarProps {
     leftIcon?: ImageSourcePropType;
     rightIcon?: ImageSourcePropType;
+    micIcon? : ImageSourcePropType;
     onLeftPress?: () => void;
     onRightPress?: () => void;
+    onMicPress?: () => void;
 }
 
 const SearchBar = ({
     leftIcon,
     rightIcon,
+    micIcon,
     onLeftPress,
-    onRightPress
+    onRightPress,
+    onMicPress
 }: SearchBarProps) => {
     const path = usePathname();
     const params = useLocalSearchParams<{ query?: string }>();
-    const [search, setSearch] = useState(params.query);
+    const [search, setSearch] = useState(params.query || '');
     const debouncedSearch = useDebouncedCallback((text: string) => {
         router.setParams({ query: text });
     }, 500);
@@ -55,10 +59,15 @@ const SearchBar = ({
                 />
             </View>
 
-            <View className="flex-row items-center gap-3">
-                <FilterItem icon={leftIcon} onPress={onLeftPress} />
-                <FilterItem icon={rightIcon} onPress={onRightPress} />
-            </View>
+            {/* Nếu search có nội dung thì hiển thị icon micro, nếu không thì 2 icon filter */}
+            {search.length >= 0 ? (
+                <FilterItem icon={micIcon} onPress={() => console.log('Micro pressed')} />
+            ) : (
+                <View className="flex-row items-center gap-3">
+                    <FilterItem icon={leftIcon} onPress={onLeftPress} />
+                    <FilterItem icon={rightIcon} onPress={onRightPress} />
+                </View>
+            )}
         </View>
     );
 };

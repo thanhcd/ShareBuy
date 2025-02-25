@@ -35,6 +35,7 @@ import tshirt from '@/assets/icons/Tshirt.png'
 import womanpant from '@/assets/icons/woman pants.png'
 import womanshoe from '@/assets/icons/woman shoes.png'
 import womanTshirt from '@/assets/icons/woman tshirt.png'
+import mic from '@/assets/icons/Mic.png'
 
 export default {
     message,
@@ -55,6 +56,7 @@ export default {
     logout,
     love,
     bell,
+    mic,
     list,
     mark,
     transaction,

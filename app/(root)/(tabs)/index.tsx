@@ -32,6 +32,7 @@ export default function Index() {
             <SearchBar 
             leftIcon={icons.love} 
             rightIcon={icons.bell} 
+            micIcon={icons.mic}
             onLeftPress={() => router.push('/favoriteProduct')}
             onRightPress={() => router.push('/notificate')}/>
             <View className="flex relative gap-5 mt-5">
