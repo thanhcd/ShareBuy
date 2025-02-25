@@ -60,7 +60,7 @@ const SearchBar = ({
             </View>
 
             {/* Nếu search có nội dung thì hiển thị icon micro, nếu không thì 2 icon filter */}
-            {search.length >= 0 ? (
+            {search.length > 0 ? (
                 <FilterItem icon={micIcon} onPress={() => console.log('Micro pressed')} />
             ) : (
                 <View className="flex-row items-center gap-3">
