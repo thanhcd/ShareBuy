@@ -36,6 +36,7 @@ import womanpant from '@/assets/icons/woman pants.png'
 import womanshoe from '@/assets/icons/woman shoes.png'
 import womanTshirt from '@/assets/icons/woman tshirt.png'
 import mic from '@/assets/icons/Mic.png'
+import notfound from '@/assets/icons/Not Found.png'
 
 export default {
     message,
@@ -63,6 +64,7 @@ export default {
     left,
     womanbag,
     manbag,
+    notfound,
     shirt,
     dress,
     manshoe,
