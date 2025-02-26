@@ -37,7 +37,8 @@ const explore = () => {
           rightIcon={icons.filter1}
           micIcon={icons.mic}
           onLeftPress={() => router.push('/classify')}
-          onSearch={setSearchQuery} // Cập nhật từ khóa tìm kiếm
+          onRightPress={() => router.push('/searchFilter')}
+          // onSearch={setSearchQuery} // Cập nhật từ khóa tìm kiếm
         />
 
         <View className="mt-5">

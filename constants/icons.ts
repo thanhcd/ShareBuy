@@ -37,6 +37,7 @@ import womanshoe from '@/assets/icons/woman shoes.png'
 import womanTshirt from '@/assets/icons/woman tshirt.png'
 import mic from '@/assets/icons/Mic.png'
 import notfound from '@/assets/icons/Not Found.png'
+import x from '@/assets/icons/X.png'
 
 export default {
     message,
@@ -52,6 +53,7 @@ export default {
     phone,
     gender,
     right,
+    x,
     date,
     email,
     logout,
