@@ -1,6 +1,7 @@
 import { Card, Featuredcards } from "@/components/Cards";
 import Filter from "@/components/filter";
 import SearchBar from "@/components/Search";
+import { flashsale, megasale, normalProduct } from "@/constants/data";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
 import { router } from "expo-router";
@@ -20,21 +21,21 @@ export default function Index() {
   return (
     <SafeAreaView className="bg-white h-full w-full">
       <FlatList
-        data={[1, 2, 3, 4]}
-        renderItem={({ item }) => <Card />}
-        keyExtractor={(item) => item.toString()}
+        data={normalProduct}
+        renderItem={({ item }) => item ? <Card item={item} /> : null}
+        keyExtractor={(item) => item.id}
         numColumns={2}
         contentContainerClassName="pb-32"
         columnWrapperClassName="flex-1 px-5 gap-5 "
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={
           <View className="px-5 mt-5">
-            <SearchBar 
-            leftIcon={icons.love} 
-            rightIcon={icons.bell} 
-            micIcon={icons.mic}
-            onLeftPress={() => router.push('/favoriteProduct')}
-            onRightPress={() => router.push('/notificate')}/>
+            <SearchBar
+              leftIcon={icons.love}
+              rightIcon={icons.bell}
+              micIcon={icons.mic}
+              onLeftPress={() => router.push('/favoriteProduct')}
+              onRightPress={() => router.push('/notificate')} />
             <View className="flex relative gap-5 mt-5">
               <View className="relative">
                 <Image source={images.durian} className="w-full rounded-md" />
@@ -91,9 +92,9 @@ export default function Index() {
                 </TouchableOpacity>
               </View>
               <FlatList
-                data={[1, 2, 3, 4]}
-                renderItem={({ item, index }) => <Featuredcards />}
-                keyExtractor={(item) => item.toString()}
+                data={megasale}
+                renderItem={({ item }) => item ? <Featuredcards item={item} /> : null}
+                keyExtractor={(item) => item.id}
                 horizontal
                 bounces={false}
                 showsHorizontalScrollIndicator={false}
@@ -103,15 +104,15 @@ export default function Index() {
 
             <View className="my-5">
               <View className="flex flex-row items-center justify-between">
-                <Text className="text-xl font-poppins-bold text-primary-200">Flash Sale</Text>
+                <Text className="text-xl font-poppins-bold text-primary-200">Mega Sale</Text>
                 <TouchableOpacity>
                   <Text className="text-base font-poppins-bold text-primary-100">Xem thêm</Text>
                 </TouchableOpacity>
               </View>
               <FlatList
-                data={[1, 2, 3, 4]}
-                renderItem={({ item, index }) => <Featuredcards />}
-                keyExtractor={(item) => item.toString()}
+                data={megasale}
+                renderItem={({ item }) => item ? <Featuredcards item={item} /> : null}
+                keyExtractor={(item) => item.id}
                 horizontal
                 bounces={false}
                 showsHorizontalScrollIndicator={false}

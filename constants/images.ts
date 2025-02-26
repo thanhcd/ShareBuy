@@ -12,6 +12,12 @@ import durian from '@/assets/images/durian.png'
 import slider from '@/assets/images/Slideshow Image.png'
 import shoebanner from '@/assets/images/image 51.png'
 import promotion from '@/assets/images/Promotion Image.png'
+import imageProduct1 from '@/assets/images/imageProduct1.png'
+import imageProduct2 from '@/assets/images/image Product2.png'
+import imageProduct3 from '@/assets/images/image Product3.png'
+import imageProduct4 from '@/assets/images/image Product4.png'
+
+
 
 export default {
     login,
@@ -27,5 +33,9 @@ export default {
     durian,
     slider,
     shoebanner,
-    promotion
+    promotion,
+    imageProduct1,
+    imageProduct2,
+    imageProduct3,
+    imageProduct4
 };

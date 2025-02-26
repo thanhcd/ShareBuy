@@ -1,3 +1,4 @@
+import discount from "@/app/(root)/(navigations)/discount";
 import icons from "./icons";
 import images from "./images";
 
@@ -87,6 +88,30 @@ export const categories_lady = [
 
 ];
 
+
+export const normalProduct = [
+  {id: "1",image: images.imageProduct1, name: 'Blue Laminate', price: '300.00', discount:'150.00'},
+  {id: "2",image: images.imageProduct2, name: 'Red Laminate', price: '300.00', discount:'150.00'},
+  {id: "3",image: images.imageProduct3, name: 'Yellow Laminate', price: '300.00', discount:'150.00'},
+  {id: "4",image: images.imageProduct4, name: 'Black Laminate', price: '300.00', discount:'150.00'}
+
+]
+
+export const megasale = [
+  {id: "1",image: images.imageProduct1, name: 'Blue Laminate', price: '300.00', discount:'150.00'},
+  {id: "2",image: images.imageProduct2, name: 'Red Laminate', price: '300.00', discount:'150.00'},
+  {id: "3",image: images.imageProduct3, name: 'Yellow Laminate', price: '300.00', discount:'150.00'},
+  {id: "4",image: images.shoe1, name: 'Black Laminate', price: '300.00', discount:'150.00'}
+
+]
+
+export const flashsale = [
+  {id: "1",image: images.imageProduct1, name: 'Blue Laminate', price: '300.00', discount:'150.00'},
+  {id: "2",image: images.imageProduct2, name: 'Red Laminate', price: '300.00', discount:'150.00'},
+  {id: "3",image: images.imageProduct3, name: 'Yellow Laminate', price: '300.00', discount:'150.00'},
+  {id: "4",image: images.shoe1, name: 'Black Laminate', price: '300.00', discount:'150.00'}
+
+]
 
 export const classify = [
   { title: "Áo", icon:icons.shirt},
