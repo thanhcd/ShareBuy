@@ -131,99 +131,40 @@ export const classify = [
 
 
 
-// export const settings = [
-//   {
-//     title: "My Bookings",
-//     icon: icons.calendar,
-//   },
-//   {
-//     title: "Payments",
-//     icon: icons.wallet,
-//   },
-//   {
-//     title: "Profile",
-//     icon: icons.person,
-//   },
-//   {
-//     title: "Notifications",
-//     icon: icons.bell,
-//   },
-//   {
-//     title: "Security",
-//     icon: icons.shield,
-//   },
-//   {
-//     title: "Language",
-//     icon: icons.language,
-//   },
-//   {
-//     title: "Help Center",
-//     icon: icons.info,
-//   },
-//   {
-//     title: "Invite Friends",
-//     icon: icons.people,
-//   },
-// ];
+export const filterConditions = [
+  { id: "1", title: "Mới" },
+  { id: "2", title: "Đã sử dụng" },
+];
 
-// export const facilities = [
-//   {
-//     title: "Laundry",
-//     icon: icons.laundry,
-//   },
-//   {
-//     title: "Car Parking",
-//     icon: icons.carPark,
-//   },
-//   {
-//     title: "Sports Center",
-//     icon: icons.run,
-//   },
-//   {
-//     title: "Cutlery",
-//     icon: icons.cutlery,
-//   },
-//   {
-//     title: "Gym",
-//     icon: icons.dumbell,
-//   },
-//   {
-//     title: "Swimming pool",
-//     icon: icons.swim,
-//   },
-//   {
-//     title: "Wifi",
-//     icon: icons.wifi,
-//   },
-//   {
-//     title: "Pet Center",
-//     icon: icons.dog,
-//   },
-// ];
+export const filterbuyForm = [
+  { id: "1", title: "All Listing" },
+  { id: "2", title: "Accepts Offers" },
+  { id: "3", title: "Auction" },
+  { id: "4", title: "Buy It Now" },
+  { id: "5", title: "Classified Ads" },
 
-// export const gallery = [
-//   {
-//     id: 1,
-//     image: images.newYork,
-//   },
-//   {
-//     id: 2,
-//     image: images.japan,
-//   },
-//   {
-//     id: 3,
-//     image: images.newYork,
-//   },
-//   {
-//     id: 4,
-//     image: images.japan,
-//   },
-//   {
-//     id: 5,
-//     image: images.newYork,
-//   },
-//   {
-//     id: 6,
-//     image: images.japan,
-//   },
-// ];
+];
+
+export const filterPosition = [
+  { id: "1", title: "US Only" },
+  { id: "2", title: "North America" },
+  { id: "3", title: "Europe" },
+  { id: "4", title: "Asia" },
+
+];
+
+export const filterLook = [
+  { id: "1", title: "Free Returns" },
+  { id: "2", title: "Returns Accepted" },
+  { id: "3", title: "Authorized Seller" },
+  { id: "4", title: "Completed Items" },
+  { id: "5", title: "Sold Items" },
+  { id: "6", title: "Deals & Savings" },
+  { id: "7", title: "Sale Items" },
+  { id: "8", title: "Listed as Lots" },
+  { id: "9", title: "Search in Description" },
+  { id: "10", title: "Benefits charity" },
+  { id: "11", title: "Authenticity Verified" },
+
+];
+
