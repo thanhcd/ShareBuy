@@ -2,12 +2,12 @@ import { TouchableOpacity, Text, ActivityIndicator, Image, View } from "react-na
 import React from "react";
 
 const CustomButton = ({
-    title,
+    title = "",
     handlePress,
-    containerStyles,
-    textStyles,
-    isLoading,
-    icons,
+    containerStyles = "",
+    textStyles= "",
+    isLoading = false,
+    icons = null,
 }) => {
     return (
         <TouchableOpacity

@@ -38,8 +38,10 @@ import womanTshirt from '@/assets/icons/woman tshirt.png'
 import mic from '@/assets/icons/Mic.png'
 import notfound from '@/assets/icons/Not Found.png'
 import x from '@/assets/icons/X.png'
+import trash from '@/assets/icons/trash.png'
 
 export default {
+    trash,
     message,
     password,
     google,

@@ -113,6 +113,14 @@ export const flashsale = [
 
 ]
 
+export const cartData = [
+  {id: "1",image: images.imageProduct1, name: 'Blue Laminate', price: '300.00', discount:'150.00'},
+  {id: "2",image: images.imageProduct2, name: 'Red Laminate', price: '300.00', discount:'150.00'},
+  {id: "3",image: images.imageProduct3, name: 'Yellow Laminate', price: '300.00', discount:'150.00'},
+  {id: "4",image: images.shoe1, name: 'Black Laminate', price: '300.00', discount:'150.00'}
+
+]
+
 export const classify = [
   { title: "Áo", icon:icons.shirt},
   { title: "Đồ lót", icon:icons.bikini },

@@ -15,7 +15,7 @@ const SearchFilter = () => {
     };
 
     return (
-        <SafeAreaView className="h-full bg-white ">
+        <SafeAreaView className="h-full bg-white">
             <ScrollView className="pb-32 px-7">
                 {/* Header */}
                 <View className="flex-row py-5 items-center">
