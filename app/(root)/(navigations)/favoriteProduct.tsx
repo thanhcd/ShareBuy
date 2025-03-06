@@ -4,14 +4,15 @@ import { router } from 'expo-router'
 import icons from '@/constants/icons'
 import images from '@/constants/images'
 import { Card } from '@/components/Cards'
+import { normalProduct } from '@/constants/data'
 
 const favoriteProduct = () => {
     return (
         <SafeAreaView className="h-full bg-white px-5">
             <FlatList
-                data={[1, 2, 3, 4]}
-                renderItem={({ item }) => <Card />}
-                keyExtractor={(item) => item.toString()}
+                data={normalProduct}
+                renderItem={({ item }) => item ? <Card item={item} /> : null}
+                keyExtractor={(item) => item.id}
                 numColumns={2}
                 contentContainerClassName="pb-32"
                 columnWrapperClassName="flex-1 gap-5 "

@@ -42,8 +42,10 @@ import trash from '@/assets/icons/trash.png'
 import bag from '@/assets/icons/bag.png'
 import address from '@/assets/icons/Location.png'
 import payment from '@/assets/icons/payment.png'
+import paypal from '@/assets/icons/Paypal.png'
 
 export default {
+    paypal,
     bag,
     address,
     payment,

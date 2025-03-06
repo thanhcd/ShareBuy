@@ -143,6 +143,7 @@ const SearchFilter = () => {
                     title="Xác nhận"
                     containerStyles="bg-primary-100 mt-5 rounded-lg"
                     textStyles="text-white"
+                    handlePress={{}}
                 />
             </ScrollView>
         </SafeAreaView>
