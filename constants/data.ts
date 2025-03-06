@@ -119,10 +119,10 @@ export const cartData = [
   {id: "3",image: images.imageProduct3, name: 'Yellow Laminate', price: '300.00', discount:'150.00'},
   {id: "4",image: images.shoe1, name: 'Black Laminate', price: '300.00', discount:'150.00'},
   
-  // {id: "5",image: images.imageProduct1, name: 'Blue Laminate', price: '300.00', discount:'150.00'},
-  // {id: "6",image: images.imageProduct2, name: 'Red Laminate', price: '300.00', discount:'150.00'},
-  // {id: "7",image: images.imageProduct3, name: 'Yellow Laminate', price: '300.00', discount:'150.00'},
-  // {id: "8",image: images.shoe1, name: 'Black Laminate', price: '300.00', discount:'150.00'},
+  {id: "5",image: images.imageProduct1, name: 'Blue Laminate', price: '300.00', discount:'150.00'},
+  {id: "6",image: images.imageProduct2, name: 'Red Laminate', price: '300.00', discount:'150.00'},
+  {id: "7",image: images.imageProduct3, name: 'Yellow Laminate', price: '300.00', discount:'150.00'},
+  {id: "8",image: images.shoe1, name: 'Black Laminate', price: '300.00', discount:'150.00'},
 
 ]
 
