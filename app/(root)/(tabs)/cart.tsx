@@ -104,6 +104,7 @@ import React from 'react';
 import { cartData } from '@/constants/data';
 import CartItem from '@/components/CartItem';
 import CustomButton from '@/components/CustomButton';
+import { router } from 'expo-router';
 
 const Cart = () => {
   const totalPrice = cartData.reduce((sum, item) => sum + parseFloat(item.discount), 0);
@@ -175,6 +176,7 @@ const Cart = () => {
             title="Thanh toán"
             containerStyles="bg-primary-100 rounded-lg"
             textStyles="text-white"
+            handlePress={() => router.push('/address')}
           />
         </View>
       </View>

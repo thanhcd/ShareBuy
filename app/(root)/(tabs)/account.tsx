@@ -68,23 +68,26 @@ const profile = () => {
           <Text className='text-xl font-poppins-bold text-primary-200'>Profile</Text>
         </View>
         <View className='flex-row flex mt-5'>
-          <View className='flex flex-row items-center relative mt-5'>
-            <Image source={{ uri: user?.avatar }} className='size-28 relative rounded-full' />
-            <View className='flex flex-col ml-5'>
-              <Text className='text-lg font-poppins-bold mt-2 text-primary-200'>{user?.name}</Text>
-              <Text className='text-gray-200 font-poppins-regular text-lg'>
-                @{user?.email?.split('@')[0]}
-              </Text>
+          <TouchableOpacity activeOpacity={0.7} onPress={() => router.push('/accountDetail')}>
+            <View className='flex flex-row items-center relative mt-5'>
+              <Image source={{ uri: user?.avatar }} className='size-28 relative rounded-full' />
+              <View className='flex flex-col ml-5'>
+                <Text className='text-lg font-poppins-bold mt-2 text-primary-200'>{user?.name}</Text>
+                <Text className='text-gray-200 font-poppins-regular text-lg'>
+                  @{user?.email?.split('@')[0]}
+                </Text>
+              </View>
             </View>
-          </View>
+          </TouchableOpacity>
+
 
         </View>
         <View className='flex flex-col mt-10'>
-          <SettingsItem icon={icons.gender} title='Giới tính' middleText='Male'/>
-          <SettingsItem icon={icons.date} title='Sinh nhật' middleText='12-12-2000'/>
-          <SettingsItem icon={icons.email} title='Email' middleText={user?.email}/>
-          <SettingsItem icon={icons.phone} title='Số điện thoại' middleText='0976761378'/>
-          <SettingsItem icon={icons.password} title='Thay đổi mật khẩu' middleText='************'/>
+          <SettingsItem icon={icons.gender} title='Giới tính' middleText='Male' />
+          <SettingsItem icon={icons.date} title='Sinh nhật' middleText='12-12-2000' />
+          <SettingsItem icon={icons.email} title='Email' middleText={user?.email} />
+          <SettingsItem icon={icons.phone} title='Số điện thoại' middleText='0976761378' />
+          <SettingsItem icon={icons.password} title='Thay đổi mật khẩu' middleText='************' />
 
         </View>
         <View className='flex flex-col mt-5 border-t pt-5 border-gray-100'>
