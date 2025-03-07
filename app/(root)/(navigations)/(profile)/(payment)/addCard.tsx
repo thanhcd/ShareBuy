@@ -44,7 +44,7 @@ const addCard = () => {
         </View>
 
         <View className='flex flex-col gap-2'>
-          <SettingsItem icon={icons.payment} title='Thẻ tín dụng hoặc ghi nợ' onPress={() =>router.push('/addCredit')}/>
+          <SettingsItem icon={icons.payment} title='Thẻ tín dụng hoặc ghi nợ' onPress={() =>router.push('./addCredit')}/>
           <SettingsItem icon={icons.paypal} title='Paypal' />
         </View>
       </ScrollView>

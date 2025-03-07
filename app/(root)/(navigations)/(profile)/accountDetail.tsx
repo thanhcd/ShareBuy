@@ -53,8 +53,8 @@ const accountDetail = () => {
         <View className='flex flex-col gap-2'>
           <SettingsItem icon={icons.user} title='Hồ sơ' />
           <SettingsItem icon={icons.bag} title='Đặt hàng' />
-          <SettingsItem icon={icons.address} title='Địa chỉ' onPress={() =>router.push('/address')}/>
-          <SettingsItem icon={icons.payment} title='Thanh toán' onPress={() => router.push('/addCard')}/>
+          <SettingsItem icon={icons.address} title='Địa chỉ' onPress={() => router.push('./address')}/>
+          <SettingsItem icon={icons.payment} title='Thanh toán' onPress={() => router.push('./payment')}/>
         </View>
       </ScrollView>
     </SafeAreaView>

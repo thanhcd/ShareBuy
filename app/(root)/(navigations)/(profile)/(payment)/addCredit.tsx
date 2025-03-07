@@ -5,7 +5,7 @@ import { router } from 'expo-router'
 import CustomButton from '@/components/CustomButton';
 
 
-interface SettingsAddressProps {
+interface SettingsCreditProps {
     // icon: ImageSourcePropType;
     title: string;
     placeholder?: string;
@@ -16,11 +16,11 @@ interface SettingsAddressProps {
     // middleText?: string;
 }
 
-const AddressItem = ({
+const CreditItem = ({
     title,
     placeholder,
     keyboardType,
-}: SettingsAddressProps) => {
+}: SettingsCreditProps) => {
     return (
         <View className='flex-1'>
             <View className='flex flex-col'>
@@ -33,7 +33,7 @@ const AddressItem = ({
     )
 }
 
-const address = () => {
+const addcredit = () => {
     return (
         <SafeAreaView className="h-full bg-white">
             <ScrollView
@@ -45,25 +45,21 @@ const address = () => {
                         <Image source={icons.left} className="size-9 mr-2" />
                     </TouchableOpacity>
                     <Text className="text-xl font-poppins-bold text-primary-200">
-                        Thêm địa chỉ
+                        Thêm thẻ
                     </Text>
                 </View>
-                <View className='gap-5'>
-                    <AddressItem title='Họ' placeholder='Châu' keyboardType={'default'} />
-                    <AddressItem title='Tên' placeholder='Thạnh' keyboardType={'default'} />
-                    <AddressItem title='Số nhà' placeholder='68 - 22' keyboardType={'default'} />
-                    <AddressItem title='Tên đường' placeholder='3/2' keyboardType={'default'} />
-                    <AddressItem title='Thành phố' placeholder='HCM' keyboardType={'default'} />
-                    <AddressItem title='Phường/Huyện' placeholder='6' keyboardType={'default'} />
-                    <AddressItem title='Zip Code' placeholder='70000' keyboardType={'number-pad'} />
-                    <AddressItem title='Số điện thoại' placeholder='0999999999' keyboardType={'phone-pad'} />
+                <View className='gap-5 flex-col'>
+                    <CreditItem title='Số thẻ' placeholder='1234-5678-0000-0000' keyboardType={'number-pad'} />
 
+                    <View className='flex flex-row gap-5 flex-1'>
+                        <CreditItem title='Ngày hết hạn' placeholder='MM/YY' keyboardType={'number-pad'} />
+                        <CreditItem title='Mã bảo mật' placeholder='123' keyboardType={'number-pad'} />
+                    </View>
+
+                    <CreditItem title='Tên chủ thẻ' placeholder='Nguyen Van A' keyboardType={'default'} />
                 </View>
 
-                <View className='pb-5'>
-                    <CustomButton title={'Thêm địa chỉ'} containerStyles='bg-primary-100 mt-5 rounded-lg' textStyles='text-white' handlePress={{}} />
-
-                </View>
+                <CustomButton title={'Thêm địa chỉ'} containerStyles='bg-primary-100 mt-5 rounded-lg' textStyles='text-white' handlePress={{}} />
             </ScrollView>
         </SafeAreaView>
 
@@ -71,4 +67,4 @@ const address = () => {
     )
 }
 
-export default address
+export default addcredit
