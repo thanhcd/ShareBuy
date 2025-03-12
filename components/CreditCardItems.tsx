@@ -2,7 +2,7 @@ import { View, Text, Image } from 'react-native'
 import React from 'react'
 import icons from '@/constants/icons'
 
-const CreditCardItem = ({ idcard, name, date, bgColor }) => {
+const CreditCardItem = ({ idcard, name, date, bgColor, color}) => {
     return (
         <View className={`${bgColor} w-full px-5 py-5 relative rounded-lg mb-4`}>
             <View className='flex flex-col gap-10'>

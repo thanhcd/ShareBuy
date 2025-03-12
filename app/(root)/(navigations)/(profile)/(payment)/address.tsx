@@ -3,10 +3,36 @@ import React from 'react'
 import icons from '@/constants/icons'
 import { router } from 'expo-router'
 import CustomButton from '@/components/CustomButton'
-import { CreditCard } from '@/constants/data'
+import { AddressData, CreditCard } from '@/constants/data'
 import CreditCardItem from '@/components/CreditCardItems'
 
-const credit = () => {
+interface AddressItemProps {
+    name?: string,
+    place?: string,
+    phone?: string,
+
+}
+
+const AddressItem = ({
+    name,
+    place,
+    phone,
+}: AddressItemProps) => {
+    return (
+        < View className='flex flex-col py-6 px-6 border border-primary-100 rounded-lg gap-5 mb-10' >
+            <Text className='font-poppins-bold text-lg text-primary-200'>{name}</Text>
+            <Text className='font-poppins-regular text-xm text-gray-200'>{place}</Text>
+            <Text className='font-poppins-regular text-xm text-gray-200'>{phone}</Text>
+            <View className='flex flex-row items-center gap-8'>
+                <CustomButton title='Sửa' containerStyles='bg-primary-100 px-8 rounded-lg' textStyles='text-white' handlePress={{}}/>
+                <Image source={icons.trash} className='size-7' />
+            </View>
+        </View >
+
+    )
+}
+
+const address = () => {
     return (
         <SafeAreaView className="h-full bg-white flex-1">
             <View className="flex-1 px-7 pb-5">
@@ -16,21 +42,18 @@ const credit = () => {
                         <Image source={icons.left} className="size-9 mr-2" />
                     </TouchableOpacity>
                     <Text className="text-xl font-poppins-bold text-primary-200">
-                        Thẻ tín dụng hoặc ghi nợ
+                        Địa chỉ
                     </Text>
                 </View>
 
-                {/* Danh sách thẻ (FlatList) */}
                 <FlatList
-                    data={CreditCard}
+                    data={AddressData}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item, index }) => (
-                        <CreditCardItem
-                            idcard={item.idcard}
+                        <AddressItem
                             name={item.name}
-                            date={item.date}
-                            color={{}}
-                            bgColor={item.color == 'blue' ? "bg-primary-300" : "bg-primary-100"}
+                            phone={item.phone}
+                            place={item.place}
                         />
                     )}
                     contentContainerStyle={{ paddingBottom: 20 }}
@@ -39,10 +62,10 @@ const credit = () => {
                 {/* Nút thêm thẻ */}
                 <View className="w-full">
                     <CustomButton
-                        title="Thêm thẻ"
+                        title="Thêm địa chỉ"
                         containerStyles="bg-primary-100 mt-5 rounded-lg"
                         textStyles="text-white"
-                        handlePress={() => router.push('/addCredit')}
+                        handlePress={() => router.push('/Addaddress')}
                     />
                 </View>
             </View>
@@ -50,4 +73,4 @@ const credit = () => {
     )
 }
 
-export default credit
+export default address
