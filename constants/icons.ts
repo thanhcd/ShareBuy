@@ -43,8 +43,10 @@ import bag from '@/assets/icons/bag.png'
 import address from '@/assets/icons/Location.png'
 import payment from '@/assets/icons/payment.png'
 import paypal from '@/assets/icons/Paypal.png'
+import elips from '@/assets/icons/Ellipse 106.png'
 
 export default {
+    elips,
     paypal,
     bag,
     address,

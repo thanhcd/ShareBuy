@@ -144,6 +144,11 @@ export const classify = [
 
 
 
+export const CreditCard = [
+  {id: "1", idcard: "1234 5678 0000 0000", name: "Lailyfa Febrina",  date: "12/2026"},
+  {id: "2", idcard: "1234 5678 0000 0000", name: "Lailyfa Febrina", date: "12/2026"}
+]
+
 export const filterConditions = [
   { id: "1", title: "Mới" },
   { id: "2", title: "Đã sử dụng" },

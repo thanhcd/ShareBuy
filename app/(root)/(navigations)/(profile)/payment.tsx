@@ -56,20 +56,12 @@ const payment = () => {
                     </View>
 
                     <View className="gap-5 ">
-                        <CreditItem title="Thẻ tín dụng hoặc ghi nợ" icon={icons.payment}/>
+                        <CreditItem title="Thẻ tín dụng hoặc ghi nợ" icon={icons.payment} onPress={() => router.push('/credit')}/>
                         <CreditItem title="Paypal" icon={icons.paypal} />
                     </View>
                 </ScrollView>
 
-                {/* Đẩy nút xuống cuối */}
-                <View className="pb-5">
-                    <CustomButton
-                        title="Thêm thẻ"
-                        containerStyles="bg-primary-100 mt-5 rounded-lg"
-                        textStyles="text-white"
-                        handlePress={() => router.push('./site-map')}
-                    />
-                </View>
+ 
             </View>
         </SafeAreaView>
     );
