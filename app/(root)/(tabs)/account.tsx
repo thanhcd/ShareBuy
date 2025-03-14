@@ -84,10 +84,10 @@ const profile = () => {
         </View>
         <View className='flex flex-col mt-10'>
           <SettingsItem icon={icons.gender} title='Giới tính' middleText='Male' onPress={() => router.push('/gender')}/>
-          <SettingsItem icon={icons.date} title='Sinh nhật' middleText='12-12-2000' />
-          <SettingsItem icon={icons.email} title='Email' middleText={user?.email} />
-          <SettingsItem icon={icons.phone} title='Số điện thoại' middleText='0976761378' />
-          <SettingsItem icon={icons.password} title='Thay đổi mật khẩu' middleText='************' />
+          <SettingsItem icon={icons.date} title='Sinh nhật' middleText='12-12-2000' onPress={() => router.push('/date')}/>
+          <SettingsItem icon={icons.email} title='Email' middleText={user?.email} onPress={() => router.push('/email')}/>
+          <SettingsItem icon={icons.phone} title='Số điện thoại' middleText='0976761378' onPress={() => router.push('/phone')}/>
+          <SettingsItem icon={icons.password} title='Thay đổi mật khẩu' middleText='************' onPress={() => router.push('/changePass')} />
 
         </View>
         <View className='flex flex-col mt-5 border-t pt-5 border-gray-100'>

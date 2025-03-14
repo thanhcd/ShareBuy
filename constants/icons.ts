@@ -44,8 +44,11 @@ import address from '@/assets/icons/Location.png'
 import payment from '@/assets/icons/payment.png'
 import paypal from '@/assets/icons/Paypal.png'
 import elips from '@/assets/icons/Ellipse 106.png'
-
+import phoneg from '@/assets/icons/phone-gray.png'
+import passwordg from '@/assets/icons/Password-gray.png'
 export default {
+    passwordg,
+    phoneg,
     elips,
     paypal,
     bag,
