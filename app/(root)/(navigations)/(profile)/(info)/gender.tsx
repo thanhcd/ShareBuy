@@ -4,6 +4,7 @@ import { router } from 'expo-router';
 import { AntDesign } from '@expo/vector-icons';
 import { Dropdown } from 'react-native-element-dropdown';
 import icons from '@/constants/icons';
+import CustomButton from '@/components/CustomButton';
 
 const data = [
     { label: 'Nam', value: 'male' },
@@ -36,7 +37,7 @@ const Gender = () => {
                     <Dropdown
                         style={{
                             height: 50,
-                            borderColor:  '#9098B1' ,
+                            borderColor: '#9098B1',
                             borderWidth: 0.5,
                             borderRadius: 8,
                             paddingHorizontal: 15,
@@ -44,7 +45,7 @@ const Gender = () => {
                         }}
                         data={data}
                         // search
-                    
+
                         selectedTextStyle={{
                             fontFamily: 'Poppins-Bold', // Font đậm cho giá trị đã chọn
                             fontSize: 16,
@@ -63,15 +64,11 @@ const Gender = () => {
                             setValue(item.value);
                             setIsFocus(false);
                         }}
-                        // renderLeftIcon={() => (
-                        //     <AntDesign
-                        //         style={{ marginRight: 10 }}
-                        //         color={isFocus ? 'blue' : 'black'}
-                        //         name="user"
-                        //         size={20}
-                        //     />
-                        // )}
+
                     />
+                </View>
+                <View className='mt-auto pb-5'>
+                    <CustomButton title='Save' handlePress={{}} containerStyles='bg-primary-100 rounded-lg' textStyles='text-white'/>
                 </View>
             </View>
         </SafeAreaView>
