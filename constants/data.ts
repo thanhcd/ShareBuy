@@ -56,6 +56,27 @@ export const featuredCards = [
   },
 ];
 
+export const sizeShow = [
+  {title: "6"},
+  {title: "6.5"},
+
+  {title: "7"},
+  {title: "7.5"},
+  {title: "8"},
+  {title: "8.5"},
+
+]
+
+export const colorOptions = [
+  {color: "#FFC833"},
+  {color: "#40BFFF"},
+  {color: "#FB7181"},
+  {color: "#53D1B6"},
+  {color: "#5C61F4"},
+  {color: "#223263"},
+
+]
+
 export const categories = [
   { title: "Áo nam", category: "Duplexes" , icon:icons.shirt},
   { title: "Váy", category: "Studios", icon:icons.dress },
