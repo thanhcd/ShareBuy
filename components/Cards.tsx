@@ -46,6 +46,7 @@ export const Card = ({ item }: { item?: any }) => {
       params: { // Đổi "query" → "params" vì expo-router dùng "params"
         id: item.id, // Đảm bảo id là chuỗi
         name: item.name,
+        describe:item.describe,
         price: item.discount,
         image: item.image,
       },  

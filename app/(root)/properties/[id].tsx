@@ -1,9 +1,10 @@
 import { useLocalSearchParams, router } from "expo-router";
-import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image } from "react-native";
+import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image, FlatList } from "react-native";
 import icons from "@/constants/icons";
-import { colorOptions, normalProduct, sizeShow } from "@/constants/data"; // Import danh sách sản phẩm
+import { colorOptions, megasale, normalProduct, sizeShow } from "@/constants/data"; // Import danh sách sản phẩm
 import images from "@/constants/images";
 import { useState } from "react";
+import { Featuredcards } from "@/components/Cards";
 
 const ProductDetail = () => {
   const params = useLocalSearchParams();
@@ -142,8 +143,56 @@ const ProductDetail = () => {
               <Text className="text-base font-poppins-regular text-gray-200 w-48 text-right">CD0113-400</Text>
             </View>
             <View className="mt-4">
-              <Text className="text-base font-poppins-regular text-gray-200">The Nike Air Max 270 React ENG combines a full-length React foam midsole with a 270 Max Air unit for unrivaled comfort and a striking visual experience.</Text>
+              <Text className="text-base font-poppins-regular text-gray-200">{product.describe}</Text>
             </View>
+          </View>
+          <View className="flex flex-col">
+            <View className="flex flex-row justify-between mt-5">
+              <Text className="text-primary-200 font-poppins-bold text-lg">Đánh giá</Text>
+              <TouchableOpacity>
+                <Text className="text-primary-100 font-poppins-bold text-lg">Xem thêm</Text>
+              </TouchableOpacity>
+            </View>
+            <View className="flex-row mt-2">
+              {[...Array(5)].map((_, index) => (
+                <Image key={index} source={icons.star} />
+              ))}
+              <View className="flex flex-row gap-2 ml-2">
+                <Text className="font-poppins-bold text-gray-200">5</Text>
+                <Text className="font-poppins-regular text-gray-200">(5 Reviews)</Text>
+              </View>
+            </View>
+            <View className="flex flex-row gap-5 mt-5">
+              <View className="">
+                <Image source={images.profilecomment} />
+              </View>
+              <View className="flex flex-col">
+                <Text className="text-primary-200 font-poppins-bold text-lg">James Lawson</Text>
+                <View className="flex flex-row">
+                  {[...Array(5)].map((_, index) => (
+                    <Image key={index} source={icons.star} />
+                  ))}
+                </View>
+              </View>
+            </View>
+            {/* comment */}
+            <View className="mt-5">
+              <Text className="text-lg font-poppins-regular text-gray-200">air max are always very comfortable fit,
+                clean and just perfect in every way. just the box was too small and scrunched the sneakers up
+                a little bit, not sure if the box was always this small but the 90s are and will always be one of my favorites.</Text>
+            </View>
+          </View>
+          <View className="mt-5 flex flex-col">
+            <Text className="text-primary-200 font-poppins-bold text-lg">Có lẽ bạn cũng thích</Text>
+            <FlatList
+              data={megasale}
+              renderItem={({ item }) => item ? <Featuredcards item={item} /> : null}
+              keyExtractor={(item) => item.id}
+              horizontal
+              bounces={false}
+              showsHorizontalScrollIndicator={false}
+              contentContainerClassName="flex gap-5 mt-5"
+            />
           </View>
         </View>
       </ScrollView>

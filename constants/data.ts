@@ -111,10 +111,10 @@ export const categories_lady = [
 
 
 export const normalProduct = [
-  {id: "1",image: images.imageProduct1, name: 'Blue Laminate', price: '300.00', discount:'150.00'},
-  {id: "2",image: images.imageProduct2, name: 'Red Laminate', price: '300.00', discount:'150.00'},
-  {id: "3",image: images.imageProduct3, name: 'Yellow Laminate', price: '300.00', discount:'150.00'},
-  {id: "4",image: images.imageProduct4, name: 'Black Laminate', price: '300.00', discount:'150.00'}
+  {id: "1",image: images.imageProduct1, name: 'Blue Laminate', price: '300.00', discount:'150.00', describe:"The Nike Air Max 270 React ENG combines a full-length React foam midsole with a 270 Max Air unit for unrivaled comfort and a striking visual experience."},
+  {id: "2",image: images.imageProduct2, name: 'Red Laminate', price: '300.00', discount:'150.00', describe:"The Nike Air Max 270 React ENG combines a full-length React foam midsole with a 270 Max Air unit for unrivaled comfort and a striking visual experience."},
+  {id: "3",image: images.imageProduct3, name: 'Yellow Laminate', price: '300.00', discount:'150.00', describe:"The Nike Air Max 270 React ENG combines a full-length React foam midsole with a 270 Max Air unit for unrivaled comfort and a striking visual experience."},
+  {id: "4",image: images.imageProduct4, name: 'Black Laminate', price: '300.00', discount:'150.00', describe:"The Nike Air Max 270 React ENG combines a full-length React foam midsole with a 270 Max Air unit for unrivaled comfort and a striking visual experience."}
 
 ]
 
