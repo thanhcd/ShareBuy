@@ -17,10 +17,16 @@ import imageProduct2 from '@/assets/images/image Product2.png'
 import imageProduct3 from '@/assets/images/image Product3.png'
 import imageProduct4 from '@/assets/images/image Product4.png'
 import profilecomment from '@/assets/images/Profile Picture.png'
+import profilecomment1 from '@/assets/images/Profile Picture1.png'
+import profilecomment2 from '@/assets/images/Profile Picture 2.png'
+import profilecomment3 from '@/assets/images/Profile Picture 3.png'
 
 
 export default {
     profilecomment,
+    profilecomment1,
+    profilecomment2,
+    profilecomment3,
     login,
     sharebuy1,
     boost_red,

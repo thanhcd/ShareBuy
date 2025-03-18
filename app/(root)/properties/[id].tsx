@@ -150,7 +150,7 @@ const ProductDetail = () => {
           <View className="flex flex-col">
             <View className="flex flex-row justify-between mt-5">
               <Text className="text-primary-200 font-poppins-bold text-lg">Đánh giá</Text>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => router.push('/productcomment')}>
                 <Text className="text-primary-100 font-poppins-bold text-lg">Xem thêm</Text>
               </TouchableOpacity>
             </View>

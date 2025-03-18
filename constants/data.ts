@@ -118,6 +118,13 @@ export const normalProduct = [
 
 ]
 
+export const productComment = [
+  {id: "1",image: images.profilecomment, name: 'James Lawson', describe:"The Nike Air Max 270 React ENG combines a full-length React foam midsole with a 270 Max Air unit for unrivaled comfort and a striking visual experience.",date:"December 10, 2016"},
+  {id: "2",image: images.profilecomment1, name: 'Laura Octavian',  describe:"This is really amazing product, i like the design of product, I hope can buy it again!" ,date:"December 10, 2016"},
+  {id: "3",image: images.profilecomment2, name: 'Jhonson Bridge', describe:"air max are always very comfortable fit, clean and just perfect in every way. just the box was too small and scrunched the sneakers up a little bit" ,date:"December 10, 2016"},
+  {id: "4",image: images.profilecomment3, name: 'Griffin Rod',  describe:"air max are always very comfortable fit, clean and just perfect in every way. just the box was too small" ,date:"December 10, 2016"}
+]
+
 export const megasale = [
   {id: "1",image: images.imageProduct1, name: 'Blue Laminate', price: '300.00', discount:'150.00'},
   {id: "2",image: images.imageProduct2, name: 'Red Laminate', price: '300.00', discount:'150.00'},
