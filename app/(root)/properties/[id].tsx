@@ -5,6 +5,7 @@ import { colorOptions, megasale, normalProduct, sizeShow } from "@/constants/dat
 import images from "@/constants/images";
 import { useState } from "react";
 import { Featuredcards } from "@/components/Cards";
+import CustomButton from "@/components/CustomButton";
 
 const ProductDetail = () => {
   const params = useLocalSearchParams();
@@ -194,6 +195,7 @@ const ProductDetail = () => {
               contentContainerClassName="flex gap-5 mt-5"
             />
           </View>
+          <CustomButton title="Thêm vào giỏ" containerStyles="bg-primary-100 rounded-lg mt-10" textStyles="text-white" handlePress={{}}/>
         </View>
       </ScrollView>
     </SafeAreaView>
