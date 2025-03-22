@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { router } from 'expo-router'
 import icons from '@/constants/icons'
 import * as ImagePicker from 'expo-image-picker';
+import CustomButton from '@/components/CustomButton';
 
 const AddComment = () => {
     const [images, setImages] = useState<string[]>([]); // Lưu danh sách ảnh
@@ -26,8 +27,8 @@ const AddComment = () => {
     };
 
     return (
-        <SafeAreaView className="h-full bg-white">
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerClassName="pb-32 px-7">
+        <SafeAreaView className="h-full bg-white px-7">
+            <ScrollView showsVerticalScrollIndicator={false} contentContainerClassName="pb-32 ">
                 
                 {/* Header */}
                 <View className="flex-row py-5 items-center">
@@ -81,7 +82,9 @@ const AddComment = () => {
                         )}
                     </View>
                 </View>
+
             </ScrollView>
+            <CustomButton title='Đánh giá' containerStyles='bg-primary-100 rounded-lg mb-5' textStyles='text-white' handlePress={{}}/>
         </SafeAreaView>
     )
 }

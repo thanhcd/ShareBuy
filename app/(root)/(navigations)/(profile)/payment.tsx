@@ -58,6 +58,7 @@ const payment = () => {
                     <View className="gap-5 ">
                         <CreditItem title="Thẻ tín dụng hoặc ghi nợ" icon={icons.payment} onPress={() => router.push('/credit')}/>
                         <CreditItem title="Paypal" icon={icons.paypal} />
+                        <CreditItem title='Tiền mặt' icon={icons.bank}/>
                     </View>
                 </ScrollView>
 

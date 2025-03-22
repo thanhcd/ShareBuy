@@ -59,9 +59,20 @@ const ProductDetail = () => {
               <Image source={icons.left} className="w-9 h-9 mr-2" />
 
             </TouchableOpacity>
-            <Text className="text-xl font-poppins-bold text-primary-200">
-              {product.name}
-            </Text>
+            <View className="flex flex-1 flex-row justify-between">
+              <Text className="text-xl font-poppins-bold text-primary-200">
+                {product.name}
+              </Text>
+              <View className="flex flex-row gap-2">
+                <TouchableOpacity onPress={() => router.push('/explore')}>
+                  <Image source={icons.search1} />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Image source={icons.more}/>
+                </TouchableOpacity>
+              </View>
+            </View>
+
           </View>
 
           <View className="flex flex-col items-center gap-5">
@@ -195,7 +206,7 @@ const ProductDetail = () => {
               contentContainerClassName="flex gap-5 mt-5"
             />
           </View>
-          <CustomButton title="Thêm vào giỏ" containerStyles="bg-primary-100 rounded-lg mt-10" textStyles="text-white" handlePress={{}}/>
+          <CustomButton title="Thêm vào giỏ" containerStyles="bg-primary-100 rounded-lg mt-10" textStyles="text-white" handlePress={{}} />
         </View>
       </ScrollView>
     </SafeAreaView>

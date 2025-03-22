@@ -46,7 +46,14 @@ import paypal from '@/assets/icons/Paypal.png'
 import elips from '@/assets/icons/Ellipse 106.png'
 import phoneg from '@/assets/icons/phone-gray.png'
 import passwordg from '@/assets/icons/Password-gray.png'
+import search1 from '@/assets/icons/Search1.png'
+import more from '@/assets/icons/More.png'
+import bank from '@/assets/icons/Bank.png'
+
 export default {
+    bank,
+    more,
+    search1,
     passwordg,
     phoneg,
     elips,
