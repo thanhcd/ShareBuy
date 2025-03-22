@@ -1,15 +1,35 @@
-import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image, TextInput } from 'react-native'
-import React from 'react'
+import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image, TextInput, Alert } from 'react-native'
+import React, { useState } from 'react'
 import { router } from 'expo-router'
 import icons from '@/constants/icons'
+import * as ImagePicker from 'expo-image-picker';
 
-const addcomment = () => {
+const AddComment = () => {
+    const [images, setImages] = useState<string[]>([]); // Lưu danh sách ảnh
+
+    const pickImage = async () => {
+        if (images.length >= 5) {
+            Alert.alert('Thông báo', 'Bạn chỉ có thể thêm tối đa 5 ảnh.');
+            return;
+        }
+
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [1, 1], // Cắt ảnh vuông
+            quality: 1,
+        });
+
+        if (!result.canceled) {
+            setImages([...images, result.assets[0].uri]); // Thêm ảnh vào danh sách
+        }
+    };
+
     return (
         <SafeAreaView className="h-full bg-white">
-            <ScrollView
-                showsVerticalScrollIndicator={false}
-                contentContainerClassName="pb-32 px-7"
-            >
+            <ScrollView showsVerticalScrollIndicator={false} contentContainerClassName="pb-32 px-7">
+                
+                {/* Header */}
                 <View className="flex-row py-5 items-center">
                     <TouchableOpacity onPress={() => router.back()}>
                         <Image source={icons.left} className="size-9 mr-2" />
@@ -18,27 +38,47 @@ const addcomment = () => {
                         Viết đánh giá
                     </Text>
                 </View>
+
+                {/* Nội dung đánh giá */}
                 <View>
-                    <Text className="text-lg font-poppins-bold text-primary-200">Vui lòng viết mức độ hài lòng chung với Dịch vụ vận chuyển / giao hàng của bạn</Text>
+                    <Text className="text-lg font-poppins-bold text-primary-200">
+                        Vui lòng viết mức độ hài lòng chung với Dịch vụ vận chuyển / giao hàng của bạn
+                    </Text>
                 </View>
-                <View className='mt-5'>
+
+                {/* Ô nhập đánh giá */}
+                <View className="mt-5">
                     <Text className="text-lg font-poppins-bold text-primary-200">Viết đánh giá của bạn</Text>
-                    <View className="border border-gray-100 h-40 px-3 py-3">
+                    <View className="border border-gray-300 h-40 px-3 py-3 rounded-lg mt-2">
                         <TextInput
-                            placeholder="Viết tại đây"
-                            multiline={true}  // Cho phép xuống dòng
-                            style={{ flex: 1, textAlignVertical: 'top' }} // Mở rộng chiều cao theo nội dung
+                            placeholder="Viết tại đây..."
+                            multiline
                             maxLength={500}
-                            className="text-gray-200 text-base font-poppins-regular"
+                            style={{ flex: 1, textAlignVertical: 'top' }}
+                            className="text-gray-600 text-base font-poppins-regular"
                         />
                     </View>
                 </View>
-                <View className='mt-5'>
+
+                {/* Thêm hình ảnh */}
+                <View className="mt-5">
                     <Text className="text-lg font-poppins-bold text-primary-200">Thêm hình ảnh</Text>
-                    <View>
-                        <TouchableOpacity>
-                            
-                        </TouchableOpacity>
+                    <View className="flex-row mt-2">
+                        
+                        {/* Hiển thị danh sách ảnh */}
+                        {images.map((img, index) => (
+                            <Image key={index} source={{ uri: img }} className="w-20 h-20 mr-2 rounded-lg border border-gray-300" />
+                        ))}
+
+                        {/* Nút thêm ảnh nếu chưa đủ 3 ảnh */}
+                        {images.length < 3 && (
+                            <TouchableOpacity
+                                onPress={pickImage}
+                                className="w-20 h-20 border-2 border-gray-300 rounded-lg flex items-center justify-center"
+                            >
+                                <Text className="text-2xl text-gray-400">+</Text>
+                            </TouchableOpacity>
+                        )}
                     </View>
                 </View>
             </ScrollView>
@@ -46,4 +86,4 @@ const addcomment = () => {
     )
 }
 
-export default addcomment
+export default AddComment;
