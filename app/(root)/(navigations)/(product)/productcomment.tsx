@@ -40,6 +40,9 @@ export const CommentItem = ({ item }: { item?: any }) => {
 
 
 const ProductComment = () => {
+    const handleComment = () =>{
+        router.push('/addcomment')
+    }
     return (
         <SafeAreaView className="h-full bg-white flex-1">
             <View className="flex-1 px-7 pb-5">
@@ -59,7 +62,7 @@ const ProductComment = () => {
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={{}}
                 />
-                <CustomButton title='Viết đánh giá' containerStyles='bg-primary-100 rounded-lg mt-5' textStyles='text-white' handlePress={{}}/>
+                <CustomButton title='Viết đánh giá' containerStyles='bg-primary-100 rounded-lg mt-5' textStyles='text-white' handlePress={handleComment} />
             </View>
         </SafeAreaView>
     );
