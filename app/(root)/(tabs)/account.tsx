@@ -43,7 +43,7 @@ const SettingsItem = ({
 const profile = () => {
   const { loading, isLogged, user, refetch } = useGlobalContext();
 
-  const userIdAuth = user?.$id
+  const userIdAuth: string = user?.$id || "";
   const userEmail = user?.email
   const [profile, setProfile] = useState(null);
 
@@ -80,8 +80,8 @@ const profile = () => {
   const handleCreateProfile = async () => {
     const userId = userIdAuth; // Thay bằng userId lấy từ auth
     const gender = "Male";
-    const birthday = "1998-12-25"; // Dữ liệu lấy từ form nhập
-    const email = userEmail;
+    const birthday: Date = new Date("1998-12-25"); // Dữ liệu lấy từ form nhập
+    const email = userEmail || "";
     const phone = "0123456789";
     const password = "securepassword";
 

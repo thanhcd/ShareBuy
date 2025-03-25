@@ -76,7 +76,7 @@ export async function getCurrentUser(){
 }
 
 
-export const createUserProfile = async (userId, gender, birthday, email, phone, password) => {
+export const createUserProfile = async (userId : string, gender : string, birthday: Date, email : string, phone: string, password: string) => {
     try {
         if (!config.databaseId || !config.profileCollectionId) {
             throw new Error("Thiếu databaseId hoặc profileCollection trong config!");
@@ -104,7 +104,7 @@ export const createUserProfile = async (userId, gender, birthday, email, phone, 
     }
 };
 
-export const getUserProfile = async (userId) => {
+export const getUserProfile = async (userId: string) => {
     try {
         // Lấy thông tin hồ sơ dựa vào userId
         const response = await databases.getDocument(
