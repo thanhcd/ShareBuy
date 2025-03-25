@@ -3,7 +3,7 @@ import React from 'react'
 import { useGlobalContext } from '@/lib/GlobalProvider';
 import icons from '@/constants/icons';
 import { router } from 'expo-router';
-import { logout } from '@/lib/appwrite';
+import { account, createUserProfile, logout } from '@/lib/appwrite';
 
 
 interface SettingsItemProps {
@@ -43,6 +43,11 @@ const SettingsItem = ({
 const profile = () => {
   const { loading, isLogged, user, refetch } = useGlobalContext();
 
+  const userIdAuth = user?.$id
+  const userEmail = user?.email
+
+  console.log(userIdAuth)
+  console.log(userEmail)
   if (!loading && isLogged) console.log("dang dang nhap")
   const handleLogout = async () => {
     console.log("Handling logout...");
@@ -58,6 +63,23 @@ const profile = () => {
       // router.push('/signIn')
     }
   }
+
+
+  const handleCreateProfile = async () => {
+    const userId = userIdAuth; // Thay bằng userId lấy từ auth
+    const gender = "Male";
+    const birthday = "1998-12-25"; // Dữ liệu lấy từ form nhập
+    const email = userEmail;
+    const phone = "0123456789";
+    const password = "securepassword";
+
+    const result = await createUserProfile(userId, gender, birthday, email, phone, password);
+    if (result) {
+      console.log("Tạo hồ sơ thành công!", result);
+    } else {
+      console.log("Tạo hồ sơ thất bại!");
+    }
+  };
 
   return (
     <SafeAreaView className='h-full bg-white'>
@@ -83,10 +105,10 @@ const profile = () => {
 
         </View>
         <View className='flex flex-col mt-10'>
-          <SettingsItem icon={icons.gender} title='Giới tính' middleText='Male' onPress={() => router.push('/gender')}/>
-          <SettingsItem icon={icons.date} title='Sinh nhật' middleText='12-12-2000' onPress={() => router.push('/date')}/>
-          <SettingsItem icon={icons.email} title='Email' middleText={user?.email} onPress={() => router.push('/email')}/>
-          <SettingsItem icon={icons.phone} title='Số điện thoại' middleText='0976761378' onPress={() => router.push('/phone')}/>
+          <SettingsItem icon={icons.gender} title='Giới tính' middleText='Male' onPress={() => router.push('/gender')} />
+          <SettingsItem icon={icons.date} title='Sinh nhật' middleText='12-12-2000' onPress={() => router.push('/date')} />
+          <SettingsItem icon={icons.email} title='Email' middleText={user?.email} onPress={() => router.push('/email')} />
+          <SettingsItem icon={icons.phone} title='Số điện thoại' middleText='0976761378' onPress={() => router.push('/phone')} />
           <SettingsItem icon={icons.password} title='Thay đổi mật khẩu' middleText='************' onPress={() => router.push('/changePass')} />
 
         </View>
@@ -97,6 +119,13 @@ const profile = () => {
             textStyle='text-danger'
             showArrow={false}
             onPress={handleLogout}
+          />
+          <SettingsItem
+            icon={icons.logout}
+            title='Tạo dữ liệu'
+            textStyle='text-danger'
+            showArrow={false}
+            onPress={handleCreateProfile}
           />
         </View>
       </ScrollView>

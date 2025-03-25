@@ -1,4 +1,4 @@
-import {Account, Avatars, Client, OAuthProvider} from 'react-native-appwrite'
+import {Account, Avatars, Client, OAuthProvider,Databases, Query } from 'react-native-appwrite'
 import * as Linking from 'expo-linking'
 import { openAuthSessionAsync } from 'expo-web-browser';
 
@@ -6,7 +6,9 @@ export const config = {
     platform: 'com.thanh.sharebuy',
     endpoint: process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT,
     projectId: process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID,
-}
+    databaseId: process.env.EXPO_PUBLIC_APPWRITE_DATABASES_ID,
+    profileCollectionId: process.env.EXPO_PUBLIC_APPWRITE_PROFILE_COLLECTION_ID,
+} 
 
 export const client = new Client();
 
@@ -15,9 +17,9 @@ client
     .setProject(config.projectId!)
     .setPlatform(config.platform!)
 
-
 export const avatar = new Avatars(client);
 export const account = new Account(client);
+export const databases = new Databases(client); 
 
 export async function login() {
     try {
@@ -72,3 +74,84 @@ export async function getCurrentUser(){
         return false; 
     }
 }
+
+
+export const createUserProfile = async (userId, gender, birthday, email, phone, password) => {
+    try {
+        if (!config.databaseId || !config.profileCollectionId) {
+            throw new Error("Thiếu databaseId hoặc profileCollection trong config!");
+        }
+
+        // Tạo document mới cho user trong collection "profile"
+        const response = await databases.createDocument(
+            config.databaseId,
+            config.profileCollectionId,
+            userId,  // Dùng userId làm ID
+            {
+                Gender: gender || "Unspecified",
+                Birthday: birthday || "2000-01-01",  // Giá trị mặc định
+                Email: email || "No Email",
+                Phone: phone || "No Phone",
+                Password: password || "No Password",
+            }
+        );
+
+        console.log("User profile created:", response);
+        return response;
+    } catch (error) {
+        console.error("Lỗi khi tạo user profile:", error);
+        return null;
+    }
+};
+// export const createOrUpdateUserProfile = async (userId, gender, value) => {
+//     try {
+//         if (!config.databaseId || !config.profileCollectionId) {
+//             throw new Error("Thiếu databaseId hoặc profileCollection trong config!");
+//         }
+
+//         // Kiểm tra xem user đã tồn tại chưa
+//         const document = await databases.listDocuments(
+//             config.databaseId,
+//             config.profileCollectionId,
+//             [Query.equal("$id", userId)]
+//         );
+
+//         if (document.total > 0) {
+//             console.log("User đã tồn tại, cập nhật gender:", gender);
+
+//             // Cập nhật gender cho user đã tồn tại
+//             const updatedResponse = await databases.updateDocument(
+//                 config.databaseId,
+//                 config.profileCollectionId,
+//                 userId,
+//                 { gender }
+//             );
+
+//             console.log("Cập nhật gender thành công:", updatedResponse);
+//             return updatedResponse;
+//         }
+
+//     } catch (error) {
+//         console.error("Lỗi khi tạo hoặc cập nhật user profile:", error);
+//         return null;
+//     }
+// };
+
+
+
+// export const updateProfileField = async (userId, field, value) => {
+//     try {
+//         const response = await databases.updateDocument(
+//             config.databaseId,
+//             config.profileCollectionId,
+//             userId,
+//             { [field]: value } // Chỉ cập nhật 1 trường
+//         );
+//         console.log(`Cập nhật ${field} thành công:`, response);
+//         return response;
+//     } catch (error) {
+//         console.error(`Lỗi khi cập nhật ${field}:`, error);
+//         return null;
+//     }
+// };
+

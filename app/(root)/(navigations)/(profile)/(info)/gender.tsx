@@ -1,10 +1,11 @@
 import { View, Text, SafeAreaView, TouchableOpacity, Image } from 'react-native';
 import React, { useState } from 'react';
 import { router } from 'expo-router';
-import { AntDesign } from '@expo/vector-icons';
 import { Dropdown } from 'react-native-element-dropdown';
 import icons from '@/constants/icons';
 import CustomButton from '@/components/CustomButton';
+import { createUserProfile } from '@/lib/appwrite';
+import { useGlobalContext } from '@/lib/GlobalProvider';
 
 const data = [
     { label: 'Nam', value: 'male' },
@@ -12,8 +13,11 @@ const data = [
 ];
 
 const Gender = () => {
+    
     const [value, setValue] = useState(null);
     const [isFocus, setIsFocus] = useState(false);
+
+   
 
     return (
         <SafeAreaView className="h-full bg-white flex-1">
@@ -44,19 +48,15 @@ const Gender = () => {
                             backgroundColor: 'white',
                         }}
                         data={data}
-                        // search
-
                         selectedTextStyle={{
-                            fontFamily: 'Poppins-Bold', // Font đậm cho giá trị đã chọn
+                            fontFamily: 'Poppins-Bold',
                             fontSize: 16,
-                            color: '#9098B1', // Tailwind: gray-800
+                            color: '#9098B1',
                         }}
-
                         maxHeight={300}
                         labelField="label"
                         valueField="value"
-                        placeholder={!isFocus ? 'Nam' : '...'}
-                        // searchPlaceholder="Tìm kiếm..."
+                        placeholder={!isFocus ? 'Chọn giới tính' : '...'}
                         value={value}
                         onFocus={() => setIsFocus(true)}
                         onBlur={() => setIsFocus(false)}
@@ -64,11 +64,17 @@ const Gender = () => {
                             setValue(item.value);
                             setIsFocus(false);
                         }}
-
                     />
                 </View>
+
+                {/* Nút Save */}
                 <View className='mt-auto pb-5'>
-                    <CustomButton title='Save' handlePress={{}} containerStyles='bg-primary-100 rounded-lg' textStyles='text-white'/>
+                    <CustomButton
+                        title='Save'
+                        handlePress={{}}
+                        containerStyles='bg-primary-100 rounded-lg'
+                        textStyles='text-white'
+                    />
                 </View>
             </View>
         </SafeAreaView>
