@@ -1,9 +1,9 @@
 import { View, Text, SafeAreaView, ScrollView, Image, TouchableOpacity, ImageSourcePropType, Alert } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useGlobalContext } from '@/lib/GlobalProvider';
 import icons from '@/constants/icons';
 import { router } from 'expo-router';
-import { account, createUserProfile, logout } from '@/lib/appwrite';
+import { account, createUserProfile, getUserProfile, logout } from '@/lib/appwrite';
 
 
 interface SettingsItemProps {
@@ -14,7 +14,12 @@ interface SettingsItemProps {
   showArrow?: boolean;
   middleText?: string;
 }
-
+interface ProfileData {
+  Gender: string;
+  Birthday: string;
+  Phone: string;
+  Email: string;
+}
 const SettingsItem = ({
   icon,
   title,
@@ -45,10 +50,22 @@ const profile = () => {
 
   const userIdAuth = user?.$id
   const userEmail = user?.email
+  const [profile, setProfile] = useState(null);
 
-  console.log(userIdAuth)
-  console.log(userEmail)
-  if (!loading && isLogged) console.log("dang dang nhap")
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const profileData = await getUserProfile(userIdAuth);
+      if (profileData) {
+        setProfile(profileData);
+      }
+    };
+
+    fetchProfile();
+  }, []);
+
+
+  //Check đăng nhập
+  // if (!loading && isLogged) console.log("dang dang nhap")
   const handleLogout = async () => {
     console.log("Handling logout...");
     const result = await logout();
@@ -81,6 +98,7 @@ const profile = () => {
     }
   };
 
+
   return (
     <SafeAreaView className='h-full bg-white'>
       <ScrollView showsVerticalScrollIndicator={false}
@@ -105,10 +123,10 @@ const profile = () => {
 
         </View>
         <View className='flex flex-col mt-10'>
-          <SettingsItem icon={icons.gender} title='Giới tính' middleText='Male' onPress={() => router.push('/gender')} />
-          <SettingsItem icon={icons.date} title='Sinh nhật' middleText='12-12-2000' onPress={() => router.push('/date')} />
+          <SettingsItem icon={icons.gender} title='Giới tính' middleText={profile ? profile.Gender : "Đang tải..."} onPress={() => router.push('/gender')} />
+          <SettingsItem icon={icons.date} title='Sinh nhật' middleText={profile?.Birthday ? new Date(profile.Birthday).toISOString().split('T')[0] : "Đang tải..."} onPress={() => router.push('/date')} />
           <SettingsItem icon={icons.email} title='Email' middleText={user?.email} onPress={() => router.push('/email')} />
-          <SettingsItem icon={icons.phone} title='Số điện thoại' middleText='0976761378' onPress={() => router.push('/phone')} />
+          <SettingsItem icon={icons.phone} title='Số điện thoại' middleText={profile ? profile.Phone : "Đang tải..."} onPress={() => router.push('/phone')} />
           <SettingsItem icon={icons.password} title='Thay đổi mật khẩu' middleText='************' onPress={() => router.push('/changePass')} />
 
         </View>
@@ -126,6 +144,12 @@ const profile = () => {
             textStyle='text-danger'
             showArrow={false}
             onPress={handleCreateProfile}
+          />
+          <SettingsItem
+            icon={icons.logout}
+            title='Test lấy dữ liệu'
+            textStyle='text-danger'
+            showArrow={false}
           />
         </View>
       </ScrollView>

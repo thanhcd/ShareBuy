@@ -103,6 +103,24 @@ export const createUserProfile = async (userId, gender, birthday, email, phone, 
         return null;
     }
 };
+
+export const getUserProfile = async (userId) => {
+    try {
+        // Lấy thông tin hồ sơ dựa vào userId
+        const response = await databases.getDocument(
+            config.databaseId,
+            config.profileCollectionId,
+            userId // Dùng userId làm ID để truy vấn
+        );
+
+        console.log("✅ Lấy hồ sơ thành công:", response);
+        return response;
+    } catch (error) {
+        console.error("❌ Lỗi khi lấy hồ sơ user:", error);
+        return null;
+    }
+};
+
 // export const createOrUpdateUserProfile = async (userId, gender, value) => {
 //     try {
 //         if (!config.databaseId || !config.profileCollectionId) {
