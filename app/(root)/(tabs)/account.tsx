@@ -14,12 +14,7 @@ interface SettingsItemProps {
   showArrow?: boolean;
   middleText?: string;
 }
-interface ProfileData {
-  Gender: string;
-  Birthday: string;
-  Phone: string;
-  Email: string;
-}
+
 const SettingsItem = ({
   icon,
   title,
