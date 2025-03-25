@@ -121,39 +121,39 @@ export const getUserProfile = async (userId: string) => {
     }
 };
 
-// export const createOrUpdateUserProfile = async (userId, gender, value) => {
-//     try {
-//         if (!config.databaseId || !config.profileCollectionId) {
-//             throw new Error("Thiếu databaseId hoặc profileCollection trong config!");
-//         }
+export const createOrUpdateUserProfile = async (userIdAuth:string, gender:string, value:string) => {
+    try {
+        if (!config.databaseId || !config.profileCollectionId) {
+            throw new Error("Thiếu databaseId hoặc profileCollection trong config!");
+        }
 
-//         // Kiểm tra xem user đã tồn tại chưa
-//         const document = await databases.listDocuments(
-//             config.databaseId,
-//             config.profileCollectionId,
-//             [Query.equal("$id", userId)]
-//         );
+        // Kiểm tra xem user đã tồn tại chưa
+        const document = await databases.listDocuments(
+            config.databaseId,
+            config.profileCollectionId,
+            [Query.equal("$id", userIdAuth)]
+        );
 
-//         if (document.total > 0) {
-//             console.log("User đã tồn tại, cập nhật gender:", gender);
+        if (document.total > 0) {
+            console.log("User đã tồn tại, cập nhật gender:", gender);
 
-//             // Cập nhật gender cho user đã tồn tại
-//             const updatedResponse = await databases.updateDocument(
-//                 config.databaseId,
-//                 config.profileCollectionId,
-//                 userId,
-//                 { gender }
-//             );
+            // Cập nhật gender cho user đã tồn tại
+            const updatedResponse = await databases.updateDocument(
+                config.databaseId,
+                config.profileCollectionId,
+                userIdAuth,
+                { Gender: gender } // Đảm bảo tên trường khớp với Appwrite
+            );
 
-//             console.log("Cập nhật gender thành công:", updatedResponse);
-//             return updatedResponse;
-//         }
+            console.log("Cập nhật gender thành công:", updatedResponse);
+            return updatedResponse;
+        }
 
-//     } catch (error) {
-//         console.error("Lỗi khi tạo hoặc cập nhật user profile:", error);
-//         return null;
-//     }
-// };
+    } catch (error) {
+        console.error("Lỗi khi tạo hoặc cập nhật user profile:", error);
+        return null;
+    }
+};
 
 
 

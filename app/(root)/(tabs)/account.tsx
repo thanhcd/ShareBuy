@@ -77,21 +77,21 @@ const profile = () => {
   }
 
 
-  const handleCreateProfile = async () => {
-    const userId = userIdAuth; // Thay bằng userId lấy từ auth
-    const gender = "Male";
-    const birthday: Date = new Date("1998-12-25"); // Dữ liệu lấy từ form nhập
-    const email = userEmail || "";
-    const phone = "0123456789";
-    const password = "securepassword";
+  // const handleCreateProfile = async () => {
+  //   const userId = userIdAuth; // Thay bằng userId lấy từ auth
+  //   const gender = "Male";
+  //   const birthday: Date = new Date("1998-12-25"); // Dữ liệu lấy từ form nhập
+  //   const email = userEmail || "";
+  //   const phone = "0123456789";
+  //   const password = "securepassword";
 
-    const result = await createUserProfile(userId, gender, birthday, email, phone, password);
-    if (result) {
-      console.log("Tạo hồ sơ thành công!", result);
-    } else {
-      console.log("Tạo hồ sơ thất bại!");
-    }
-  };
+  //   const result = await createUserProfile(userId, gender, birthday, email, phone, password);
+  //   if (result) {
+  //     console.log("Tạo hồ sơ thành công!", result);
+  //   } else {
+  //     console.log("Tạo hồ sơ thất bại!");
+  //   }
+  // };
 
 
   return (
@@ -138,7 +138,7 @@ const profile = () => {
             title='Tạo dữ liệu'
             textStyle='text-danger'
             showArrow={false}
-            onPress={handleCreateProfile}
+            // onPress={handleCreateProfile}
           />
           <SettingsItem
             icon={icons.logout}

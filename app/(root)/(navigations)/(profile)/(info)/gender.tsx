@@ -4,7 +4,7 @@ import { router } from 'expo-router';
 import { Dropdown } from 'react-native-element-dropdown';
 import icons from '@/constants/icons';
 import CustomButton from '@/components/CustomButton';
-import { createUserProfile } from '@/lib/appwrite';
+import { createOrUpdateUserProfile, createUserProfile } from '@/lib/appwrite';
 import { useGlobalContext } from '@/lib/GlobalProvider';
 
 const data = [
@@ -13,12 +13,28 @@ const data = [
 ];
 
 const Gender = () => {
-    
+    const { loading, isLogged, user, refetch } = useGlobalContext();
+
+    const userIdAuth: string = user?.$id || "";
     const [value, setValue] = useState(null);
     const [isFocus, setIsFocus] = useState(false);
-
-   
-
+    const handleSaveGender = () => {
+        if (!value) {
+            alert("Vui lòng chọn giới tính!");
+            return;
+        }
+    
+        // Lấy label từ data dựa trên value được chọn
+        const selectedGender = data.find(item => item.value === value)?.label;
+    
+        if (!selectedGender) {
+            alert("Giới tính không hợp lệ!");
+            return;
+        }
+    
+        createOrUpdateUserProfile(userIdAuth, selectedGender, "Gender");
+        alert("Cập nhật giới tính thành công")
+    };
     return (
         <SafeAreaView className="h-full bg-white flex-1">
             <View className="flex-1 px-7 pb-5">
@@ -71,7 +87,7 @@ const Gender = () => {
                 <View className='mt-auto pb-5'>
                     <CustomButton
                         title='Save'
-                        handlePress={{}}
+                        handlePress={handleSaveGender}
                         containerStyles='bg-primary-100 rounded-lg'
                         textStyles='text-white'
                     />
