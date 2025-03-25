@@ -157,19 +157,19 @@ export const createOrUpdateUserProfile = async (userIdAuth:string, gender:string
 
 
 
-// export const updateProfileField = async (userId, field, value) => {
-//     try {
-//         const response = await databases.updateDocument(
-//             config.databaseId,
-//             config.profileCollectionId,
-//             userId,
-//             { [field]: value } // Chỉ cập nhật 1 trường
-//         );
-//         console.log(`Cập nhật ${field} thành công:`, response);
-//         return response;
-//     } catch (error) {
-//         console.error(`Lỗi khi cập nhật ${field}:`, error);
-//         return null;
-//     }
-// };
+export const updateProfileField = async (userIdAuth:string, field, value:string) => {
+    try {
+        const response = await databases.updateDocument(
+            config.databaseId,
+            config.profileCollectionId,
+            userIdAuth,
+            { [field]: value } // Chỉ cập nhật 1 trường
+        );
+        console.log(`Cập nhật ${field} thành công:`, response);
+        return response;
+    } catch (error) {
+        console.error(`Lỗi khi cập nhật ${field}:`, error);
+        return null;
+    }
+};
 

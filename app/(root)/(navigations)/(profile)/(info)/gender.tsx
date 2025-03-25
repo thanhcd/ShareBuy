@@ -4,7 +4,7 @@ import { router } from 'expo-router';
 import { Dropdown } from 'react-native-element-dropdown';
 import icons from '@/constants/icons';
 import CustomButton from '@/components/CustomButton';
-import { createOrUpdateUserProfile, createUserProfile } from '@/lib/appwrite';
+import { createOrUpdateUserProfile, updateProfileField } from '@/lib/appwrite';
 import { useGlobalContext } from '@/lib/GlobalProvider';
 
 const data = [
@@ -32,7 +32,7 @@ const Gender = () => {
             return;
         }
     
-        createOrUpdateUserProfile(userIdAuth, selectedGender, "Gender");
+        updateProfileField(userIdAuth, "Gender", selectedGender);
         alert("Cập nhật giới tính thành công")
     };
     return (
