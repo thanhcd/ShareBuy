@@ -120,7 +120,7 @@ const profile = () => {
         <View className='flex flex-col mt-10'>
           <SettingsItem icon={icons.gender} title='Giới tính' middleText={profile ? profile.Gender : "Đang tải..."} onPress={() => router.push('/gender')} />
           <SettingsItem icon={icons.date} title='Sinh nhật' middleText={profile?.Birthday ? new Date(profile.Birthday).toISOString().split('T')[0] : "Đang tải..."} onPress={() => router.push('/date')} />
-          <SettingsItem icon={icons.email} title='Email' middleText={user?.email} onPress={() => router.push('/email')} />
+          <SettingsItem icon={icons.email} title='Email' middleText={profile ? profile.Email : "Đang tải..."} onPress={() => router.push('/email')} />
           <SettingsItem icon={icons.phone} title='Số điện thoại' middleText={profile ? profile.Phone : "Đang tải..."} onPress={() => router.push('/phone')} />
           <SettingsItem icon={icons.password} title='Thay đổi mật khẩu' middleText='************' onPress={() => router.push('/changePass')} />
 
