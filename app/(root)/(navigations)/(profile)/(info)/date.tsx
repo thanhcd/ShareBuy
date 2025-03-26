@@ -1,8 +1,9 @@
-import { View, Text, SafeAreaView, TouchableOpacity, Image, StyleSheet } from 'react-native'
+import { View, Text, SafeAreaView, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import icons from '@/constants/icons'
 import { router } from 'expo-router'
 import { Calendar } from 'react-native-calendars';
+import CustomButton from '@/components/CustomButton';
 
 const DateScreen = () => {
     const today = new Date().toISOString().split('T')[0]; // Lấy ngày hôm nay dạng YYYY-MM-DD
@@ -87,7 +88,11 @@ const DateScreen = () => {
                         );
                     }}
                 />
+                <View className='mt-auto pb-5'>
+                    <CustomButton title='Save' containerStyles='bg-primary-100 rounded-lg' handlePress={{}} textStyles='text-white'/>
+                </View>
             </View>
+
         </SafeAreaView>
     );
 };
