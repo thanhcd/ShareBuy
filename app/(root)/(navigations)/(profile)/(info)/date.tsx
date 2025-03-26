@@ -19,14 +19,17 @@ const DateScreen = () => {
                         Ngày tháng năm sinh
                     </Text>
                 </View>
-                <View className='gap-3'>
+                <View className='gap-3 mb-5'>
                     <Text className="text-lg font-poppins-bold text-primary-200">
                         Ngày tháng năm sinh của bạn
                     </Text>
 
                     <View className='px-3 py-3 w-full border border-primary-100 rounded-lg flex flex-row items-center justify-between'>
                         <Text className='font-poppins-bold text-gray-200'>20/12/2002</Text>
-                        <Image source={icons.date}/>
+                        <TouchableOpacity>
+                            <Image source={icons.date} />
+
+                        </TouchableOpacity>
                     </View>
                 </View>
 
