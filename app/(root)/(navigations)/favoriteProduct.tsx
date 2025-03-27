@@ -9,28 +9,31 @@ import { normalProduct } from '@/constants/data'
 const favoriteProduct = () => {
     return (
         <SafeAreaView className="h-full bg-white px-5">
-            <FlatList
-                data={normalProduct}
-                renderItem={({ item }) => item ? <Card item={item} /> : null}
-                keyExtractor={(item) => item.id}
-                numColumns={2}
-                contentContainerClassName="pb-32"
-                columnWrapperClassName="flex-1 gap-5 "
-                showsVerticalScrollIndicator={false}
-                ListHeaderComponent={
-                    <View>
-                        <View className="flex-row py-5 items-center">
-                            <TouchableOpacity onPress={() => router.back()}>
-                                <Image source={icons.left} className="size-9 mr-2" />
-                            </TouchableOpacity>
-                            <Text className="text-xl font-poppins-bold text-primary-200">
-                                Sản phẩm yêu thích
-                            </Text>
+            <View className='px-7'>
+                <FlatList
+                    data={normalProduct}
+                    renderItem={({ item }) => item ? <Card item={item} /> : null}
+                    keyExtractor={(item) => item.id}
+                    numColumns={2}
+                    contentContainerClassName="pb-32"
+                    columnWrapperClassName="flex-1 gap-5 "
+                    showsVerticalScrollIndicator={false}
+                    ListHeaderComponent={
+                        <View>
+                            <View className="flex-row py-5 items-center">
+                                <TouchableOpacity onPress={() => router.back()}>
+                                    <Image source={icons.left} className="size-9 mr-2" />
+                                </TouchableOpacity>
+                                <Text className="text-xl font-poppins-bold text-primary-200">
+                                    Sản phẩm yêu thích
+                                </Text>
+                            </View>
                         </View>
-                    </View>
 
-                }
-            />
+                    }
+                />
+            </View>
+
 
         </SafeAreaView>
     )
