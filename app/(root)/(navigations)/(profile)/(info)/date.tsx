@@ -4,10 +4,31 @@ import icons from '@/constants/icons'
 import { router } from 'expo-router'
 import { Calendar } from 'react-native-calendars';
 import CustomButton from '@/components/CustomButton';
+import DateTimePicker from '@react-native-community/datetimepicker'
 
 const DateScreen = () => {
     const today = new Date().toISOString().split('T')[0]; // Lấy ngày hôm nay dạng YYYY-MM-DD
+    const [date, setDate] = useState(new Date())
+    const [show, setShow] = useState(false);
+    const [mode, setMode] = useState('date');
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate;
+        setShow(false);
+        setDate(currentDate);
+    };
 
+    const showMode = (currentMode) => {
+        setShow(true);
+        setMode(currentMode);
+    };
+
+    const showDatepicker = () => {
+        showMode('date');
+    };
+
+    const showTimepicker = () => {
+        showMode('time');
+    };
     return (
         <SafeAreaView className="h-full bg-white flex-1">
             <View className="flex-1 px-7 pb-5">
@@ -24,16 +45,24 @@ const DateScreen = () => {
                     <Text className="text-lg font-poppins-bold text-primary-200">
                         Ngày tháng năm sinh của bạn
                     </Text>
-
                     <View className='px-3 py-3 w-full border border-primary-100 rounded-lg flex flex-row items-center justify-between'>
-                        <Text className='font-poppins-bold text-gray-200'>20/12/2002</Text>
-                        <TouchableOpacity>
+                        <Text className='font-poppins-bold text-gray-200'>{date.toLocaleDateString()}</Text>
+                        <TouchableOpacity onPress={() => setShow(true)}>
                             <Image source={icons.date} />
-
                         </TouchableOpacity>
                     </View>
                 </View>
 
+                {show && (
+                    <DateTimePicker
+                        testID="dateTimePicker"
+                        value={date}
+                        mode={mode}
+                        is24Hour={true}
+                        display="default"
+                        onChange={onChange}
+                    />
+                )}
                 {/* Calendar */}
                 <Calendar
                     style={styles.calendar}
@@ -89,7 +118,7 @@ const DateScreen = () => {
                     }}
                 />
                 <View className='mt-auto pb-5'>
-                    <CustomButton title='Save' containerStyles='bg-primary-100 rounded-lg' handlePress={{}} textStyles='text-white'/>
+                    <CustomButton title='Save' containerStyles='bg-primary-100 rounded-lg' handlePress={{}} textStyles='text-white' />
                 </View>
             </View>
 
