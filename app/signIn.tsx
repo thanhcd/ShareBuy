@@ -1,7 +1,7 @@
 import { View, Text, SafeAreaView, Image, Pressable, ScrollView, TouchableOpacity, Alert } from 'react-native'
 import React, { useState } from 'react'
 import images from '@/constants/images'
-import FormFields from '@/components/FormFields'
+import FormFields from '@/components/FormField'
 import icons from '@/constants/icons'
 import CustomButton from '@/components/CustomButton'
 import { Redirect, router } from 'expo-router'
@@ -10,9 +10,9 @@ import { useGlobalContext } from '@/lib/GlobalProvider'
 
 const SignInScreen = () => {
     const [form, setForm] = useState();
-    const {refetch, loading, isLogged} = useGlobalContext()
+    const { refetch, loading, isLogged } = useGlobalContext()
 
-    if(!loading && isLogged) return <Redirect href={'/'}/>
+    if (!loading && isLogged) return <Redirect href={'/'} />
     const handleSignIn = async () => {
         const result = await login();
         if (result) {
@@ -25,6 +25,10 @@ const SignInScreen = () => {
     }
     const handleSignUp = () => {
         router.push('/signUp')
+    }
+
+    const handleFuction = () => {
+        alert('Not done yet');
     }
     return (
         <SafeAreaView className='w-full h-full bg-white'>
@@ -41,6 +45,7 @@ const SignInScreen = () => {
                             keyboardType="email-address"
                             placeholder="Email của bạn"
                             icons={icons.message}
+                            textStyle="text-primary-100" // Thay đổi màu chữ
                         />
                         <FormFields title="Password"
                             otherStyles="mt-5 border border-gray-100 h-16 justify-center items-center px-4 rounded-lg"
@@ -51,7 +56,7 @@ const SignInScreen = () => {
                         <CustomButton title={'Đăng nhập'}
                             textStyles={'text-white'}
                             containerStyles={'h-20 bg-primary-100 rounded-lg mt-5'}
-                            
+                            handlePress={handleFuction}
                         />
                         <View className="flex-row items-center justify-center space-x-2 mt-8">
                             <View className="flex-1 border-t border-gray-100" />
@@ -68,8 +73,12 @@ const SignInScreen = () => {
                             containerStyles="mt-5 border border-gray-100 h-20 justify-center items-center px-4 rounded-lg"
                             icons={icons.facebook}
                             textStyles={'text-gray-200'}
+                            handlePress={handleFuction}
                         />
-                        <Text className='font-poppins-bold text-sm text-center text-primary-100 mt-2'>Quên mật khẩu</Text>
+                        <TouchableOpacity onPress={handleFuction}>
+                            <Text className='font-poppins-bold text-sm text-center text-primary-100 mt-2'>Quên mật khẩu</Text>
+
+                        </TouchableOpacity>
                         <View className="flex-row justify-center items-center mt-2">
                             <Text className="font-poppins-regular text-sm text-gray-200">
                                 Không có tài khoản?

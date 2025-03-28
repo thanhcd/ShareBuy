@@ -82,9 +82,10 @@ export const categories = [
   { title: "Váy", category: "Studios", icon:icons.dress },
   { title: "Trang phục công sở", category: "All", icon:icons.manbag },
   { title: "Túi xách nữ", category: "Condos", icon:icons.womanbag },
-  { title: "Túi xách nữ", category: "Condos", icon:icons.womanbag },
-  { title: "Túi xách nữ", category: "Condos", icon:icons.womanbag },
-  { title: "Túi xách nữ", category: "Condos", icon:icons.womanbag },
+  { title: "Váy nữ", category: "Woman", icon:icons.skirt },
+  { title: "Giày nam", category: "Man", icon:icons.manshoe },
+  { title: "Quần nam", category: "Underware", icon:icons.manpant },
+
 ];
 
 export const categories_man = [

@@ -1,7 +1,7 @@
 import { View, Text, SafeAreaView, Image, Pressable, ScrollView, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import images from '@/constants/images'
-import FormFields from '@/components/FormFields'
+import FormFields from '@/components/FormField'
 import icons from '@/constants/icons'
 import CustomButton from '@/components/CustomButton'
 import { router } from 'expo-router'
@@ -9,6 +9,9 @@ import { router } from 'expo-router'
 const SignUnScreen = () => {
     const [form, setForm] = useState();
 
+    const handleFuction = () => {
+        alert('Not done yet');
+    }
     const handleSignIn = () => {
         router.push('/signIn')
     }
@@ -49,6 +52,7 @@ const SignUnScreen = () => {
                         <CustomButton title={'Đăng kí'}
                             textStyles={'text-white'}
                             containerStyles={'h-20 bg-primary-100 rounded-lg mt-5'}
+                            handlePress={handleFuction}
                         />
                         <View className="flex-row justify-center items-center mt-2">
                             <Text className="font-poppins-regular text-sm text-gray-200">

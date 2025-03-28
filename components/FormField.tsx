@@ -2,7 +2,7 @@ import { View, Text, TextInput, Image } from "react-native";
 import React, {useState} from "react";
 import { TouchableOpacity } from "react-native";
 
-const FormField = ({
+const FormFields = ({
   title,
   value,
   placeholder,
@@ -17,10 +17,10 @@ const FormField = ({
       <View className="w-full bg-white focus:border-secondary items-center flex-row">
         <Image source={icons}/>
         <TextInput
-          className="flex-1 text-base font-poppins-regular"
+          className="flex-1 text-base font-poppins-regular p-2"
           value={value}
           placeholder={placeholder}
-          placeholderTextColor=""
+          placeholderTextColor="#B0B0B0"
           onChangeText={handleChangeText}
           secureTextEntry={title === 'Password' && !showPassword}
         />
@@ -30,4 +30,4 @@ const FormField = ({
   );
 };
 
-export default FormField;
+export default FormFields;
