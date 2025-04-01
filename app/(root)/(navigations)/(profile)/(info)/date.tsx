@@ -5,16 +5,46 @@ import { router } from 'expo-router'
 import { Calendar } from 'react-native-calendars';
 import CustomButton from '@/components/CustomButton';
 import DateTimePicker from '@react-native-community/datetimepicker'
+import { useGlobalContext } from '@/lib/GlobalProvider';
+import { updateProfileField } from '@/lib/appwrite';
 
 const DateScreen = () => {
     const today = new Date().toISOString().split('T')[0]; // Lấy ngày hôm nay dạng YYYY-MM-DD
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
+    const { user } = useGlobalContext();
+
+    const userIdAuth: string = user?.$id || "";
 
     const onChange = (event, selectedDate) => {
         setShow(true); // Ẩn picker sau khi chọn
         if (selectedDate) {
             setDate(selectedDate);
+        }
+    };
+    const handleConfirm = async (event: any, selectedDate?: Date) => {
+        console.log("handleConfirm called!"); // Kiểm tra xem hàm có được gọi không
+        setShow(false);
+    
+        if (selectedDate) {
+            setDate(selectedDate);
+            const formattedDate = selectedDate.toISOString().split("T")[0];
+            console.log("Formatted date:", formattedDate); // Kiểm tra giá trị ngày
+    
+            try {
+                const response = await updateProfileField(userIdAuth, "Birthday", formattedDate);
+                if (response) {
+                    alert("Ngày sinh đã được cập nhật thành công!");
+                    console.log("Ngày sinh cập nhật thành công!");
+                } else {
+                    console.log("Lỗi khi cập nhật ngày sinh!");
+                    alert("Lỗi khi cập nhật ngày sinh!");
+                }
+            } catch (error) {
+                console.error("Error updating birthday:", error);
+            }
+        } else {
+            console.log("No date selected.");
         }
     };
 
@@ -115,7 +145,7 @@ const DateScreen = () => {
                     }}
                 />
                 <View className='mt-auto pb-5'>
-                    <CustomButton title='Save' containerStyles='bg-primary-100 rounded-lg' handlePress={{}} textStyles='text-white' />
+                    <CustomButton title='Save' containerStyles='bg-primary-100 rounded-lg' handlePress={() => handleConfirm(null, date)} textStyles='text-white' />
                 </View>
             </View>
 
