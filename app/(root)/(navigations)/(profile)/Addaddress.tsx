@@ -88,11 +88,11 @@ const Address = () => {
                         placeholder={profile?.name || 'Tên chưa có'}
                         keyboardType="default"
                     />
-                    <AddressItem title="Số nhà" placeholder="68 - 22" keyboardType="default" />
-                    <AddressItem title="Tên đường" placeholder="3/2" keyboardType="default" />
-                    <AddressItem title="Thành phố" placeholder="HCM" keyboardType="default" />
-                    <AddressItem title="Phường/Huyện" placeholder="6" keyboardType="default" />
-                    <AddressItem title="Zip Code" placeholder="70000" keyboardType="number-pad" />
+                    <AddressItem title="Số nhà" placeholder="" keyboardType="default" />
+                    <AddressItem title="Tên đường" placeholder="" keyboardType="default" />
+                    <AddressItem title="Thành phố" placeholder="" keyboardType="default" />
+                    <AddressItem title="Phường/Huyện" placeholder="" keyboardType="default" />
+                    <AddressItem title="Zip Code" placeholder="" keyboardType="number-pad" />
                     <AddressItem
                         title="Số điện thoại"
                         placeholder={userCollectionData?.Phone || 'Số điện thoại chưa có'}

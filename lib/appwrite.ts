@@ -108,8 +108,8 @@ export const getUserProfile = async (userId: string) => {
     try {
         // Lấy thông tin hồ sơ dựa vào userId
         const response = await databases.getDocument(
-            config.databaseId,
-            config.profileCollectionId,
+            config.databaseId || "khong tim thay databaseId",
+            config.profileCollectionId || "khong tim thay profileCollectionId",
             userId // Dùng userId làm ID để truy vấn
         );
 
@@ -157,11 +157,11 @@ export const createOrUpdateUserProfile = async (userIdAuth:string, gender:string
 
 
 
-export const updateProfileField = async (userIdAuth:string, field, value:string) => {
+export const updateProfileField = async (userIdAuth:string, field: any, value:string) => {
     try {
         const response = await databases.updateDocument(
-            config.databaseId,
-            config.profileCollectionId,
+            config.databaseId || "khong tim thay databaseId",
+            config.profileCollectionId || "khong tim thay profileCollectionId",
             userIdAuth,
             { [field]: value } // Chỉ cập nhật 1 trường
         );
