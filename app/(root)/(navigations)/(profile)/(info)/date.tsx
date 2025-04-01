@@ -16,7 +16,7 @@ const DateScreen = () => {
 
     const userIdAuth: string = user?.$id || "";
 
-    const onChange = (event, selectedDate) => {
+    const onChange = (event?: any, selectedDate?: any) => {
         setShow(true); // Ẩn picker sau khi chọn
         if (selectedDate) {
             setDate(selectedDate);
@@ -35,10 +35,8 @@ const DateScreen = () => {
                 const response = await updateProfileField(userIdAuth, "Birthday", formattedDate);
                 if (response) {
                     alert("Ngày sinh đã được cập nhật thành công!");
-                    console.log("Ngày sinh cập nhật thành công!");
                 } else {
                     console.log("Lỗi khi cập nhật ngày sinh!");
-                    alert("Lỗi khi cập nhật ngày sinh!");
                 }
             } catch (error) {
                 console.error("Error updating birthday:", error);
