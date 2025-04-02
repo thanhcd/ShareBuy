@@ -5,6 +5,7 @@ import {
   OAuthProvider,
   Databases,
   Query,
+  ID,
 } from "react-native-appwrite";
 import * as Linking from "expo-linking";
 import { openAuthSessionAsync } from "expo-web-browser";
@@ -209,37 +210,57 @@ export const addAddressUser = async (
   }
 ) => {
   try {
-    // Kiểm tra các trường bắt buộc
-    const { country, house_no, street, city, district, zipcode } =
-      addressDetails;
+    const { country, house_no, street, city, district, zipcode } = addressDetails;
     if (!country || !house_no || !street || !city || !district || !zipcode) {
       throw new Error("Thiếu thông tin bắt buộc trong địa chỉ.");
     }
 
-    // Tạo một đối tượng để gửi lên database
     const documentData = {
-      house_no: house_no,
-      street: street,
-      city: city,
-      district: district,
-      zipcode: zipcode,
-      country: country, // Đảm bảo tên trường là chữ thường
+      house_no,
+      street,
+      city,
+      district,
+      zipcode,
+      country,
+      user_id: userIdAuth, // Liên kết địa chỉ với user
     };
 
     console.log("Dữ liệu gửi lên Appwrite:", documentData);
 
-    // Gọi API của Appwrite để tạo mới một document
     const response = await databases.createDocument(
-      config.databaseId || "khong tim thay databaseId",
+      config.databaseId  || "khong tim thay databaseId",
       config.addressCollectionId || "khong tim thay addressCollectionId",
-      userIdAuth, // ID của user
-      documentData // Dữ liệu document mà bạn muốn lưu
+      "unique()", // Tạo ID tự động
+      documentData
     );
 
     console.log(`Cập nhật địa chỉ thành công:`, response);
     return response;
   } catch (error) {
     console.error(`Lỗi khi cập nhật địa chỉ:`, error);
+    return null;
+  }
+};
+
+
+
+export const getUserAddresses = async (userIdAuth: string) => {
+  try {
+    if (!config.databaseId || !config.addressCollectionId) {
+      throw new Error("Thiếu databaseId hoặc addressCollectionId trong config!");
+    }
+
+    // Truy vấn danh sách các địa chỉ của người dùng
+    const response = await databases.listDocuments(
+      config.databaseId,
+      config.addressCollectionId,
+      [Query.equal("user_id", userIdAuth)] // Lọc theo userId
+    );
+
+    console.log("✅ Lấy danh sách địa chỉ thành công:", response.documents);
+    return response.documents; // Trả về danh sách các địa chỉ
+  } catch (error) {
+    console.error("❌ Lỗi khi lấy danh sách địa chỉ:", error);
     return null;
   }
 };

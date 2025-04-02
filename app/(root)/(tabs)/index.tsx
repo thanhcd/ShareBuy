@@ -23,7 +23,7 @@ export default function Index() {
       <FlatList
         data={normalProduct}
         renderItem={({ item }) => item ? <Card item={item} /> : null}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item, index) => item.id || index.toString()} // Đảm bảo key duy nhất
         numColumns={2}
         contentContainerClassName="pb-32"
         columnWrapperClassName="flex-1 px-5 gap-5 "
@@ -94,7 +94,7 @@ export default function Index() {
               <FlatList
                 data={megasale}
                 renderItem={({ item }) => item ? <Featuredcards item={item} /> : null}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item, index) => item.id || index.toString()} // Đảm bảo key duy nhất
                 horizontal
                 bounces={false}
                 showsHorizontalScrollIndicator={false}
@@ -112,7 +112,7 @@ export default function Index() {
               <FlatList
                 data={megasale}
                 renderItem={({ item }) => item ? <Featuredcards item={item} /> : null}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item, index) => item.id || index.toString()} // Đảm bảo key duy nhất
                 horizontal
                 bounces={false}
                 showsHorizontalScrollIndicator={false}

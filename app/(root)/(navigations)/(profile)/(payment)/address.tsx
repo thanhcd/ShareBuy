@@ -1,38 +1,89 @@
-import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image, FlatList } from 'react-native'
-import React from 'react'
-import icons from '@/constants/icons'
-import { router } from 'expo-router'
-import CustomButton from '@/components/CustomButton'
-import { AddressData, CreditCard } from '@/constants/data'
-import CreditCardItem from '@/components/CreditCardItems'
+import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image, FlatList, Alert } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import icons from '@/constants/icons';
+import { router } from 'expo-router';
+import CustomButton from '@/components/CustomButton';
+import { useGlobalContext } from '@/lib/GlobalProvider';
+import { getUserAddresses } from '@/lib/appwrite'; // Import hàm getUserAddresses
 
 interface AddressItemProps {
-    name?: string,
-    place?: string,
-    phone?: string,
-
+    username?: string;
+    country?: string;
+    district?: string;
+    street?: string;
+    house_no?: string;
+    handlePress?: () => void;
 }
 
 const AddressItem = ({
-    name,
-    place,
-    phone,
+    username,
+    country,
+    district,
+    street,
+    house_no,
+    handlePress,
 }: AddressItemProps) => {
     return (
-        < View className='flex flex-col py-6 px-6 border border-primary-100 rounded-lg gap-5 mb-10' >
-            <Text className='font-poppins-bold text-lg text-primary-200'>{name}</Text>
-            <Text className='font-poppins-regular text-xm text-gray-200'>{place}</Text>
-            <Text className='font-poppins-regular text-xm text-gray-200'>{phone}</Text>
-            <View className='flex flex-row items-center gap-8'>
-                <CustomButton title='Sửa' containerStyles='bg-primary-100 px-8 rounded-lg' textStyles='text-white' handlePress={{}}/>
-                <Image source={icons.trash} className='size-7' />
+        <View className='flex flex-col py-6 px-6 border border-primary-100 rounded-lg gap-5 mb-10'>
+            <Text className='font-poppins-bold text-lg text-primary-200'>{username}</Text>
+            <View className='flex flex-row justify-between'>
+                <Text className='font-poppins-regular text-xm text-gray-200'>Quốc gia: </Text>
+                <Text className='font-poppins-regular text-xm text-gray-200'>{country}</Text>
             </View>
-        </View >
+            <View className='flex flex-row justify-between'>
+                <Text className='font-poppins-regular text-xm text-gray-200'>Quận: </Text>
+                <Text className='font-poppins-regular text-xm text-gray-200'>{district}</Text>
+            </View>
+            <View className='flex flex-row justify-between'>
+                <Text className='font-poppins-regular text-xm text-gray-200'>Đường: </Text>
+                <Text className='font-poppins-regular text-xm text-gray-200'>{street}</Text>
+            </View>
+            <View className='flex flex-row justify-between'>
+                <Text className='font-poppins-regular text-xm text-gray-200'>Số nhà:</Text>
+                <Text className='font-poppins-regular text-xm text-gray-200'>{house_no}</Text>
+            </View>
 
-    )
-}
+            <View className='flex flex-row items-center gap-8'>
+                <CustomButton title='Sửa' containerStyles='bg-primary-100 px-8 rounded-lg' textStyles='text-white' handlePress={handlePress} />
+                <TouchableOpacity onPress={handlePress}>
+                    <Image source={icons.trash} className='size-7' />
+                </TouchableOpacity>
+            </View>
+        </View>
+    );
+};
 
-const address = () => {
+const Address = () => {
+    const { user } = useGlobalContext();
+    const username = user?.name;
+    const userIdAuth: string = user?.$id || "";
+
+    // State để lưu trữ danh sách địa chỉ
+    const [addressInfo, setAddressInfo] = useState<AddressItemProps[]>([]);
+    const handlefuction = () => {
+        alert("not done yet");
+    }
+    // useEffect để gọi hàm getUserAddresses
+    useEffect(() => {
+        const fetchAddresses = async () => {
+            try {
+                const addresses = await getUserAddresses(userIdAuth);
+                if (addresses) {
+                    setAddressInfo(addresses); // Lưu danh sách địa chỉ vào state
+                } else {
+                    Alert.alert('Thông báo', 'Không thể lấy danh sách địa chỉ.');
+                }
+            } catch (error) {
+                console.error('Lỗi khi lấy danh sách địa chỉ:', error);
+                Alert.alert('Lỗi', 'Đã xảy ra lỗi khi lấy danh sách địa chỉ.');
+            }
+        };
+
+        if (userIdAuth) {
+            fetchAddresses();
+        }
+    }, [userIdAuth]); // Chỉ chạy khi userIdAuth thay đổi
+
     return (
         <SafeAreaView className="h-full bg-white flex-1">
             <View className="flex-1 px-7 pb-5">
@@ -46,20 +97,24 @@ const address = () => {
                     </Text>
                 </View>
 
+                {/* Danh sách địa chỉ */}
                 <FlatList
-                    data={AddressData}
-                    keyExtractor={(item) => item.id}
-                    renderItem={({ item, index }) => (
+                    data={addressInfo} // Sử dụng state addressInfo
+                    keyExtractor={(item, index) => item.id || index.toString()} // Đảm bảo key duy nhất
+                    renderItem={({ item }) => (
                         <AddressItem
-                            name={item.name}
-                            phone={item.phone}
-                            place={item.place}
+                            username={username}
+                            district={item.district}
+                            country={item.country}
+                            street={item.street}
+                            house_no={item.house_no}
+                            handlePress={handlefuction} // Truyền hàm xử lý sự kiện vào đây
                         />
                     )}
                     contentContainerStyle={{ paddingBottom: 20 }}
                 />
 
-                {/* Nút thêm thẻ */}
+                {/* Nút thêm địa chỉ */}
                 <View className="w-full">
                     <CustomButton
                         title="Thêm địa chỉ"
@@ -70,7 +125,7 @@ const address = () => {
                 </View>
             </View>
         </SafeAreaView>
-    )
-}
+    );
+};
 
-export default address
+export default Address;
