@@ -257,10 +257,31 @@ export const getUserAddresses = async (userIdAuth: string) => {
       [Query.equal("user_id", userIdAuth)] // Lọc theo userId
     );
 
-    console.log("✅ Lấy danh sách địa chỉ thành công:", response.documents);
+    // console.log("✅ Lấy danh sách địa chỉ thành công:", response.documents);
     return response.documents; // Trả về danh sách các địa chỉ
   } catch (error) {
     console.error("❌ Lỗi khi lấy danh sách địa chỉ:", error);
     return null;
   }
 };
+
+
+export const deleteUserAddress = async (documentId: string) => {
+  try {
+    if (!config.databaseId || !config.addressCollectionId) {
+      throw new Error("Thiếu databaseId hoặc addressCollectionId trong config!");
+    }
+
+    await databases.deleteDocument(
+      config.databaseId,
+      config.addressCollectionId,
+      documentId // ✅ Đảm bảo truyền đúng documentId
+    );
+
+    return true;
+  } catch (error) {
+    console.error("❌ Lỗi khi xóa địa chỉ:", error);
+    return false;
+  }
+};
+

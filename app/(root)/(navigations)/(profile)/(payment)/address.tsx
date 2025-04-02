@@ -4,7 +4,7 @@ import icons from '@/constants/icons';
 import { router } from 'expo-router';
 import CustomButton from '@/components/CustomButton';
 import { useGlobalContext } from '@/lib/GlobalProvider';
-import { getUserAddresses } from '@/lib/appwrite'; // Import hàm getUserAddresses
+import { deleteUserAddress, getUserAddresses } from '@/lib/appwrite'; // Import hàm getUserAddresses
 
 interface AddressItemProps {
     username?: string;
@@ -13,6 +13,7 @@ interface AddressItemProps {
     street?: string;
     house_no?: string;
     handlePress?: () => void;
+    onPress?: () => void;
 }
 
 const AddressItem = ({
@@ -22,6 +23,7 @@ const AddressItem = ({
     street,
     house_no,
     handlePress,
+    onPress
 }: AddressItemProps) => {
     return (
         <View className='flex flex-col py-6 px-6 border border-primary-100 rounded-lg gap-5 mb-10'>
@@ -45,7 +47,7 @@ const AddressItem = ({
 
             <View className='flex flex-row items-center gap-8'>
                 <CustomButton title='Sửa' containerStyles='bg-primary-100 px-8 rounded-lg' textStyles='text-white' handlePress={handlePress} />
-                <TouchableOpacity onPress={handlePress}>
+                <TouchableOpacity onPress={onPress}>
                     <Image source={icons.trash} className='size-7' />
                 </TouchableOpacity>
             </View>
@@ -63,7 +65,28 @@ const Address = () => {
     const handlefuction = () => {
         alert("not done yet");
     }
-    // useEffect để gọi hàm getUserAddresses
+
+    const handleDeleteAddress = async (documentId: string) => {
+        try {
+            if (!documentId) {
+                Alert.alert("Lỗi", "Không tìm thấy ID của địa chỉ cần xóa.");
+                return;
+            }
+
+            const response = await deleteUserAddress(documentId);
+            if (response) {
+                Alert.alert("Thông báo", "Địa chỉ đã được xóa thành công.");
+                setAddressInfo((prevAddresses) => prevAddresses.filter((address) => address.$id !== documentId)); // ✅ Dùng $id
+            } else {
+                Alert.alert("Thông báo", "Không thể xóa địa chỉ.");
+            }
+        } catch (error) {
+            console.error("❌ Lỗi khi xóa địa chỉ:", error);
+            Alert.alert("Lỗi", "Đã xảy ra lỗi khi xóa địa chỉ.");
+        }
+    };
+
+
     useEffect(() => {
         const fetchAddresses = async () => {
             try {
@@ -99,8 +122,8 @@ const Address = () => {
 
                 {/* Danh sách địa chỉ */}
                 <FlatList
-                    data={addressInfo} // Sử dụng state addressInfo
-                    keyExtractor={(item, index) => item.id || index.toString()} // Đảm bảo key duy nhất
+                    data={addressInfo}
+                    keyExtractor={(item, index) => item.$id || index.toString()} // ✅ Đảm bảo key là documentId ($id)
                     renderItem={({ item }) => (
                         <AddressItem
                             username={username}
@@ -108,7 +131,8 @@ const Address = () => {
                             country={item.country}
                             street={item.street}
                             house_no={item.house_no}
-                            handlePress={handlefuction} // Truyền hàm xử lý sự kiện vào đây
+                            handlePress={handlefuction}
+                            onPress={() => handleDeleteAddress(item.$id)} // ✅ Truyền đúng documentId ($id)
                         />
                     )}
                     contentContainerStyle={{ paddingBottom: 20 }}
