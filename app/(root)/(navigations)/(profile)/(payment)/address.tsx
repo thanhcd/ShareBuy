@@ -7,6 +7,7 @@ import { useGlobalContext } from '@/lib/GlobalProvider';
 import { deleteUserAddress, getUserAddresses } from '@/lib/appwrite'; // Import hàm getUserAddresses
 
 interface AddressItemProps {
+    $id?: string;
     username?: string;
     country?: string;
     district?: string;
@@ -23,7 +24,7 @@ const AddressItem = ({
     street,
     house_no,
     handlePress,
-    onPress
+    onPress,
 }: AddressItemProps) => {
     return (
         <View className='flex flex-col py-6 px-6 border border-primary-100 rounded-lg gap-5 mb-10'>
