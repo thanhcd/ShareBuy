@@ -11,7 +11,7 @@ const Cart = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-white">
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
+      {/* <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}> */}
         <View className="px-5">
           <Text className="text-xl font-poppins-bold text-primary-200 mt-5 mb-4">
             Giỏ hàng
@@ -78,7 +78,7 @@ const Cart = () => {
             />
           </View>
         </View>
-      </ScrollView>
+      {/* </ScrollView> */}
     </SafeAreaView>
   );
 };

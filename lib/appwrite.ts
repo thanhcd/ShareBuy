@@ -17,6 +17,7 @@ export const config = {
   databaseId: process.env.EXPO_PUBLIC_APPWRITE_DATABASES_ID,
   profileCollectionId: process.env.EXPO_PUBLIC_APPWRITE_PROFILE_COLLECTION_ID,
   addressCollectionId: process.env.EXPO_PUBLIC_APPWRITE_ADDRESS_COLLECTION_ID,
+  creditcardCollectionId: process.env.EXPO_PUBLIC_APPWRITE_CREDITCARD_COLLECTION_ID,
 };
 
 export const client = new Client();
@@ -242,8 +243,6 @@ export const addAddressUser = async (
   }
 };
 
-
-
 export const getUserAddresses = async (userIdAuth: string) => {
   try {
     if (!config.databaseId || !config.addressCollectionId) {
@@ -316,5 +315,47 @@ export const updateAddressUser = async (
   } catch (error) {
       console.error('Lỗi khi cập nhật địa chỉ:', error);
       return null;
+  }
+};
+
+
+
+export const addCreditCardUser = async (
+  userIdAuth: string,
+  creditDetails: {
+    card_number: string;
+    card_name: string;
+    card_expiry: string;
+    card_cvc: string;
+  }
+) => {
+  try {
+    const { card_number, card_name, card_expiry, card_cvc } = creditDetails;
+    if (!card_number || !card_name || !card_expiry || !card_cvc) {
+      throw new Error("Thiếu thông tin bắt buộc trong địa chỉ.");
+    }
+
+    const documentData = {
+      card_number,
+      card_name,
+      card_expiry,
+      card_cvc,
+      user_id: userIdAuth, // Liên kết địa chỉ với user
+    };
+
+    console.log("Dữ liệu gửi lên Appwrite:", documentData);
+
+    const response = await databases.createDocument(
+      config.databaseId  || "khong tim thay databaseId",
+      config.creditcardCollectionId || "khong tim thay creditcardCollectionId",
+      "unique()", // Tạo ID tự động
+      documentData
+    );
+
+    console.log(`Cập nhật địa chỉ thành công:`, response);
+    return response;
+  } catch (error) {
+    console.error(`Lỗi khi cập nhật địa chỉ:`, error);
+    return null;
   }
 };
