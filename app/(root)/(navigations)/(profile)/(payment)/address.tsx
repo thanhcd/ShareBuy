@@ -4,7 +4,7 @@ import icons from '@/constants/icons';
 import { router } from 'expo-router';
 import CustomButton from '@/components/CustomButton';
 import { useGlobalContext } from '@/lib/GlobalProvider';
-import { deleteUserAddress, getUserAddresses } from '@/lib/appwrite'; // Import hàm getUserAddresses
+import { deleteUserAddress, getUserAddresses, updateAddressUser } from '@/lib/appwrite'; // Import hàm getUserAddresses
 
 interface AddressItemProps {
     $id?: string;
@@ -63,9 +63,31 @@ const Address = () => {
 
     // State để lưu trữ danh sách địa chỉ
     const [addressInfo, setAddressInfo] = useState<AddressItemProps[]>([]);
-    const handlefuction = () => {
-        alert("not done yet");
-    }
+    const handleUpdateFunction = async (documentId: string) => {
+        console.log("Địa chỉ cần sửa có ID:", documentId);
+        try {
+            if (!documentId) {
+                Alert.alert("Lỗi", "Không tìm thấy ID của địa chỉ cần sửa.");
+                return;
+            }
+    
+            const address = addressInfo.find((item) => item.$id === documentId);
+            if (address) {
+                // Xóa các thuộc tính không hợp lệ trước khi truyền dữ liệu
+                const { handlePress, onPress, ...filteredAddress } = address;
+    
+                console.log("Dữ liệu địa chỉ gửi đi:", filteredAddress);
+    
+                router.push({
+                    pathname: "/Addaddress",
+                    params: { ...filteredAddress, documentId }, // Truyền dữ liệu hợp lệ
+                });
+            }
+        } catch (error) {
+            console.error("Lỗi khi chuyển trang:", error);
+        }
+    };
+    
 
     const handleDeleteAddress = async (documentId: string) => {
         try {
@@ -132,8 +154,8 @@ const Address = () => {
                             country={item.country}
                             street={item.street}
                             house_no={item.house_no}
-                            handlePress={handlefuction}
-                            onPress={() => handleDeleteAddress(item.$id)} // ✅ Truyền đúng documentId ($id)
+                            handlePress={() => handleUpdateFunction(item.$id ?? "")} // ✅ Truyền đúng documentId ($id)
+                            onPress={() => handleDeleteAddress(item.$id ?? "")} // ✅ Truyền đúng documentId ($id)
                         />
                     )}
                     contentContainerStyle={{ paddingBottom: 20 }}

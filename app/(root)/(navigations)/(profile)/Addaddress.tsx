@@ -1,9 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, TextInput, Alert } from 'react-native';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import icons from '@/constants/icons';
-import { addAddressUser, getCurrentUser } from '@/lib/appwrite';
+import { addAddressUser, getCurrentUser, updateAddressUser } from '@/lib/appwrite';
 import CustomButton from '@/components/CustomButton';
+import { useGlobalContext } from '@/lib/GlobalProvider';
+
+interface AddressParams {
+    documentId?: string;
+    country?: string;
+    house_no?: string;
+    street?: string;
+    city?: string;
+    district?: string;
+    zipcode?: string;
+}
 
 const AddressItem = ({ title, placeholder, keyboardType, value, onChangeText }: any) => {
     return (
@@ -24,7 +35,11 @@ const AddressItem = ({ title, placeholder, keyboardType, value, onChangeText }: 
 };
 
 const Address = () => {
+    const params = useLocalSearchParams<AddressParams>();
     const [userId, setUserId] = useState<string | null>(null);
+    const { user } = useGlobalContext(); // Lấy thông tin người dùng từ context
+    const userIdAuth = user?.$id; // Lấy ID người dùng từ context
+    const [isDataLoaded, setIsDataLoaded] = useState(false); // State để kiểm tra dữ liệu đã tải
     const [addressDetails, setAddressDetails] = useState({
         country: 'Việt Nam',
         house_no: '',
@@ -42,8 +57,23 @@ const Address = () => {
             }
         };
 
-        fetchUser();
-    }, []);
+        if (!isDataLoaded) {
+            fetchUser();
+
+            if (params && params.documentId) {
+                setAddressDetails({
+                    country: params.country || 'Việt Nam', // Thiết lập mặc định nếu không có giá trị
+                    house_no: params.house_no || '',
+                    street: params.street || '',
+                    city: params.city || '',
+                    district: params.district || '',
+                    zipcode: params.zipcode || '',
+                });
+            }
+
+            setIsDataLoaded(true); // Đánh dấu dữ liệu đã được tải
+        }
+    }, [isDataLoaded, params]);
 
     const handleSaveAddress = async () => {
         if (!userId) {
@@ -65,6 +95,30 @@ const Address = () => {
         }
     };
 
+    const handleUpdateAdress = async (documentId: string) => {
+        try {
+            if (!documentId) {
+                Alert.alert('Lỗi', 'Không tìm thấy ID của địa chỉ cần sửa.');
+                return;
+            }
+    
+            console.log('Dữ liệu địa chỉ trước khi cập nhật:', addressDetails);
+    
+            // Gửi yêu cầu cập nhật địa chỉ
+            const response = await updateAddressUser(documentId, addressDetails);
+    
+            if (response) {
+                Alert.alert('Thành công', 'Địa chỉ đã được cập nhật thành công.');
+                router.back(); // Quay lại trang trước
+            } else {
+                Alert.alert('Lỗi', 'Không thể cập nhật địa chỉ.');
+            }
+        } catch (error) {
+            console.error('Lỗi khi cập nhật địa chỉ:', error);
+            Alert.alert('Lỗi', 'Đã xảy ra lỗi khi cập nhật địa chỉ.');
+        }
+    };
+
     return (
         <SafeAreaView className="h-full bg-white">
             <ScrollView
@@ -76,9 +130,10 @@ const Address = () => {
                         <Text className="text-xl font-poppins-bold text-primary-200">←</Text>
                     </TouchableOpacity>
                     <Text className="text-xl font-poppins-bold text-primary-200 ml-4">
-                        Thêm địa chỉ
+                        {params.documentId ? 'Chỉnh sửa địa chỉ' : 'Thêm địa chỉ'}
                     </Text>
                 </View>
+
                 <View className="gap-5">
                     <AddressItem
                         title="Số nhà"
@@ -129,10 +184,14 @@ const Address = () => {
 
                 <View className="pb-5">
                     <CustomButton
-                        title="Lưu địa chỉ"
+                        title={params.documentId ? 'Cập nhật địa chỉ' : 'Lưu địa chỉ'}
                         containerStyles="bg-primary-100 mt-5 rounded-lg"
                         textStyles="text-white"
-                        handlePress={handleSaveAddress}
+                        handlePress={() =>
+                            params.documentId
+                                ? handleUpdateAdress(params.documentId) // Gọi hàm cập nhật
+                                : handleSaveAddress() // Gọi hàm lưu mới
+                        }
                     />
                 </View>
             </ScrollView>
@@ -141,3 +200,4 @@ const Address = () => {
 };
 
 export default Address;
+

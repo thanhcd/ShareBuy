@@ -285,3 +285,36 @@ export const deleteUserAddress = async (documentId: string) => {
   }
 };
 
+
+export const updateAddressUser = async (
+  documentId: string,
+  addressDetails: {
+      house_no: string;
+      street: string;
+      city: string;
+      district: string;
+      zipcode: string;
+      country?: string; // Đảm bảo country là tùy chọn
+  }
+) => {
+  try {
+      // Đảm bảo country luôn có giá trị mặc định
+      const updatedDetails = {
+          ...addressDetails,
+          country: addressDetails.country || 'Việt Nam', // Thiết lập mặc định nếu country không tồn tại
+      };
+
+      const response = await databases.updateDocument(
+          config.databaseId || "khong tim thay databaseId",
+          config.addressCollectionId || "khong tim thay addressCollectionId",
+          documentId,
+          updatedDetails
+      );
+
+      console.log('Cập nhật địa chỉ thành công:', response);
+      return response;
+  } catch (error) {
+      console.error('Lỗi khi cập nhật địa chỉ:', error);
+      return null;
+  }
+};
