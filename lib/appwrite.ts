@@ -359,3 +359,26 @@ export const addCreditCardUser = async (
     return null;
   }
 };
+
+
+
+export const getUserCredit = async (userIdAuth: string) => {
+  try {
+    if (!config.databaseId || !config.creditcardCollectionId) {
+      throw new Error("Thiếu databaseId hoặc addressCollectionId trong config!");
+    }
+
+    // Truy vấn danh sách các địa chỉ của người dùng
+    const response = await databases.listDocuments(
+      config.databaseId,
+      config.creditcardCollectionId,
+      [Query.equal("user_id", userIdAuth)] // Lọc theo userId
+    );
+
+    // console.log("✅ Lấy danh sách địa chỉ thành công:", response.documents);
+    return response.documents; // Trả về danh sách các địa chỉ
+  } catch (error) {
+    console.error("❌ Lỗi khi lấy danh sách địa chỉ:", error);
+    return null;
+  }
+};
