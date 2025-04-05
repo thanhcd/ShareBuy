@@ -44,6 +44,19 @@ const Credit = () => {
         }
     }, [userIdAuth]);
 
+    const handleDeleteCredit = async (documentId: string) => {
+        try {
+
+        } catch (error) {
+            console.error('Lỗi khi xóa credit:', error);
+            Alert.alert('Lỗi', 'Đã xảy ra lỗi khi xóa credit');
+        }
+    }
+
+    const handleNotdone = () => {
+        Alert.alert('Thông báo', 'Chức năng này chưa được thực hiện.');
+    }
+
     return (
         <SafeAreaView className="h-full bg-white flex-1">
             <View className="flex-1 px-7 pb-5">
@@ -85,6 +98,7 @@ const Credit = () => {
                                 })}
                                 color={{}}
                                 bgColor={bgColor}
+                                handlePress={handleNotdone}
                             />
                         );
                     }}
