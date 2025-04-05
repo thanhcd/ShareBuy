@@ -5,7 +5,7 @@ import { router } from 'expo-router';
 import CustomButton from '@/components/CustomButton';
 import CreditCardItem from '@/components/CreditCardItems';
 import { useGlobalContext } from '@/lib/GlobalProvider';
-import { getUserCredit } from '@/lib/appwrite';
+import { deleteUserCredit, getUserCredit } from '@/lib/appwrite';
 
 interface CreditCardInfo {
     $id: string;
@@ -44,18 +44,44 @@ const Credit = () => {
         }
     }, [userIdAuth]);
 
-    const handleDeleteCredit = async (documentId: string) => {
-        try {
-
-        } catch (error) {
-            console.error('Lỗi khi xóa credit:', error);
-            Alert.alert('Lỗi', 'Đã xảy ra lỗi khi xóa credit');
-        }
-    }
+    
 
     const handleNotdone = () => {
         Alert.alert('Thông báo', 'Chức năng này chưa được thực hiện.');
     }
+
+    const handleDeleteCredit = (documentId: string) => {
+        Alert.alert(
+            "Xác nhận",
+            "Bạn có chắc chắn muốn xóa thẻ này không?",
+            [
+                {
+                    text: "Hủy",
+                    style: "cancel"
+                },
+                {
+                    text: "Xóa",
+                    style: "destructive",
+                    onPress: async () => {
+                        try {
+                            const response = await deleteUserCredit(documentId);
+                            if (response) {
+                                Alert.alert("Thông báo", "Thẻ đã được xóa thành công.");
+                                setCreditInfo((prev) =>
+                                    prev.filter((credit) => credit.$id !== documentId)
+                                );
+                            } else {
+                                Alert.alert("Lỗi", "Không thể xóa thẻ.");
+                            }
+                        } catch (error) {
+                            console.error("❌ Lỗi khi xóa thẻ:", error);
+                            Alert.alert("Lỗi", "Đã xảy ra lỗi khi xóa thẻ.");
+                        }
+                    }
+                }
+            ]
+        );
+    };
 
     return (
         <SafeAreaView className="h-full bg-white flex-1">
@@ -98,7 +124,8 @@ const Credit = () => {
                                 })}
                                 color={{}}
                                 bgColor={bgColor}
-                                handlePress={handleNotdone}
+                                handlePress={() => handleDeleteCredit(item.$id)}
+
                             />
                         );
                     }}

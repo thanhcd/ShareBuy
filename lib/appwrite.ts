@@ -382,3 +382,23 @@ export const getUserCredit = async (userIdAuth: string) => {
     return null;
   }
 };
+
+
+export const deleteUserCredit = async (documentId: string) => {
+  try {
+    if (!config.databaseId || !config.creditcardCollectionId) {
+      throw new Error("Thiếu databaseId hoặc addressCollectionId trong config!");
+    }
+
+    await databases.deleteDocument(
+      config.databaseId,
+      config.creditcardCollectionId,
+      documentId // ✅ Đảm bảo truyền đúng documentId
+    );
+
+    return true;
+  } catch (error) {
+    console.error("❌ Lỗi khi xóa địa chỉ:", error);
+    return false;
+  }
+};
