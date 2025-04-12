@@ -20,7 +20,7 @@ const Filter = () => {
     return (
         <ScrollView horizontal showsHorizontalScrollIndicator={false} className='mt-3 mb-2'>
             {categories.map((item, index) => (
-                <TouchableOpacity onPress={() => handleCategoryPress(item.category)} className={`flex flex-col items-center 
+                <TouchableOpacity key={item.category} onPress={() => handleCategoryPress(item.category)} className={`flex flex-col items-center 
                `}>
                     <View className='flex flex-col mr-5 items-center'>
                         <View className={`w-14 h-14 flex items-center justify-center rounded-full border ${selectedCategory === item.category ? 'border-primary-100' : 'border-gray-100'} p-10`}>

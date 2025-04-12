@@ -19,7 +19,7 @@ const CustomButton = ({
             {isLoading ? (
                 <ActivityIndicator color="#fff" />
             ) : (
-                <View className="flex-row"> {/* Bọc Image và Text trong View */}
+                <View className="flex-row"> 
                     <Image source={icons} />
                     <Text className={`font-poppins-bold text-base ${textStyles}`}>
                         {title}

@@ -11,26 +11,24 @@ const Cart = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-white">
-      {/* <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}> */}
         <View className="px-5">
           <Text className="text-xl font-poppins-bold text-primary-200 mt-5 mb-4">
             Giỏ hàng
           </Text>
 
-          {/* Bọc FlatList để nó scroll riêng */}
           <View style={{ height: 300 }}> 
             <FlatList
               data={cartData}
-              keyExtractor={(item) => item.id}
+              // keyExtractor={(item) => item.id}
+              keyExtractor={(item) => item.id.toString()}
               renderItem={({ item }) => <CartItem item={item} />}
               showsVerticalScrollIndicator={true}
               nestedScrollEnabled={true} 
             />
           </View>
 
-          {/* Mã gemm giá */}
           <View className="mt-5 flex flex-row border border-gray-100 rounded-lg">
-            <TextInput placeholder="Nhập mã giảm giá" className="px-3 flex-1" />
+            <TextInput placeholder="Nhập mã giảm giá" className="px-3 flex-1"  placeholderTextColor="#9ca3af"/>
             <CustomButton
               title="Áp dụng"
               containerStyles="bg-primary-100 px-5 rounded-r-lg"
@@ -68,7 +66,6 @@ const Cart = () => {
             </View>
           </View>
 
-          {/* Nút Thanh toán */}
           <View className="mt-5">
             <CustomButton
               title="Thanh toán"
@@ -78,7 +75,6 @@ const Cart = () => {
             />
           </View>
         </View>
-      {/* </ScrollView> */}
     </SafeAreaView>
   );
 };

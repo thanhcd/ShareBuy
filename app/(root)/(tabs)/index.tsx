@@ -23,7 +23,8 @@ export default function Index() {
       <FlatList
         data={normalProduct}
         renderItem={({ item }) => item ? <Card item={item} /> : null}
-        keyExtractor={(item, index) => item.id || index.toString()} // Đảm bảo key duy nhất
+        // keyExtractor={(item, index) => item.id || index.toString()} 
+        keyExtractor={(item, index) => item?.id?.toString?.() || index.toString()}
         numColumns={2}
         contentContainerClassName="pb-32"
         columnWrapperClassName="flex-1 px-5 gap-5 "
@@ -77,7 +78,7 @@ export default function Index() {
             <View className="my-5">
               <View className="flex flex-row items-center justify-between">
                 <Text className="text-xl font-poppins-bold text-primary-200">Phân loại</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => router.push('/explore')}>
                   <Text className="text-base font-poppins-bold text-primary-100">Xem thêm</Text>
                 </TouchableOpacity>
               </View>
@@ -94,7 +95,8 @@ export default function Index() {
               <FlatList
                 data={megasale}
                 renderItem={({ item }) => item ? <Featuredcards item={item} /> : null}
-                keyExtractor={(item, index) => item.id || index.toString()} // Đảm bảo key duy nhất
+                // keyExtractor={(item, index) => item.id || index.toString()} 
+                keyExtractor={(item, index) => item?.id?.toString?.() || index.toString()}
                 horizontal
                 bounces={false}
                 showsHorizontalScrollIndicator={false}
@@ -112,7 +114,8 @@ export default function Index() {
               <FlatList
                 data={megasale}
                 renderItem={({ item }) => item ? <Featuredcards item={item} /> : null}
-                keyExtractor={(item, index) => item.id || index.toString()} // Đảm bảo key duy nhất
+                // keyExtractor={(item, index) => item.id || index.toString()} 
+                keyExtractor={(item, index) => item?.id?.toString?.() || index.toString()}
                 horizontal
                 bounces={false}
                 showsHorizontalScrollIndicator={false}

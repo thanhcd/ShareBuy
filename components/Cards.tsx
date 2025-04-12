@@ -16,16 +16,16 @@ export const Featuredcards = ({ item }: { item?: any }) => {
       price: item.discount,
       image: item.image,
     });
-  
+
     router.push({
       pathname: "/(root)/properties/[id]",
       params: { // Đổi "query" → "params" vì expo-router dùng "params"
         id: item.id, // Đảm bảo id là chuỗi
         name: item.name,
-        describe:item.describe,
+        describe: item.describe,
         price: item.discount,
         image: item.image,
-      },  
+      },
     });
   };
   return (
@@ -58,19 +58,19 @@ export const Card = ({ item }: { item?: any }) => {
       price: item.discount,
       image: item.image,
     });
-  
+
     router.push({
       pathname: "/(root)/properties/[id]",
       params: { // Đổi "query" → "params" vì expo-router dùng "params"
         id: item.id, // Đảm bảo id là chuỗi
         name: item.name,
-        describe:item.describe,
+        describe: item.describe,
         price: item.discount,
         image: item.image,
-      },  
+      },
     });
   };
-  
+
   return (
     <TouchableOpacity className="flex-1 w-full mt-4 px-3 py-4 rounded-lg border border-gray-100 relative" onPress={handlePress}>
       <Image source={item.image} className="w-full h-40 rounded-lg" />
@@ -81,8 +81,11 @@ export const Card = ({ item }: { item?: any }) => {
         </Text>
 
         <View className="flex-row">
-          {[...Array(5)].map((_, index) => (
+          {/* {[...Array(5)].map((_, index) => (
             <Image key={index} source={icons.star} />
+          ))} */}
+          {[...Array(5)].map((_, index) => (
+            <Image key={`star-${index}`} source={icons.star} />
           ))}
         </View>
 
