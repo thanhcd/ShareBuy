@@ -49,13 +49,13 @@ This app is still in development.
 ## 🔔 Notificate
 <img src="https://github.com/user-attachments/assets/28202cae-520b-489f-862e-04a4a452c3c0" width="300" style="margin-right: 10px" />
 
-### 💸 Discount
+## 💸 Discount
 <img src="https://github.com/user-attachments/assets/a1924148-9556-45e9-9e2c-3faa0ca281c9" width="300" style="margin-right: 10px" />
 
-### 📰 News
+## 📰 News
 <img src="https://github.com/user-attachments/assets/3ca99b98-1f09-4a0b-8bdd-cc28bc00e9fc" width="300" style="margin-right: 10px" />
 
-### 🔄 Activity
+## 🔄 Activity
 <img src="https://github.com/user-attachments/assets/7640d4ed-006a-4515-a214-08a0f9c709e6" width="300" style="margin-right: 10px" />
 
 # 🔍 Explore Screen
@@ -69,6 +69,25 @@ This app is still in development.
 
 # 👤 Profile Screen
 <img src="https://github.com/user-attachments/assets/25753091-292e-4b20-96d4-6cd2507303f5" width="300" style="margin-right: 10px" />
+
+## 👤 ProfileDetail
+<img src="https://github.com/user-attachments/assets/0733cdc9-1fab-4957-b02d-d82c1aa084a9" width="300" style="margin-right: 10px" />
+
+
+## 🛒 Order
+<img src="https://github.com/user-attachments/assets/8fa7cfad-bb04-4c30-9e73-27abfc7051c5" width="300" style="margin-right: 10px" />
+<img src="https://github.com/user-attachments/assets/8f1d78d1-f9e1-4319-9a40-4805ac5022f4" width="300" style="margin-right: 10px" />
+
+## 🏠  Address
+<img src="https://github.com/user-attachments/assets/aa34ca29-c164-4f1c-84ee-48f5c14f8d89" width="300" style="margin-right: 10px" />
+<img src="https://github.com/user-attachments/assets/7b8c4ae9-37d0-45c1-9efe-9507121f03c4" width="300" style="margin-right: 10px" />
+
+
+## 💳 Pay
+<img src="https://github.com/user-attachments/assets/075c52c1-8deb-49cb-b2d2-cb63d1819c28" width="300" style="margin-right: 10px" />
+<img src="https://github.com/user-attachments/assets/90343269-3df2-4363-adc8-e28448052e01" width="300" style="margin-right: 10px" />
+<img src="https://github.com/user-attachments/assets/fb246ae8-ab93-4c47-b0e4-4faacfc5b70b" width="300" style="margin-right: 10px" />
+
 
 ## 🚺/🚹 Gender
 <img src="https://github.com/user-attachments/assets/8b8fbd45-090a-41da-a2f6-ffc677d8b20c" width="300" style="margin-right: 10px" />
