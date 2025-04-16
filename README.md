@@ -32,8 +32,6 @@ You can start developing by editing the files inside the **app** directory. This
 <img src="https://github.com/user-attachments/assets/7b7f2280-9157-47ad-92cf-26b3c4133dfa" width="300" />
 
 
-
-
 # Homescreen
 <img src="https://github.com/user-attachments/assets/60630138-0600-4b2d-8186-d6f95f489433" width="300" style="margin-right: 10px" />
 <img src="https://github.com/user-attachments/assets/cfd0f42b-3966-471e-9131-d581101d1c9f" width="300" style="margin-right: 10px" />
@@ -43,6 +41,13 @@ You can start developing by editing the files inside the **app** directory. This
 <img src="https://github.com/user-attachments/assets/cd556ca2-6cbb-48c9-96a4-981d6a4c1df0" width="300" style="margin-right: 10px" />
 <img src="https://github.com/user-attachments/assets/f9954517-4c3b-4e9c-99f2-53c5dae0483a" width="300" style="margin-right: 10px" />
 <img src="https://github.com/user-attachments/assets/262d87b3-16d6-4422-b2ac-84c51b0e3231" width="300" style="margin-right: 10px" />
+
+# Cart and Offerscreen
+<img src="https://github.com/user-attachments/assets/85fd08db-c086-444e-83c0-c5f1d8109438" width="300" style="margin-right: 10px" />
+<img src="https://github.com/user-attachments/assets/02c6f11a-de6b-4559-af26-7c504ff0c877" width="300" style="margin-right: 10px" />
+
+# Profilescreen
+<img src="https://github.com/user-attachments/assets/25753091-292e-4b20-96d4-6cd2507303f5" width="300" style="margin-right: 10px" />
 
 
 
