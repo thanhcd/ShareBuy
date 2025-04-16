@@ -28,6 +28,16 @@ You can start developing by editing the files inside the **app** directory. This
 ## This app is still in development. Currently, only the UI is available, but the full features will be completed in the near future.
 ## These are some UI components that have been developed in the iOS simulator.
 # SignIn and Signup Screen
-<img src="https://github.com/user-attachments/assets/647fd33e-7ef7-41a9-a5c3-d4961f97a904" width="300" />
+<img src="https://github.com/user-attachments/assets/647fd33e-7ef7-41a9-a5c3-d4961f97a904" width="300" style="margin-right: 10px;" />
 <img src="https://github.com/user-attachments/assets/7b7f2280-9157-47ad-92cf-26b3c4133dfa" width="300" />
+
+
+
+
+# Homescreen
+<img src="https://github.com/user-attachments/assets/60630138-0600-4b2d-8186-d6f95f489433" width="300" style="margin-right: 10px" />
+
+<img src="https://github.com/user-attachments/assets/cfd0f42b-3966-471e-9131-d581101d1c9f" width="300" style="margin-right: 10px" />
+<img src="https://github.com/user-attachments/assets/df2914bd-35e0-4bb6-bc47-801d6bacb954" width="300" style="margin-right: 10px" />
+
 
