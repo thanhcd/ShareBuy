@@ -36,8 +36,13 @@ You can start developing by editing the files inside the **app** directory. This
 
 # Homescreen
 <img src="https://github.com/user-attachments/assets/60630138-0600-4b2d-8186-d6f95f489433" width="300" style="margin-right: 10px" />
-
 <img src="https://github.com/user-attachments/assets/cfd0f42b-3966-471e-9131-d581101d1c9f" width="300" style="margin-right: 10px" />
 <img src="https://github.com/user-attachments/assets/df2914bd-35e0-4bb6-bc47-801d6bacb954" width="300" style="margin-right: 10px" />
+
+# Explorescreen
+<img src="https://github.com/user-attachments/assets/cd556ca2-6cbb-48c9-96a4-981d6a4c1df0" width="300" style="margin-right: 10px" />
+<img src="https://github.com/user-attachments/assets/f9954517-4c3b-4e9c-99f2-53c5dae0483a" width="300" style="margin-right: 10px" />
+<img src="https://github.com/user-attachments/assets/262d87b3-16d6-4422-b2ac-84c51b0e3231" width="300" style="margin-right: 10px" />
+
 
 
