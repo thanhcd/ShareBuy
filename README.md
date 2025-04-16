@@ -50,7 +50,7 @@ This app is still in development.
 <img src="https://github.com/user-attachments/assets/28202cae-520b-489f-862e-04a4a452c3c0" width="300" style="margin-right: 10px" />
 
 ### 💸 Discount
-<img src="https://github.com/user-attachments/assets/4e6475a7-2d51-4a63-add0-390b31d30d5d" width="300" style="margin-right: 10px" />
+<img src="https://github.com/user-attachments/assets/a1924148-9556-45e9-9e2c-3faa0ca281c9" width="300" style="margin-right: 10px" />
 
 ### 📰 News
 <img src="https://github.com/user-attachments/assets/3ca99b98-1f09-4a0b-8bdd-cc28bc00e9fc" width="300" style="margin-right: 10px" />
@@ -69,3 +69,26 @@ This app is still in development.
 
 # 👤 Profile Screen
 <img src="https://github.com/user-attachments/assets/25753091-292e-4b20-96d4-6cd2507303f5" width="300" style="margin-right: 10px" />
+
+## Gender
+<img src="https://github.com/user-attachments/assets/8b8fbd45-090a-41da-a2f6-ffc677d8b20c" width="300" style="margin-right: 10px" />
+
+## Birthday
+<img src="https://github.com/user-attachments/assets/0aaea8f6-a139-4bb1-9f08-b6b2d70cf572" width="300" style="margin-right: 10px" />
+
+## Email
+<img src="https://github.com/user-attachments/assets/bf8dfa11-8dbe-47ed-a2eb-9631f232e4b9" width="300" style="margin-right: 10px" />
+
+## Phone
+<img src="https://github.com/user-attachments/assets/bca07194-ad35-4400-a29d-7dd67f984d6b" width="300" style="margin-right: 10px" />
+
+## Change Password
+<img src="https://github.com/user-attachments/assets/ae8303da-9daa-466e-9dfc-e2f7eeaf0b3a" width="300" style="margin-right: 10px" />
+
+
+
+
+
+
+
+   
