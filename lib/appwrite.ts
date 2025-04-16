@@ -18,6 +18,9 @@ export const config = {
   profileCollectionId: process.env.EXPO_PUBLIC_APPWRITE_PROFILE_COLLECTION_ID,
   addressCollectionId: process.env.EXPO_PUBLIC_APPWRITE_ADDRESS_COLLECTION_ID,
   creditcardCollectionId: process.env.EXPO_PUBLIC_APPWRITE_CREDITCARD_COLLECTION_ID,
+  productCollectionId: process.env.EXPO_PUBLIC_APPWRITE_PRODUCT_COLLECTION_ID,
+  commentCollectionId: process.env.EXPO_PUBLIC_APPWRITE_COMMENT_COLLECTION_ID,
+  cartCollectionId: process.env.EXPO_PUBLIC_APPWRITE_CART_COLLECTION_ID,
 };
 
 export const client = new Client();
