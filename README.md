@@ -43,19 +43,19 @@ This app is still in development.
 <img src="https://github.com/user-attachments/assets/cfd0f42b-3966-471e-9131-d581101d1c9f" width="300" style="margin-right: 10px" />
 <img src="https://github.com/user-attachments/assets/df2914bd-35e0-4bb6-bc47-801d6bacb954" width="300" style="margin-right: 10px" />
 
-## FavoriteProduct
+## ❤️ FavoriteProduct
 <img src="https://github.com/user-attachments/assets/a92d776c-fe79-48a3-b825-58674dd65c07" width="300" style="margin-right: 10px" />
 
-## Notificate
+## 🔔 Notificate
 <img src="https://github.com/user-attachments/assets/28202cae-520b-489f-862e-04a4a452c3c0" width="300" style="margin-right: 10px" />
 
-### Discount
+### 💸 Discount
 <img src="https://github.com/user-attachments/assets/4e6475a7-2d51-4a63-add0-390b31d30d5d" width="300" style="margin-right: 10px" />
 
-### News
+### 📰 News
 <img src="https://github.com/user-attachments/assets/3ca99b98-1f09-4a0b-8bdd-cc28bc00e9fc" width="300" style="margin-right: 10px" />
 
-### Activity
+### 🔄 Activity
 <img src="https://github.com/user-attachments/assets/7640d4ed-006a-4515-a214-08a0f9c709e6" width="300" style="margin-right: 10px" />
 
 # 🔍 Explore Screen
