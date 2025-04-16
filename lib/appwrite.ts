@@ -17,7 +17,8 @@ export const config = {
   databaseId: process.env.EXPO_PUBLIC_APPWRITE_DATABASES_ID,
   profileCollectionId: process.env.EXPO_PUBLIC_APPWRITE_PROFILE_COLLECTION_ID,
   addressCollectionId: process.env.EXPO_PUBLIC_APPWRITE_ADDRESS_COLLECTION_ID,
-  creditcardCollectionId: process.env.EXPO_PUBLIC_APPWRITE_CREDITCARD_COLLECTION_ID,
+  creditcardCollectionId:
+    process.env.EXPO_PUBLIC_APPWRITE_CREDITCARD_COLLECTION_ID,
   productCollectionId: process.env.EXPO_PUBLIC_APPWRITE_PRODUCT_COLLECTION_ID,
   commentCollectionId: process.env.EXPO_PUBLIC_APPWRITE_COMMENT_COLLECTION_ID,
   cartCollectionId: process.env.EXPO_PUBLIC_APPWRITE_CART_COLLECTION_ID,
@@ -214,7 +215,8 @@ export const addAddressUser = async (
   }
 ) => {
   try {
-    const { country, house_no, street, city, district, zipcode } = addressDetails;
+    const { country, house_no, street, city, district, zipcode } =
+      addressDetails;
     if (!country || !house_no || !street || !city || !district || !zipcode) {
       throw new Error("Thiếu thông tin bắt buộc trong địa chỉ.");
     }
@@ -232,7 +234,7 @@ export const addAddressUser = async (
     console.log("Dữ liệu gửi lên Appwrite:", documentData);
 
     const response = await databases.createDocument(
-      config.databaseId  || "khong tim thay databaseId",
+      config.databaseId || "khong tim thay databaseId",
       config.addressCollectionId || "khong tim thay addressCollectionId",
       "unique()", // Tạo ID tự động
       documentData
@@ -249,7 +251,9 @@ export const addAddressUser = async (
 export const getUserAddresses = async (userIdAuth: string) => {
   try {
     if (!config.databaseId || !config.addressCollectionId) {
-      throw new Error("Thiếu databaseId hoặc addressCollectionId trong config!");
+      throw new Error(
+        "Thiếu databaseId hoặc addressCollectionId trong config!"
+      );
     }
 
     // Truy vấn danh sách các địa chỉ của người dùng
@@ -267,11 +271,12 @@ export const getUserAddresses = async (userIdAuth: string) => {
   }
 };
 
-
 export const deleteUserAddress = async (documentId: string) => {
   try {
     if (!config.databaseId || !config.addressCollectionId) {
-      throw new Error("Thiếu databaseId hoặc addressCollectionId trong config!");
+      throw new Error(
+        "Thiếu databaseId hoặc addressCollectionId trong config!"
+      );
     }
 
     await databases.deleteDocument(
@@ -287,41 +292,38 @@ export const deleteUserAddress = async (documentId: string) => {
   }
 };
 
-
 export const updateAddressUser = async (
   documentId: string,
   addressDetails: {
-      house_no: string;
-      street: string;
-      city: string;
-      district: string;
-      zipcode: string;
-      country?: string; // Đảm bảo country là tùy chọn
+    house_no: string;
+    street: string;
+    city: string;
+    district: string;
+    zipcode: string;
+    country?: string; // Đảm bảo country là tùy chọn
   }
 ) => {
   try {
-      // Đảm bảo country luôn có giá trị mặc định
-      const updatedDetails = {
-          ...addressDetails,
-          country: addressDetails.country || 'Việt Nam', // Thiết lập mặc định nếu country không tồn tại
-      };
+    // Đảm bảo country luôn có giá trị mặc định
+    const updatedDetails = {
+      ...addressDetails,
+      country: addressDetails.country || "Việt Nam", // Thiết lập mặc định nếu country không tồn tại
+    };
 
-      const response = await databases.updateDocument(
-          config.databaseId || "khong tim thay databaseId",
-          config.addressCollectionId || "khong tim thay addressCollectionId",
-          documentId,
-          updatedDetails
-      );
+    const response = await databases.updateDocument(
+      config.databaseId || "khong tim thay databaseId",
+      config.addressCollectionId || "khong tim thay addressCollectionId",
+      documentId,
+      updatedDetails
+    );
 
-      console.log('Cập nhật địa chỉ thành công:', response);
-      return response;
+    console.log("Cập nhật địa chỉ thành công:", response);
+    return response;
   } catch (error) {
-      console.error('Lỗi khi cập nhật địa chỉ:', error);
-      return null;
+    console.error("Lỗi khi cập nhật địa chỉ:", error);
+    return null;
   }
 };
-
-
 
 export const addCreditCardUser = async (
   userIdAuth: string,
@@ -349,7 +351,7 @@ export const addCreditCardUser = async (
     console.log("Dữ liệu gửi lên Appwrite:", documentData);
 
     const response = await databases.createDocument(
-      config.databaseId  || "khong tim thay databaseId",
+      config.databaseId || "khong tim thay databaseId",
       config.creditcardCollectionId || "khong tim thay creditcardCollectionId",
       "unique()", // Tạo ID tự động
       documentData
@@ -363,12 +365,12 @@ export const addCreditCardUser = async (
   }
 };
 
-
-
 export const getUserCredit = async (userIdAuth: string) => {
   try {
     if (!config.databaseId || !config.creditcardCollectionId) {
-      throw new Error("Thiếu databaseId hoặc addressCollectionId trong config!");
+      throw new Error(
+        "Thiếu databaseId hoặc addressCollectionId trong config!"
+      );
     }
 
     // Truy vấn danh sách các địa chỉ của người dùng
@@ -386,11 +388,12 @@ export const getUserCredit = async (userIdAuth: string) => {
   }
 };
 
-
 export const deleteUserCredit = async (documentId: string) => {
   try {
     if (!config.databaseId || !config.creditcardCollectionId) {
-      throw new Error("Thiếu databaseId hoặc addressCollectionId trong config!");
+      throw new Error(
+        "Thiếu databaseId hoặc addressCollectionId trong config!"
+      );
     }
 
     await databases.deleteDocument(
@@ -403,5 +406,25 @@ export const deleteUserCredit = async (documentId: string) => {
   } catch (error) {
     console.error("❌ Lỗi khi xóa địa chỉ:", error);
     return false;
+  }
+};
+
+export const fetchProducts = async () => {
+  try {
+    if (!config.databaseId || !config.productCollectionId) {
+      throw new Error(
+        "Thiếu databaseId hoặc productCollectionId trong config!"
+      );
+    }
+    const respone = await databases.listDocuments(
+      config.databaseId,
+      config.productCollectionId,
+      []
+    );
+    return respone.documents;
+    // Trả về danh sách sản phẩm
+  } catch (error) {
+    console.error("❌ Lỗi khi lấy danh sách sản phẩm:", error);
+    return null;
   }
 };
