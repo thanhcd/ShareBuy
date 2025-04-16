@@ -70,19 +70,19 @@ This app is still in development.
 # 👤 Profile Screen
 <img src="https://github.com/user-attachments/assets/25753091-292e-4b20-96d4-6cd2507303f5" width="300" style="margin-right: 10px" />
 
-## Gender
+## 🚺/🚹 Gender
 <img src="https://github.com/user-attachments/assets/8b8fbd45-090a-41da-a2f6-ffc677d8b20c" width="300" style="margin-right: 10px" />
 
-## Birthday
+## 🎂 Birthday
 <img src="https://github.com/user-attachments/assets/0aaea8f6-a139-4bb1-9f08-b6b2d70cf572" width="300" style="margin-right: 10px" />
 
-## Email
+## 📧 Email
 <img src="https://github.com/user-attachments/assets/bf8dfa11-8dbe-47ed-a2eb-9631f232e4b9" width="300" style="margin-right: 10px" />
 
-## Phone
+## 📞 Phone
 <img src="https://github.com/user-attachments/assets/bca07194-ad35-4400-a29d-7dd67f984d6b" width="300" style="margin-right: 10px" />
 
-## Change Password
+## 🔒 Change Password
 <img src="https://github.com/user-attachments/assets/ae8303da-9daa-466e-9dfc-e2f7eeaf0b3a" width="300" style="margin-right: 10px" />
 
 
