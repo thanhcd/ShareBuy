@@ -8,22 +8,31 @@ import { Featuredcards } from "@/components/Cards";
 import CustomButton from "@/components/CustomButton";
 
 const ProductDetail = () => {
-  const params = useLocalSearchParams();
-  // console.log("Received params:", params);
-
+  // const params = useLocalSearchParams();
+  const { name, discount, image, describe } = useLocalSearchParams<{
+    name?: string;
+    discount?: string;
+    image?: string;
+    describe?: string;
+  }>();
+  console.log('params:', name, discount, image, describe);
   // Tìm sản phẩm trong danh sách bằng `id`
-  const product = normalProduct.find((p) => p.id === params.id);
-  // console.log("Found product:", product);
+  // const product = normalProduct.find((p) => p.id === params.id);
 
-  // Nếu không tìm thấy sản phẩm, hiển thị thông báo lỗi
-  if (!product) {
+  // if (!product) {
+  //   return (
+  //     <SafeAreaView className="flex-1 justify-center items-center">
+  //       <Text className="text-lg font-bold text-red-500">Sản phẩm không tồn tại!</Text>
+  //     </SafeAreaView>
+  //   );
+  // }
+  if (!name || !discount || !image) {
     return (
       <SafeAreaView className="flex-1 justify-center items-center">
-        <Text className="text-lg font-bold text-red-500">Sản phẩm không tồn tại!</Text>
+        <Text className="text-lg font-bold text-red-500">Thiếu dữ liệu sản phẩm!</Text>
       </SafeAreaView>
     );
   }
-
   const paramsfilter = useLocalSearchParams<{ filter?: string, color?: string }>();
   const [selectedSize, setSelectedSize] = useState(paramsfilter.filter || '6');
 
@@ -61,7 +70,7 @@ const ProductDetail = () => {
             </TouchableOpacity>
             <View className="flex flex-1 flex-row justify-between">
               <Text className="text-xl font-poppins-bold text-primary-200">
-                {product.name}
+                {name}
               </Text>
               <View className="flex flex-row gap-2">
                 <TouchableOpacity onPress={() => router.push('/explore')}>
@@ -76,13 +85,13 @@ const ProductDetail = () => {
           </View>
 
           <View className="flex flex-col items-center gap-5">
-            <Image source={product.image} className="w-full h-64 rounded-lg" />
+            <Image source={{uri:image}} className="w-full h-64 rounded-lg" />
             <Image source={images.slider} />
           </View>
 
           <View className="flex flex-col mt-2 gap-5">
             <View className="flex flex-row justify-between items-center">
-              <Text className="text-2xl font-poppins-bold text-primary-200">{product.name}</Text>
+              <Text className="text-2xl font-poppins-bold text-primary-200">{name}</Text>
               <TouchableOpacity>
                 <Image source={icons.love} />
               </TouchableOpacity>
@@ -92,7 +101,7 @@ const ProductDetail = () => {
                 <Image key={index} source={icons.star} />
               ))}
             </View>
-            <Text className="text-xl font-poppins-bold text-primary-100">${product.discount}</Text>
+            <Text className="text-xl font-poppins-bold text-primary-100">${discount}</Text>
           </View>
 
           <View className="mt-5">
@@ -155,7 +164,7 @@ const ProductDetail = () => {
               <Text className="text-base font-poppins-regular text-gray-200 w-48 text-right">CD0113-400</Text>
             </View>
             <View className="mt-4">
-              <Text className="text-base font-poppins-regular text-gray-200">{product.describe}</Text>
+              <Text className="text-base font-poppins-regular text-gray-200">{describe}</Text>
             </View>
           </View>
           <View className="flex flex-col">
@@ -194,7 +203,7 @@ const ProductDetail = () => {
                 a little bit, not sure if the box was always this small but the 90s are and will always be one of my favorites.</Text>
             </View>
           </View>
-          <View className="mt-5 flex flex-col">
+          {/* <View className="mt-5 flex flex-col">
             <Text className="text-primary-200 font-poppins-bold text-lg">Có lẽ bạn cũng thích</Text>
             <FlatList
               data={megasale}
@@ -205,7 +214,7 @@ const ProductDetail = () => {
               showsHorizontalScrollIndicator={false}
               contentContainerClassName="flex gap-5 mt-5"
             />
-          </View>
+          </View> */}
           <CustomButton title="Thêm vào giỏ" containerStyles="bg-primary-100 rounded-lg mt-10" textStyles="text-white" handlePress={{}} />
         </View>
       </ScrollView>

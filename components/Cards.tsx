@@ -61,13 +61,13 @@ export const Card = ({ item }: { item?: any }) => {
 
     router.push({
       pathname: "/(root)/properties/[id]",
-      params: { // Đổi "query" → "params" vì expo-router dùng "params"
-        id: item.$id, // Đảm bảo id là chuỗi
+      params: {
+        id: item.$id.toString(),
         name: item.name,
-        describe: item.describe,
-        price: item.discount,
-        image: item.image,
-      },
+        discount: item.discount.toString(),
+        image: item.image.toString(),
+        describe: item.describe.toString()
+      }
     });
   };
 

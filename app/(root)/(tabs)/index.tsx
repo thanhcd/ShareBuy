@@ -24,7 +24,7 @@ export default function Index() {
     const fetchProfile = async () => {
       try {
         const productData = await fetchProducts();
-        console.log('Fetched data: ', productData);
+        // console.log('Fetched data: ', productData);
 
         if (productData && Array.isArray(productData)) {
           setProduct(productData);
