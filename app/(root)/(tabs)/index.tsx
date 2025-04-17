@@ -4,12 +4,14 @@ import SearchBar from "@/components/Search";
 import { flashsale, megasale, normalProduct } from "@/constants/data";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
+import { fetchProducts } from "@/lib/appwrite";
 import { router } from "expo-router";
 import { useState, useEffect } from "react";
 import { FlatList, Image, Pressable, SafeAreaView, Text, TouchableOpacity, View, } from "react-native";
 
 export default function Index() {
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
+  const [product, setProduct] = useState([]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -18,13 +20,29 @@ export default function Index() {
     return () => clearInterval(timer)
   }, [])
 
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const productData = await fetchProducts();
+        console.log('Fetched data: ', productData);
+
+        if (productData && Array.isArray(productData)) {
+          setProduct(productData);
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchProfile();
+  }, []);
   return (
     <SafeAreaView className="bg-white h-full w-full">
       <FlatList
-        data={normalProduct}
+        data={product}
         renderItem={({ item }) => item ? <Card item={item} /> : null}
-        // keyExtractor={(item, index) => item.id || index.toString()} 
-        keyExtractor={(item, index) => item?.id?.toString?.() || index.toString()}
+        keyExtractor={(item, index) => item.$id || index.toString()} 
+        // keyExtractor={(item, index) => item?.id?.toString?.() || index.toString()}
         numColumns={2}
         contentContainerClassName="pb-32"
         columnWrapperClassName="flex-1 px-5 gap-5 "
