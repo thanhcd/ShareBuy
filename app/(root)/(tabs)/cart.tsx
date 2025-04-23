@@ -99,29 +99,49 @@
 
 // export default Cart;
 
-
-import { View, Text, SafeAreaView, FlatList, TextInput } from 'react-native';
+import { View, Text, SafeAreaView, FlatList, TextInput, Alert } from 'react-native';
 import React from 'react';
 import CartItem from '@/components/CartItem';
 import CustomButton from '@/components/CustomButton';
 import { useCart } from '@/lib/CartContext';
 
 const Cart = () => {
-  const { cart } = useCart(); // Lấy giỏ hàng từ CartContext
-  console.log(cart); // Kiểm tra giỏ hàng trong console
+  const { cart, clearCart } = useCart(); // Lấy giỏ hàng và hàm clearCart từ CartContext
+
   // Tính tổng giá trị đơn hàng và các khoản phí
   const totalPrice = cart.reduce((sum, item) => sum + parseFloat(item.discount), 0);
   const shippingFee = cart.length > 0 ? 5 : 0;
   const finalPrice = totalPrice - shippingFee;
 
   // Hiển thị giỏ hàng
-  
-  
+  const renderCart = () => {
+    if (cart.length === 0) {
+      return <Text>Giỏ hàng của bạn đang trống!</Text>;
+    }
+
+    return (
+      <SafeAreaView>
+        {cart.map((item, index) => (
+          <Text key={index}>
+            {item.name} - {item.size} - {item.color} - {item.discount}
+          </Text>
+        ))}
+      </SafeAreaView>
+    );
+  };
+
+  const handleClearCart = () => {
+    clearCart(); // Xóa hết các sản phẩm trong giỏ hàng
+    Alert.alert("Thông báo", "Giỏ hàng đã được xóa!"); // Thông báo sau khi xóa
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       <View className="px-5">
         <Text className="text-xl font-poppins-bold text-primary-200 mt-5 mb-4">Giỏ hàng</Text>
-    
+        {/* <Text className="text-2xl font-bold mb-4">Giỏ Hàng</Text>
+        {renderCart()} */}
+
         {/* Hiển thị danh sách các mục giỏ hàng */}
         <View style={{ height: 300 }}>
           <FlatList
@@ -144,7 +164,7 @@ const Cart = () => {
             title="Áp dụng"
             containerStyles="bg-primary-100 px-5 rounded-r-lg"
             textStyles="text-white"
-            handlePress={() => {}}
+            handlePress={handleClearCart} // Gọi đúng hàm
           />
         </View>
 

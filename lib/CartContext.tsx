@@ -34,9 +34,19 @@ export const CartProvider = ({ children }: any) => {
       console.error('Failed to save cart to AsyncStorage', error);
     }
   };
+
+  // Hàm xóa giỏ hàng khỏi AsyncStorage và reset trạng thái cart
   const clearCart = async () => {
-    setCart([]); // Reset giỏ hàng về mảng rỗng
+    try {
+      // Xóa giỏ hàng khỏi AsyncStorage
+      await AsyncStorage.removeItem('cart');
+      // Reset giỏ hàng trong trạng thái
+      setCart([]);
+    } catch (error) {
+      console.error('Failed to clear cart from AsyncStorage', error);
+    }
   };
+
   return (
     <CartContext.Provider value={{ cart, addToCart, clearCart }}>
       {children}
