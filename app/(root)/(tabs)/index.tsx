@@ -9,6 +9,7 @@ import { router } from "expo-router";
 import { useState, useEffect } from "react";
 import { FlatList, Image, Pressable, SafeAreaView, Text, TouchableOpacity, View, } from "react-native";
 
+
 export default function Index() {
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
   const [product, setProduct] = useState([]);

@@ -1,11 +1,12 @@
 import { useLocalSearchParams, router } from "expo-router";
-import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image, FlatList } from "react-native";
+import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image, FlatList, Alert } from "react-native";
 import icons from "@/constants/icons";
 import { colorOptions, megasale, normalProduct, sizeShow } from "@/constants/data"; // Import danh sách sản phẩm
 import images from "@/constants/images";
 import { useState } from "react";
-import { Featuredcards } from "@/components/Cards";
+// import { Featuredcards } from "@/components/Cards";
 import CustomButton from "@/components/CustomButton";
+import { useCart } from "@/app/context/CartContext"; // Nhập hook từ CartContext
 
 const ProductDetail = () => {
   // const params = useLocalSearchParams();
@@ -16,16 +17,7 @@ const ProductDetail = () => {
     describe?: string;
   }>();
   console.log('params:', name, discount, image, describe);
-  // Tìm sản phẩm trong danh sách bằng `id`
-  // const product = normalProduct.find((p) => p.id === params.id);
-
-  // if (!product) {
-  //   return (
-  //     <SafeAreaView className="flex-1 justify-center items-center">
-  //       <Text className="text-lg font-bold text-red-500">Sản phẩm không tồn tại!</Text>
-  //     </SafeAreaView>
-  //   );
-  // }
+  
   if (!name || !discount || !image) {
     return (
       <SafeAreaView className="flex-1 justify-center items-center">
@@ -35,6 +27,7 @@ const ProductDetail = () => {
   }
   const paramsfilter = useLocalSearchParams<{ filter?: string, color?: string }>();
   const [selectedSize, setSelectedSize] = useState(paramsfilter.filter || '6');
+  const [selectedColor, setSelectedColor] = useState(paramsfilter.color || '#FFC833');
 
   const handleCategoryPress = (title: string) => {
     if (selectedSize === title) {
@@ -47,7 +40,6 @@ const ProductDetail = () => {
   }
 
 
-  const [selectedColor, setSelectedColor] = useState(paramsfilter.color || '#FFC833');
   const handleColorPress = (color: string) => {
     if (selectedColor === color) {
       setSelectedColor('#FFC833'); // Reset về màu mặc định
@@ -58,6 +50,27 @@ const ProductDetail = () => {
     router.setParams({ color });
   };
 
+  const { addToCart } = useCart(); // Lấy hàm addToCart từ CartContext
+
+  const handleAddToCart = () => {
+    const product = {
+      name,
+      discount,
+      image,
+      describe,
+      size: selectedSize,
+      color: selectedColor,
+    };
+
+    // Thêm vào giỏ hàng
+    addToCart(product); // Dùng hàm addToCart từ context để thêm sản phẩm vào giỏ hàng
+
+    // Hiển thị thông báo cho người dùng
+    Alert.alert("Thông báo", "Sản phẩm đã được thêm vào giỏ hàng!");
+
+    // Có thể chuyển hướng tới trang giỏ hàng
+    router.push('/cart'); // Điều hướng đến giỏ hàng (nếu cần)
+  };
   return (
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView>
@@ -215,7 +228,7 @@ const ProductDetail = () => {
               contentContainerClassName="flex gap-5 mt-5"
             />
           </View> */}
-          <CustomButton title="Thêm vào giỏ" containerStyles="bg-primary-100 rounded-lg mt-10" textStyles="text-white" handlePress={{}} />
+          <CustomButton title="Thêm vào giỏ" containerStyles="bg-primary-100 rounded-lg mt-10" textStyles="text-white" handlePress={handleAddToCart} />
         </View>
       </ScrollView>
     </SafeAreaView>

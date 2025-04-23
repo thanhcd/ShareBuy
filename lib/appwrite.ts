@@ -9,6 +9,7 @@ import {
 } from "react-native-appwrite";
 import * as Linking from "expo-linking";
 import { openAuthSessionAsync } from "expo-web-browser";
+import { Alert } from "react-native";
 
 export const config = {
   platform: "com.thanh.sharebuy",
@@ -425,6 +426,34 @@ export const fetchProducts = async () => {
     // Trả về danh sách sản phẩm
   } catch (error) {
     console.error("❌ Lỗi khi lấy danh sách sản phẩm:", error);
+    return null;
+  }
+};
+
+
+export const addToCart = async (userId: string, productId: string) => {
+  try {
+    if (!config.databaseId || !config.cartCollectionId) {
+      throw new Error("Thiếu databaseId hoặc cartCollectionId trong config!");
+    }
+
+    const response = await databases.createDocument(
+      config.databaseId,
+      config.cartCollectionId,
+      ID.unique(),
+      {
+        userId: userId,
+        productId: productId,
+        quantity: 1,
+        addedAt: new Date().toISOString(), // optional
+      }
+    );
+
+    console.log("✅ Thêm vào giỏ hàng thành công:", response);
+    return response;
+  } catch (error) {
+    console.error("❌ Lỗi khi thêm vào cart:", error);
+    Alert.alert("Lỗi khi thêm sản phẩm vào giỏ hàng!");
     return null;
   }
 };

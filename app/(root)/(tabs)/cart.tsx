@@ -3,19 +3,37 @@ import React from 'react';
 import { cartData } from '@/constants/data';
 import CartItem from '@/components/CartItem';
 import CustomButton from '@/components/CustomButton';
+import { useCart } from '@/app/context/CartContext';
 
 const Cart = () => {
   const totalPrice = cartData.reduce((sum, item) => sum + parseFloat(item.discount), 0);
   const shippingFee = cartData.length > 0 ? 5 : 0;
   const finalPrice = totalPrice - shippingFee;
+  const { cart, addToCart } = useCart();
 
+  const renderCart = () => {
+    if (cart.length === 0) {
+      return <Text>Giỏ hàng của bạn đang trống!</Text>;
+    }
+
+    return (
+      <SafeAreaView>
+        {cart.map((item, index) => (
+          <Text key={index}>
+            {item.name} - {item.size} - {item.color} - {item.discount}
+          </Text>
+        ))}
+      </SafeAreaView>
+    );
+  };
   return (
     <SafeAreaView className="flex-1 bg-white">
         <View className="px-5">
           <Text className="text-xl font-poppins-bold text-primary-200 mt-5 mb-4">
             Giỏ hàng
           </Text>
-
+          <Text className="text-2xl font-bold mb-4">Giỏ Hàng</Text>
+          {renderCart()}
           <View style={{ height: 300 }}> 
             <FlatList
               data={cartData}

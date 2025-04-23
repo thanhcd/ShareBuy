@@ -2,9 +2,8 @@ import { SplashScreen, Stack } from "expo-router";
 import "./global.css";
 import { useEffect } from "react";
 import { useFonts } from "expo-font";
-import { ClerkProvider, ClerkLoaded } from '@clerk/clerk-expo'
 import GlobalProvider from "@/lib/GlobalProvider";
-
+import { CartProvider } from "./context/CartContext";
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
@@ -20,14 +19,11 @@ export default function RootLayout() {
 
   if (!fontsLoaded) return null;
 
-
-
   return (
     <GlobalProvider>
-      <Stack screenOptions={{ headerShown: false }} />
-
-
+      <CartProvider>
+        <Stack screenOptions={{ headerShown: false }} />
+      </CartProvider>
     </GlobalProvider>
-
-  )
+  );
 }
