@@ -431,7 +431,7 @@ export const fetchProducts = async () => {
 };
 
 
-export const addToCart = async (userId: string, productId: string) => {
+export const addToCartAppwrite  = async (userId: string, productId: string, size: string, color: string) => {
   try {
     if (!config.databaseId || !config.cartCollectionId) {
       throw new Error("Thiếu databaseId hoặc cartCollectionId trong config!");
@@ -445,6 +445,8 @@ export const addToCart = async (userId: string, productId: string) => {
         userId: userId,
         productId: productId,
         quantity: 1,
+        size,
+        color,
         addedAt: new Date().toISOString(), // optional
       }
     );

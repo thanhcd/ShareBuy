@@ -3,7 +3,7 @@ import "./global.css";
 import { useEffect } from "react";
 import { useFonts } from "expo-font";
 import GlobalProvider from "@/lib/GlobalProvider";
-import { CartProvider } from "./context/CartContext";
+import { CartProvider } from "../lib/CartContext";
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({

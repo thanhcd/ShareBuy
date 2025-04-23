@@ -6,18 +6,23 @@ import images from "@/constants/images";
 import { useState } from "react";
 // import { Featuredcards } from "@/components/Cards";
 import CustomButton from "@/components/CustomButton";
-import { useCart } from "@/app/context/CartContext"; // Nhập hook từ CartContext
+import { useCart } from "@/lib/CartContext"; // Nhập hook từ CartContext
+import { addToCartAppwrite } from "@/lib/appwrite";
+import { useGlobalContext } from "@/lib/GlobalProvider";
 
 const ProductDetail = () => {
   // const params = useLocalSearchParams();
-  const { name, discount, image, describe } = useLocalSearchParams<{
+  const { user } = useGlobalContext()
+  const userId = user?.$id; // Lấy userId từ context
+  const { name, discount, image, describe, id } = useLocalSearchParams<{
     name?: string;
     discount?: string;
     image?: string;
     describe?: string;
+    id?: string;
   }>();
-  console.log('params:', name, discount, image, describe);
-  
+  console.log('params:', name, discount, image, describe, id);
+
   if (!name || !discount || !image) {
     return (
       <SafeAreaView className="flex-1 justify-center items-center">
@@ -52,7 +57,7 @@ const ProductDetail = () => {
 
   const { addToCart } = useCart(); // Lấy hàm addToCart từ CartContext
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     const product = {
       name,
       discount,
@@ -61,16 +66,32 @@ const ProductDetail = () => {
       size: selectedSize,
       color: selectedColor,
     };
+    try {
+      // addToCart(product);
+      const response = await addToCartAppwrite(userId, id, selectedSize, selectedColor);
+      Alert.alert(
+        "Thông báo",
+        "Thêm vào giỏ hàng thành công! Bạn có muốn chuyển đến giỏ hàng không?",
+        [
+          {
+            text: "Không",
+            style: "cancel"
+          },
+          {
+            text: "Có",
+            onPress: () => router.push('/cart') // thay "Cart" bằng tên route thực tế của bạn
+          }
+        ]
+      );
+      return response;
 
-    // Thêm vào giỏ hàng
-    addToCart(product); // Dùng hàm addToCart từ context để thêm sản phẩm vào giỏ hàng
-
-    // Hiển thị thông báo cho người dùng
-    Alert.alert("Thông báo", "Sản phẩm đã được thêm vào giỏ hàng!");
-
-    // Có thể chuyển hướng tới trang giỏ hàng
-    router.push('/cart'); // Điều hướng đến giỏ hàng (nếu cần)
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      Alert.alert("Thông báo", "Đã xảy ra lỗi khi thêm vào giỏ hàng!");
+      return;
+    }
   };
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView>
@@ -90,7 +111,7 @@ const ProductDetail = () => {
                   <Image source={icons.search1} />
                 </TouchableOpacity>
                 <TouchableOpacity>
-                  <Image source={icons.more}/>
+                  <Image source={icons.more} />
                 </TouchableOpacity>
               </View>
             </View>
@@ -98,7 +119,7 @@ const ProductDetail = () => {
           </View>
 
           <View className="flex flex-col items-center gap-5">
-            <Image source={{uri:image}} className="w-full h-64 rounded-lg" />
+            <Image source={{ uri: image }} className="w-full h-64 rounded-lg" />
             <Image source={images.slider} />
           </View>
 
