@@ -8,10 +8,30 @@ interface Props {
   onPress?: () => void;
 }
 export const Featuredcards = ({ item }: { item?: any }) => {
-  if (!item) return null; // ✅ Nếu không có item, không render
+  // if (!item) return null; // ✅ Nếu không có item, không render
+  // const handlePress = () => {
+  //   console.log("Navigating with:", {
+  //     id: item.id, // Đổi từ item.$id → item.id
+  //     name: item.name,
+  //     price: item.discount,
+  //     image: item.image,
+  //   });
+
+  //   router.push({
+  //     pathname: "/(root)/properties/[id]",
+  //     params: { // Đổi "query" → "params" vì expo-router dùng "params"
+  //       id: item.id, // Đảm bảo id là chuỗi
+  //       name: item.name,
+  //       describe: item.describe,
+  //       price: item.discount,
+  //       image: item.image,
+  //     },
+  //   });
+  // };
+  if (!item) return null; // ✅ Nếu item bị undefined, không render
   const handlePress = () => {
     console.log("Navigating with:", {
-      id: item.id, // Đổi từ item.$id → item.id
+      id: item.$id, // Đổi từ item.$id → item.id
       name: item.name,
       price: item.discount,
       image: item.image,
@@ -19,19 +39,19 @@ export const Featuredcards = ({ item }: { item?: any }) => {
 
     router.push({
       pathname: "/(root)/properties/[id]",
-      params: { // Đổi "query" → "params" vì expo-router dùng "params"
-        id: item.id, // Đảm bảo id là chuỗi
+      params: {
+        id: item.$id.toString(),
         name: item.name,
-        describe: item.describe,
-        price: item.discount,
-        image: item.image,
-      },
+        discount: item.discount.toString(),
+        image: item.image.toString(),
+        describe: item.describe.toString()
+      }
     });
   };
   return (
     <View className="w-40 h-60 border border-gray-100 flex py-4 items-center overflow-hidden rounded-md">
       <TouchableOpacity className="flex flex-col items-center w-32 h-32 relative" onPress={handlePress}>
-        <Image source={item.image} className="w-full h-full rounded-md" />
+        <Image source={{uri: item.image}} className="w-full h-full rounded-md" />
         <View className="flex flex-col items-start w-full mt-2">
           <Text className="text-sm font-poppins-bold text-primary-200" numberOfLines={1}>
             {item.name}

@@ -41,7 +41,7 @@ export default function Index() {
       <FlatList
         data={product}
         renderItem={({ item }) => item ? <Card item={item} /> : null}
-        keyExtractor={(item, index) => item.$id || index.toString()} 
+        keyExtractor={(item, index) => item.$id || index.toString()}
         // keyExtractor={(item, index) => item?.id?.toString?.() || index.toString()}
         numColumns={2}
         contentContainerClassName="pb-32"
@@ -111,10 +111,12 @@ export default function Index() {
                 </TouchableOpacity>
               </View>
               <FlatList
-                data={megasale}
+                // data={megasale}
+                // renderItem={({ item }) => item ? <Featuredcards item={item} /> : null}
+                // // keyExtractor={(item, index) => item.id || index.toString()} 
+                data={product}
                 renderItem={({ item }) => item ? <Featuredcards item={item} /> : null}
-                // keyExtractor={(item, index) => item.id || index.toString()} 
-                keyExtractor={(item, index) => item?.id?.toString?.() || index.toString()}
+                keyExtractor={(item, index) => item.$id || index.toString()}
                 horizontal
                 bounces={false}
                 showsHorizontalScrollIndicator={false}
@@ -130,10 +132,9 @@ export default function Index() {
                 </TouchableOpacity>
               </View>
               <FlatList
-                data={megasale}
+                data={product}
                 renderItem={({ item }) => item ? <Featuredcards item={item} /> : null}
-                // keyExtractor={(item, index) => item.id || index.toString()} 
-                keyExtractor={(item, index) => item?.id?.toString?.() || index.toString()}
+                keyExtractor={(item, index) => item.$id || index.toString()}
                 horizontal
                 bounces={false}
                 showsHorizontalScrollIndicator={false}
