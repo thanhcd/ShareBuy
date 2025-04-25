@@ -459,3 +459,42 @@ export const addToCartAppwrite  = async (userId: string, productId: string, size
     return null;
   }
 };
+
+export const getCartItems = async (userId: string) => {
+  try {
+    if (!config.databaseId || !config.cartCollectionId) {
+      throw new Error("Thiếu databaseId hoặc cartCollectionId trong config!");
+    }
+
+    const response = await databases.listDocuments(
+      config.databaseId,
+      config.cartCollectionId,
+      [Query.equal("userId", userId)]
+    );
+
+    console.log("✅ Lấy danh sách sản phẩm trong giỏ hàng thành công:", response.documents);
+    return response.documents;
+  } catch (error) {
+    console.error("❌ Lỗi khi lấy danh sách sản phẩm trong giỏ hàng:", error);
+    return null;
+  }
+}
+
+export const getProductById = async (productId: string) => {
+  try {
+    if (!config.databaseId || !config.productCollectionId) {
+      throw new Error(
+        "Thiếu databaseId hoặc addressCollectionId trong config!"
+      );
+    }
+    const respone = await databases.getDocument(
+      config.databaseId,
+      config.productCollectionId,
+      productId
+    )
+    return respone;
+  } catch (error) {
+    console.error('❌ Lỗi khi lấy sản phẩm:', error);
+    return null;
+  }
+};

@@ -5,15 +5,33 @@ import icons from '@/constants/icons'
 import images from '@/constants/images'
 import { Card } from '@/components/Cards'
 import { normalProduct } from '@/constants/data'
+import { fetchProducts } from '@/lib/appwrite'
 
 const favoriteProduct = () => {
+    const [product, setProduct] = useState([]);
+    useEffect(() => {
+        const fetchProfile = async () => {
+          try {
+            const productData = await fetchProducts();
+            // console.log('Fetched data: ', productData);
+    
+            if (productData && Array.isArray(productData)) {
+              setProduct(productData);
+            }
+          } catch (error) {
+            console.error('Error fetching products:', error);
+          }
+        };
+    
+        fetchProfile();
+      }, []);
     return (
         <SafeAreaView className="h-full bg-white px-5">
             <View className='px-7'>
                 <FlatList
-                    data={normalProduct}
+                    data={product}
                     renderItem={({ item }) => item ? <Card item={item} /> : null}
-                    keyExtractor={(item) => item.id}
+                    keyExtractor={(item, index) => item.$id || index.toString()}
                     numColumns={2}
                     contentContainerClassName="pb-32"
                     columnWrapperClassName="flex-1 gap-5 "
