@@ -6,10 +6,12 @@ const CartItem = ({
     item,
     onDecrease,
     onIncrease,
+    onDelete,
 }: {
     item: any;
     onDecrease: (id: string) => void;
     onIncrease: (id: string) => void;
+    onDelete: (id: string) => void;
 }) => {
     return (
         <View className="w-full p-4 border border-gray-100 rounded-lg flex flex-row items-center mb-4">
@@ -39,7 +41,7 @@ const CartItem = ({
                         <TouchableOpacity>
                             <Image source={icons.love} className="size-8 opacity-50" />
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => onDelete(item.id)}>
                             <Image source={icons.trash} className="size-7 opacity-50" />
                         </TouchableOpacity>
                     </View>

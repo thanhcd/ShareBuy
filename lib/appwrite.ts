@@ -498,3 +498,23 @@ export const getProductById = async (productId: string) => {
     return null;
   }
 };
+
+export const deleteCartItem = async (documentId: string) => {
+  try {
+    if (!config.databaseId || !config.cartCollectionId) {
+      throw new Error("Thiếu databaseId hoặc cartCollectionId trong config!");
+    }
+
+    await databases.deleteDocument(
+      config.databaseId,
+      config.cartCollectionId,
+      documentId // ✅ Đảm bảo truyền đúng documentId
+    );
+    console.log(`✅ Đã xóa sản phẩm với ID: ${documentId}`);
+    return true;
+  } catch (error: any) {
+    console.error("❌ Lỗi khi xóa sản phẩm:", error?.message || error);
+    return false;
+    
+  }  
+}

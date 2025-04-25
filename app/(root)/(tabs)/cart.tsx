@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import CartItem from '@/components/CartItem';
 import CustomButton from '@/components/CustomButton';
 import { useCart } from '@/lib/CartContext';
-import { getCartItems, getProductById  } from '@/lib/appwrite';
+import { deleteCartItem, getCartItems, getProductById } from '@/lib/appwrite';
 import { useGlobalContext } from '@/lib/GlobalProvider';
 
 const Cart = () => {
@@ -14,7 +14,7 @@ const Cart = () => {
   const totalPrice = cart.reduce((sum, item) => sum + parseFloat(item.discount), 0);
   const shippingFee = cart.length > 0 ? 5 : 0;
   const finalPrice = totalPrice - shippingFee;
-  
+
   const onDecrease = () => {
 
   }
@@ -23,9 +23,6 @@ const Cart = () => {
 
   }
   const [cartData, setCartData] = useState([]);
-
-
-
   // Hiển thị giỏ hàng
   const renderCart = () => {
     if (cart.length === 0) {
@@ -47,12 +44,13 @@ const Cart = () => {
       try {
         const cartItems = await getCartItems(userId);
         console.log('✅ Giỏ hàng:', cartItems);
-  
+
         const enrichedCartItems = await Promise.all(
           cartItems.map(async (item) => {
             const product = await getProductById(item.productId); // lấy từ bảng product
             return {
               ...item,
+              id: item.$id,
               name: product?.name,
               image: product?.image,
               price: product?.price,
@@ -61,13 +59,14 @@ const Cart = () => {
             };
           })
         );
-  
+
         setCartData(enrichedCartItems);
       } catch (error) {
         console.error('❌ Lỗi khi lấy giỏ hàng:', error);
       }
     };
-  
+    
+
     if (userId) fetchCartItems();
   }, [userId]);
 
@@ -76,6 +75,32 @@ const Cart = () => {
     Alert.alert("Thông báo", "Giỏ hàng đã được xóa!"); // Thông báo sau khi xóa
   };
 
+  const handleDeleteItem = (id: string) => {
+    Alert.alert(
+      "Xác nhận",
+      "Bạn có muốn xóa sản phẩm này khỏi giỏ hàng?",
+      [
+        {
+          text: "Hủy",
+          style: "cancel",
+        },
+        {
+          text: "Xóa",
+          style: "destructive",
+          onPress: async () => {
+            const result = await deleteCartItem(id);
+            if (result) {
+              setCartData(prev => prev.filter(item => item.id !== id));
+              Alert.alert("Thành công", "Sản phẩm đã được xóa khỏi giỏ hàng.");
+            } else {
+              Alert.alert("Lỗi", "Không thể xóa sản phẩm. Vui lòng thử lại.");
+            }
+          },
+        },
+      ],
+      { cancelable: true }
+    );
+  };
   return (
     <SafeAreaView className="flex-1 bg-white">
       <View className="px-5">
@@ -88,7 +113,9 @@ const Cart = () => {
           <FlatList
             data={cartData} // Sử dụng giỏ hàng từ context
             keyExtractor={(item, index) => item.$id || index.toString()} // Key từ index vì không có id
-            renderItem={({ item }) => <CartItem item={item} />}
+            renderItem={({ item }) => <CartItem item={item} onDecrease={onDecrease}
+              onIncrease={onIncrease}
+              onDelete={handleDeleteItem} />}
             showsVerticalScrollIndicator={true}
             nestedScrollEnabled={true}
           />
