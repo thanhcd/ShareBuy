@@ -518,3 +518,26 @@ export const deleteCartItem = async (documentId: string) => {
     
   }  
 }
+
+// export const updateCartItem = async (documentId: string, quantity: number,size: string, color: string) => {
+//   try {
+//     if (!config.databaseId || !config.cartCollectionId) {
+//       throw new Error("Thiếu databaseId hoặc cartCollectionId trong config!");
+//     }
+
+//     const response = await databases.updateDocument(
+//       config.databaseId,
+//       config.cartCollectionId,
+//       documentId,
+//       { quantity: quantity,
+//         size: size,
+//         color: color } // Chỉ cập nhật trường quantity
+//     );
+
+//     console.log("✅ Cập nhật số lượng sản phẩm thành công:", response);
+//     return response;
+//   } catch (error) {
+//     console.error("❌ Lỗi khi cập nhật số lượng sản phẩm:", error);
+//     return null;
+//   }
+// }
