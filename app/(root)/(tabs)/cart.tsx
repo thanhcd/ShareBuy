@@ -6,13 +6,15 @@ import {
   TextInput,
   Alert,
   KeyboardAvoidingView,
+  Modal,
+  Pressable,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import CartItem from '@/components/CartItem';
 import CustomButton from '@/components/CustomButton';
 import { deleteCartItem, getCartItems, getProductById } from '@/lib/appwrite';
 import { useGlobalContext } from '@/lib/GlobalProvider';
-import { router } from 'expo-router';
+import { colorOptions, sizeShow } from '@/constants/data';
 
 interface CartItemProps {
   id: string;
@@ -32,6 +34,12 @@ const Cart = () => {
   const [discountCode, setDiscountCode] = useState('');
   const [discountApplied, setDiscountApplied] = useState(false);
   const [discountAmount, setDiscountAmount] = useState(0);
+
+  // Modal state
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
+  const [selectedColor, setSelectedColor] = useState<string>('');
+  const [selectedSize, setSelectedSize] = useState<string>('');
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -121,9 +129,21 @@ const Cart = () => {
     );
   };
 
-  const onUpdateItem = () => {
-    router.push('/(root)/properties/[id]')
-  }
+  const handleUpdateItem = (id: string) => {
+    setSelectedItemId(id);
+    setModalVisible(true);
+  };
+
+  const handleConfirmUpdate = () => {
+    if (selectedColor && selectedSize) {
+      // Có thể xử lý tiếp update màu và size ở đây
+      Alert.alert('Đã chọn', `Màu: ${selectedColor}, Size: ${selectedSize}`);
+      setModalVisible(false);
+    } else {
+      Alert.alert('Lỗi', 'Vui lòng chọn đủ Màu và Size.');
+    }
+  };
+
   return (
     <KeyboardAvoidingView className="flex-1">
       <SafeAreaView className="flex-1 bg-white">
@@ -142,7 +162,7 @@ const Cart = () => {
                   onDelete={handleDeleteItem}
                   onIncrease={() => handleQuantityChange(item.id, 'increase')}
                   onDecrease={() => handleQuantityChange(item.id, 'decrease')}
-                  onUpdateItem={() => onUpdateItem}
+                  onUpdateItem={() => handleUpdateItem(item.id)}
                 />
               )}
               showsVerticalScrollIndicator={true}
@@ -221,6 +241,65 @@ const Cart = () => {
             />
           </View>
         </View>
+
+        {/* Modal chọn màu và size */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)}
+        >
+          <View className="flex-1 justify-center items-center bg-black/50">
+            <View className="bg-white p-5 rounded-lg w-4/5">
+              <Text className="text-lg font-bold mb-3">Chọn Màu và Size</Text>
+
+              {/* Chọn màu */}
+              <Text className="mb-1">Màu:</Text>
+              <View className="flex flex-row gap-3 mb-3 flex-wrap">
+                {colorOptions.map((option, index) => (
+                  <Pressable
+                    key={index}
+                    className={`w-10 h-10 rounded-full border-2 ${selectedColor === option.color ? 'border-primary-100' : 'border-gray-300'
+                      }`}
+                    style={{ backgroundColor: option.color }}
+                    onPress={() => setSelectedColor(option.color)}
+                  />
+                ))}
+              </View>
+
+              {/* Chọn size */}
+              <Text className="mb-1">Size:</Text>
+              <View className="flex flex-row gap-3 mb-3 flex-wrap">
+                {sizeShow.map((option, index) => (
+                  <Pressable
+                    key={index}
+                    className={`px-3 py-2 rounded-full border ${selectedSize === option.title ? 'bg-primary-100 border-primary-100' : 'bg-gray-100 border-gray-300'
+                      }`}
+                    onPress={() => setSelectedSize(option.title)}
+                  >
+                    <Text className="text-center">{option.title}</Text>
+                  </Pressable>
+                ))}
+              </View>
+
+              {/* Confirm Button */}
+              <CustomButton
+                title="Xác nhận"
+                containerStyles="bg-primary-100 rounded-lg mt-3"
+                textStyles="text-white"
+                handlePress={handleConfirmUpdate}
+              />
+
+              {/* Cancel Button */}
+              <CustomButton
+                title="Đóng"
+                containerStyles="bg-gray-100 rounded-lg mt-2"
+                textStyles="text-black"
+                handlePress={() => setModalVisible(false)}
+              />
+            </View>
+          </View>
+        </Modal>
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
