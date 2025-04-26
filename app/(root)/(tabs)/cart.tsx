@@ -12,7 +12,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import CartItem from '@/components/CartItem';
 import CustomButton from '@/components/CustomButton';
-import { deleteCartItem, getCartItems, getProductById } from '@/lib/appwrite';
+import { deleteCartItem, getCartItems, getProductById, updateCartItem } from '@/lib/appwrite';
 import { useGlobalContext } from '@/lib/GlobalProvider';
 import { colorOptions, sizeShow } from '@/constants/data';
 
@@ -134,11 +134,27 @@ const Cart = () => {
     setModalVisible(true);
   };
 
-  const handleConfirmUpdate = () => {
-    if (selectedColor && selectedSize) {
-      // Có thể xử lý tiếp update màu và size ở đây
-      Alert.alert('Đã chọn', `Màu: ${selectedColor}, Size: ${selectedSize}`);
-      setModalVisible(false);
+  const handleConfirmUpdate = async () => {
+    if (selectedColor && selectedSize && selectedItemId) {
+      try {
+        const response = await updateCartItem(selectedItemId, selectedSize, selectedColor);
+        if (response) {
+          setCartData((prevCart) =>
+            prevCart.map((item) =>
+              item.id === selectedItemId
+                ? { ...item, color: selectedColor, size: selectedSize }
+                : item
+            )
+          );
+          Alert.alert('Thành công', `Màu: ${selectedColor}, Size: ${selectedSize} đã được cập nhật.`);
+          setModalVisible(false);
+        } else {
+          Alert.alert('Lỗi', 'Không thể cập nhật sản phẩm.');
+        }
+      } catch (error) {
+        console.error("❌ Lỗi khi cập nhật sản phẩm:", error);
+        Alert.alert('Lỗi', 'Đã xảy ra lỗi khi cập nhật sản phẩm.');
+      }
     } else {
       Alert.alert('Lỗi', 'Vui lòng chọn đủ Màu và Size.');
     }
