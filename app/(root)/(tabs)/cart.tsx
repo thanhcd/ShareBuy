@@ -8,6 +8,8 @@ import {
   KeyboardAvoidingView,
   Modal,
   Pressable,
+  Image,
+  TouchableOpacity,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import CartItem from '@/components/CartItem';
@@ -15,6 +17,7 @@ import CustomButton from '@/components/CustomButton';
 import { deleteCartItem, getCartItems, getProductById, updateCartItem } from '@/lib/appwrite';
 import { useGlobalContext } from '@/lib/GlobalProvider';
 import { colorOptions, sizeShow } from '@/constants/data';
+import icons from '@/constants/icons';
 
 interface CartItemProps {
   id: string;
@@ -40,6 +43,9 @@ const Cart = () => {
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
   const [selectedColor, setSelectedColor] = useState<string>('');
   const [selectedSize, setSelectedSize] = useState<string>('');
+  const [paymentModalVisible, setPaymentModalVisible] = useState(false);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string | null>(null);
+  const [showCardFields, setShowCardFields] = useState(false);
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -253,7 +259,7 @@ const Cart = () => {
               title="Thanh toán"
               containerStyles="bg-primary-100 rounded-lg"
               textStyles="text-white"
-              handlePress={() => Alert.alert('Thông báo', 'Tính năng đang phát triển')}
+              handlePress={() => setPaymentModalVisible(true)}
             />
           </View>
         </View>
@@ -316,8 +322,126 @@ const Cart = () => {
             </View>
           </View>
         </Modal>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={paymentModalVisible}
+          onRequestClose={() => setPaymentModalVisible(false)}
+        >
+          <View className="flex-1 justify-center items-center bg-black/50">
+            <View className="bg-white p-5 rounded-lg w-4/5 relative pt-10">
+
+              {/* Icon Close */}
+              <Pressable
+                onPress={() => setPaymentModalVisible(false)}
+                className="absolute top-3 right-3"
+              >
+                <Image source={icons.x} className="w-8 h-8" />
+              </Pressable>
+
+              {/* Tiêu đề */}
+              <Text className="text-lg font-poppins-bold mb-5 text-center">
+                Phương thức thanh toán
+              </Text>
+
+              {/* Chọn phương thức */}
+              <View className="flex flex-col gap-3">
+                {/* Thanh toán bằng thẻ */}
+                <Pressable
+                  className={`px-4 py-3 rounded-lg border ${selectedPaymentMethod === 'card' ? 'bg-primary-100 border-primary-100' : 'border-gray-300'
+                    }`}
+                  onPress={() => {
+                    setSelectedPaymentMethod('card');
+                    setShowCardFields(true);
+                  }}
+                >
+                  <Text className="text-center font-poppins-regular text-black">Thanh toán bằng thẻ</Text>
+                </Pressable>
+                {showCardFields && (
+                  <View className="flex flex-col gap-4 mt-5">
+                    <TextInput
+                      placeholder="Số thẻ"
+                      keyboardType="numeric"
+                      maxLength={16}
+                      className="border border-gray-300 p-3 rounded-lg"
+                      placeholderTextColor="gray"
+                      textContentType="creditCardNumber"
+                    />
+                    <View className="flex flex-row gap-3">
+                      <TextInput
+                        placeholder="MM/YY"
+                        keyboardType="numeric"
+                        maxLength={5}
+                        className="flex-1 border border-gray-300 p-3 rounded-lg"
+                        textContentType='creditCardExpiration'
+                        placeholderTextColor="gray"
+                      />
+                      <TextInput
+                        placeholder="CVC"
+                        keyboardType="numeric"
+                        maxLength={4}
+                        className="flex-1 border border-gray-300 p-3 rounded-lg"
+                        textContentType='creditCardSecurityCode'
+                        placeholderTextColor="gray"
+                      />
+                    </View>
+                    <TextInput
+                      placeholder="Tên chủ thẻ"
+                      className="border border-gray-300 p-3 rounded-lg"
+                      textContentType='creditCardName'
+                      placeholderTextColor="gray"
+                    />
+                  </View>
+                )}
+                {/* Thanh toán khi nhận hàng */}
+                <Pressable
+                  className={`px-4 py-3 rounded-lg border ${selectedPaymentMethod === 'cod' ? 'bg-primary-100 border-primary-100' : 'border-gray-300'
+                    }`}
+                  onPress={() => {
+                    setSelectedPaymentMethod('cod');
+                    setShowCardFields(false);
+                  }}
+                >
+                  <Text className="text-center font-poppins-regular text-black">Thanh toán khi nhận hàng</Text>
+                </Pressable>
+              </View>
+
+
+
+
+              {/* Tổng tiền */}
+              <View className="flex flex-row justify-between items-center mt-6">
+                <Text className="font-poppins-bold text-primary-200 text-lg">Tổng:</Text>
+                <Text className="font-poppins-bold text-primary-100 text-lg">${finalPrice.toFixed(2)}</Text>
+              </View>
+
+              {/* Nút hành động */}
+              <View className="flex flex-row gap-3 mt-5">
+                <CustomButton
+                  title="Checkout"
+                  containerStyles="bg-primary-100 rounded-lg flex-1"
+                  textStyles="text-white"
+                  handlePress={() => {
+                    if (selectedPaymentMethod) {
+                      Alert.alert('Thông báo', `Bạn đã chọn phương thức: ${selectedPaymentMethod === 'card' ? 'Thanh toán bằng thẻ' : 'Thanh toán khi nhận hàng'}`);
+                      setPaymentModalVisible(false);
+                    } else {
+                      Alert.alert('Lỗi', 'Vui lòng chọn phương thức thanh toán.');
+                    }
+                  }}
+                />
+                {/* <CustomButton
+                  title="Đóng"
+                  containerStyles="bg-gray-200 rounded-lg flex-1"
+                  textStyles="text-black"
+                  handlePress={() => setPaymentModalVisible(false)}
+                /> */}
+              </View>
+            </View>
+          </View>
+        </Modal>
       </SafeAreaView>
-    </KeyboardAvoidingView>
+    </KeyboardAvoidingView >
   );
 };
 
