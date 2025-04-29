@@ -1,6 +1,7 @@
 const express = require("express");
+const stripe_key = process.env.EXPO_PUBLIC_STRIPE_SECRET_KEY;
 const stripe = require("stripe")(
-  "sk_test_51RIn9KPPTCC6VmXKTosJAsZYWRqk7fykGfOBhV1pnenfgHa4JWXflSVsly3nbUKdnD2BLaFOB41RiEP3AIkqDSeK00yCAAp5tt"
+  stripe_key
 ); // Replace with your Secret Key
 const app = express();
 
