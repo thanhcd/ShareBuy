@@ -1,0 +1,27 @@
+const express = require("express");
+const stripe = require("stripe")(
+  "sk_test_51RIn9KPPTCC6VmXKTosJAsZYWRqk7fykGfOBhV1pnenfgHa4JWXflSVsly3nbUKdnD2BLaFOB41RiEP3AIkqDSeK00yCAAp5tt"
+); // Replace with your Secret Key
+const app = express();
+
+app.use(express.json());
+
+app.post("/create-payment-intent", async (req, res) => {
+  console.log("Received request:", req.body); // Log để kiểm tra
+  const { amount, currency } = req.body;
+
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount,
+      currency,
+      payment_method_types: ["card"],
+    });
+
+    console.log("PaymentIntent created:", paymentIntent); // Log để kiểm tra
+    res.send({ clientSecret: paymentIntent.client_secret });
+  } catch (error) {
+    console.error("Error creating PaymentIntent:", error); // Log lỗi
+    res.status(500).send({ error: error.message });
+  }
+});
+app.listen(3000, () => console.log("Server running on port 3000"));
