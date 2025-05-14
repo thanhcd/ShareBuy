@@ -1,5 +1,6 @@
+require('dotenv').config(); // bắt buộc phải có dòng này
 const express = require("express");
-const stripe_key = process.env.EXPO_PUBLIC_STRIPE_SECRET_KEY;
+const stripe_key = process.env.STRIPE_SECRET_KEY;
 const stripe = require("stripe")(
   stripe_key
 ); // Replace with your Secret Key
