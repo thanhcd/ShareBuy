@@ -15,7 +15,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import CartItem from '@/components/CartItem';
 import CustomButton from '@/components/CustomButton';
-import { deleteCartItem, getCartItems, getProductById, updateCartItem } from '@/lib/appwrite';
+import { DeleteCartAfterPayment, deleteCartItem, getCartItems, getProductById, updateCartItem } from '@/lib/appwrite';
 import { useGlobalContext } from '@/lib/GlobalProvider';
 import { colorOptions, sizeShow } from '@/constants/data';
 import icons from '@/constants/icons';
@@ -29,6 +29,7 @@ interface CartItemProps {
   price: number;
   discount: number;
   quantity: number;
+  userId?: string;
 }
 
 const Cart = () => {
@@ -48,7 +49,8 @@ const Cart = () => {
   const [paymentModalVisible, setPaymentModalVisible] = useState(false);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string | null>(null);
   const [showCardFields, setShowCardFields] = useState(false);
-
+  const [reloadKey, setReloadKey] = useState(0);
+  
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
@@ -76,7 +78,7 @@ const Cart = () => {
     };
 
     if (userId) fetchCartItems();
-  }, [userId]);
+  }, [userId, reloadKey]);
 
   const totalPrice = cartData.reduce(
     (sum, item) => sum + parseFloat(item.discount) * item.quantity,
@@ -178,7 +180,7 @@ const Cart = () => {
     }
 
     try {
-      const serverUrl = 'http://192.168.100.5:3000/create-payment-intent'; // Đảm bảo URL đúng
+      const serverUrl = 'http://192.168.100.8:3000/create-payment-intent'; // Đảm bảo URL đúng
       console.log('Sending request to:', serverUrl);
 
       const response = await fetch(serverUrl, {
@@ -191,8 +193,9 @@ const Cart = () => {
           currency: 'usd',
         }),
       });
-
+      
       console.log('Response status:', response.status); // Log trạng thái phản hồi
+      
       if (!response.ok) {
         const errorText = await response.text();
         console.error('Response error:', errorText); // Log lỗi từ server
@@ -212,6 +215,8 @@ const Cart = () => {
       } else if (paymentIntent) {
         Alert.alert('Thành công', 'Thanh toán thành công!');
         setPaymentModalVisible(false);
+        await DeleteCartAfterPayment(userId); // Xóa giỏ hàng sau khi thanh toán thành công
+        setReloadKey(prev => prev + 1); // Gọi lại để cập nhật danh sách giỏ hàng mới nhất
       }
     } catch (error) {
       console.error('❌ Lỗi khi thanh toán:', error);

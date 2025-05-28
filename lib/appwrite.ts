@@ -56,7 +56,7 @@ export async function login() {
     const url = new URL(browserResult.url);
     const secret = url.searchParams.get("secret")?.toString();
     const userId = url.searchParams.get("userId")?.toString();
-    console.log("id dnag dang nhap", userId);
+    // console.log("id dnag dang nhap", userId);
 
     if (!secret || !userId) throw new Error("failed to login");
 
@@ -472,7 +472,7 @@ export const getCartItems = async (userId: string) => {
       [Query.equal("userId", userId)]
     );
 
-    console.log("✅ Lấy danh sách sản phẩm trong giỏ hàng thành công:", response.documents);
+    // console.log("✅ Lấy danh sách sản phẩm trong giỏ hàng thành công:", response.documents);
     return response.documents;
   } catch (error) {
     console.error("❌ Lỗi khi lấy danh sách sản phẩm trong giỏ hàng:", error);
@@ -539,5 +539,34 @@ export const updateCartItem = async (documentId: string, size: string, color: st
   } catch (error) {
     console.error("❌ Lỗi khi cập nhật số lượng sản phẩm:", error);
     return null;
+  }
+}
+
+export const DeleteCartAfterPayment = async (userId: string) => {
+  try {
+    if (!config.databaseId || !config.cartCollectionId) {
+      throw new Error("Thiếu databaseId hoặc cartCollectionId trong config!");
+    }
+
+    const response = await databases.listDocuments(
+      config.databaseId,
+      config.cartCollectionId,
+      [Query.equal("userId", userId)]
+    );
+
+    if (response.documents.length > 0) {
+      for (const item of response.documents) {
+        await databases.deleteDocument(
+          config.databaseId,
+          config.cartCollectionId,
+          item.$id
+        );
+      }
+      console.log("✅ Đã xóa tất cả sản phẩm trong giỏ hàng sau khi thanh toán.");
+    } else {
+      console.log("Giỏ hàng trống, không cần xóa.");
+    }
+  } catch (error) {
+    console.error("❌ Lỗi khi xóa sản phẩm trong giỏ hàng:", error);
   }
 }
